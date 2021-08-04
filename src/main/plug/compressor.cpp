@@ -33,12 +33,13 @@ namespace lsp
     namespace plugins
     {
         //-------------------------------------------------------------------------
-        typedef struct graph_equalizer_settings_t
+        // Plugin factory
+        typedef struct plugin_settings_t
         {
             const meta::plugin_t   *metadata;
             bool                    sc;
             uint8_t                 mode;
-        } graph_equalizer_settings_t;
+        } plugin_settings_t;
 
         static const meta::plugin_t *plugins[] =
         {
@@ -52,7 +53,7 @@ namespace lsp
             &meta::sc_compressor_ms
         };
 
-        static const graph_equalizer_settings_t trigger_settings[] =
+        static const plugin_settings_t plugin_settings[] =
         {
             { &meta::compressor_mono,       false, compressor::CM_MONO          },
             { &meta::compressor_stereo,     false, compressor::CM_STEREO        },
@@ -66,15 +67,15 @@ namespace lsp
             { NULL, 0, false }
         };
 
-        static plug::Module *graph_equalizer_factory(const meta::plugin_t *meta)
+        static plug::Module *plugin_factory(const meta::plugin_t *meta)
         {
-            for (const graph_equalizer_settings_t *s = trigger_settings; s->metadata != NULL; ++s)
+            for (const plugin_settings_t *s = plugin_settings; s->metadata != NULL; ++s)
                 if (s->metadata == meta)
                     return new compressor(s->metadata, s->sc, s->mode);
             return NULL;
         }
 
-        static plug::Factory factory(graph_equalizer_factory, plugins, 8);
+        static plug::Factory factory(plugin_factory, plugins, 8);
 
         //-------------------------------------------------------------------------
         compressor::compressor(const meta::plugin_t *metadata, bool sc, size_t mode): plug::Module(metadata)

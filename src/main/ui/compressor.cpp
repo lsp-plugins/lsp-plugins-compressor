@@ -28,7 +28,7 @@ namespace lsp
     {
         //---------------------------------------------------------------------
         // Plugin UI factory
-        static const meta::plugin_t *uis[] =
+        static const meta::plugin_t *plugin_uis[] =
         {
             &meta::compressor_mono,
             &meta::compressor_stereo,
@@ -40,7 +40,7 @@ namespace lsp
             &meta::sc_compressor_ms
         };
 
-        static ui::Factory factory(uis, 8);
+        static ui::Factory factory(plugin_uis, 8);
 
     } // namespace plugui
 } // namespace lsp
