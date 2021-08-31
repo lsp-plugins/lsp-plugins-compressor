@@ -13,7 +13,6 @@
 						<marker v="${t}.75" color="graph_alt_2" />
 					</ui:attributes>
 				</ui:for>
-			
 				<ui:attributes ox="1" oy="0" color="graph_alt_1">
 					<marker v="+12 db" />
 					<marker v="-12 db" />
@@ -25,7 +24,6 @@
 				<ui:for id="t" first="1" last="4" step="1">
 					<marker v="${t}" ox="0" oy="1" color="graph_sec" />
 				</ui:for>
-
 				<ui:attributes ox="1" oy="0" color="graph_sec">
 					<marker v="0 db" />
 					<marker v="-24 db" />
@@ -52,6 +50,14 @@
 				<axis min="0" max="5" angle="1.0" log="false" color="graph_prim" />
 				<axis min="-72 db" max="24 db" angle="0.5" log="true" color="graph_prim" />
 				
+				<!-- Markers -->
+				<ui:attributes ox="1" oy="0">
+					<marker id="al_m" color="g_magenta" />
+					<marker id="al_s" color="g_blue" />
+					<marker id="rl_m" color="g_magenta" />
+					<marker id="rl_s" color="g_blue" />
+				</ui:attributes>
+				
 				<!-- Text -->
 				<text x="5" y="-72 db" text="graph.units.s" halign="1" valign="1" color="graph_prim" />
 				<ui:for id="t" first="0" last="4" step="1">
@@ -68,14 +74,6 @@
 					<text y="-60 db" text="-60" />
 					<text x="5" y="24 db" text="graph.units.db" valign="-1" />
 				</ui:attributes>
-				
-				<!-- Markers -->
-				<ui:attributes ox="1" oy="0">
-					<marker id="al_m" color="g_magenta" />
-					<marker id="al_s" color="g_blue" />
-					<marker id="rl_m" color="g_magenta" />
-					<marker id="rl_s" color="g_blue" />
-				</ui:attributes>
 			</graph>
 			<hbox>
 				<button id="pause" size="16" color="green" led="true" />
@@ -84,14 +82,14 @@
 				<label text="labels.clear" />
 				<button id="msl" size="16" color="yellow" led="true" />
 				<label text="labels.ms_listen" />
-				<label pad.right="4" hexpand="true" text.hpos="1" text="labels.graphs.time" />
+				<label text="labels.graphs.time" pad.r="4" hexpand="true" fill="true" htext="1" />
 			</hbox>
 			
 			<!-- Sidechain meters -->
 			<vbox>
 				<grid rows="2" cols="2">
-					<label text="labels.chan.M_id" font_size="8" />
-					<label text="labels.chan.S_ide" font_size="8" />
+					<label text="labels.chan.M_id" font.size="8" />
+					<label text="labels.chan.S_ide" font.size="8" />
 					<button id="slv_m" size="10" color="bright_green" led="true" />
 					<button id="slv_s" size="10" color="bright_green" led="true" />
 				</grid>
@@ -107,8 +105,8 @@
 			<!-- Envelope meters -->
 			<vbox>
 				<grid rows="2" cols="2">
-					<label text="labels.chan.M_id" font_size="8" />
-					<label text="labels.chan.S_ide" font_size="8" />
+					<label text="labels.chan.M_id" font.size="8" />
+					<label text="labels.chan.S_ide" font.size="8" />
 					<button id="elv_m" size="10" color="bright_magenta" led="true" />
 					<button id="elv_s" size="10" color="bright_magenta" led="true" />
 				</grid>
@@ -124,8 +122,8 @@
 			<!-- Gain reduction meters -->
 			<vbox>
 				<grid rows="2" cols="2">
-					<label text="labels.chan.M_id" font_size="8" />
-					<label text="labels.chan.S_ide" font_size="8" />
+					<label text="labels.chan.M_id" font.size="8" />
+					<label text="labels.chan.S_ide" font.size="8" />
 					<button id="grv_m" size="10" color="bright_blue" led="true" />
 					<button id="grv_s" size="10" color="bright_blue" led="true" />
 				</grid>
@@ -202,13 +200,13 @@
 					<text x="-72 db" text="graph.axis.in" halign="1" />
 				</ui:attributes>
 			</graph>
-			<label pad.right="4" fill="true" hpos="-1" text="labels.graphs.compression" />
+			<label text="labels.graphs.compression" pad.r="4" fill="true" htext="-1" />
 			
 			<!-- Input signal meters -->
 			<vbox>
 				<grid rows="2" cols="2">
-					<label text="labels.chan.M_id" font_size="8" />
-					<label text="labels.chan.S_ide" font_size="8" />
+					<label text="labels.chan.M_id" font.size="8" />
+					<label text="labels.chan.S_ide" font.size="8" />
 					<button id="ilv_m" size="10" color="mid_channel" led="true" />
 					<button id="ilv_s" size="10" color="side_channel" led="true" />
 				</grid>
@@ -226,8 +224,8 @@
 			<!-- Output signal meters -->
 			<vbox>
 				<grid rows="2" cols="2">
-					<label text="labels.chan.M_id" font_size="8" />
-					<label text="labels.chan.S_ide" font_size="8" />
+					<label text="labels.chan.M_id" font.size="8" />
+					<label text="labels.chan.S_ide" font.size="8" />
 					<button id="olv_m" size="10" color="mid_channel" led="true" />
 					<button id="olv_s" size="10" color="side_channel" led="true" />
 				</grid>

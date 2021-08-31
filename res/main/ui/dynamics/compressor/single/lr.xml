@@ -193,9 +193,7 @@
 				</graph>
 				<label />
 			</vbox>
-			<align pad_right="4" fill="true" hpos="0">
-				<label text="labels.graphs.compression" />
-			</align>
+			<label text="labels.graphs.compression" hexpand="true" text.halign="1" />
 			
 			<!-- Input signal meters -->
 			<vbox>
