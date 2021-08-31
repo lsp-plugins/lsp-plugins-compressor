@@ -172,10 +172,10 @@
 				<dot x.id="elm_s" y.id="clm_s" color="side_channel" bcolor="side_channel" />
 				
 				<!-- Markers -->
-				<marker id="al_m" color="g_magenta" basis="0" parallel="1" />
-				<marker id="al_s" color="g_blue" basis="0" parallel="1" />
-				<marker id="rl_m" color="g_magenta" basis="0" parallel="1" />
-				<marker id="rl_s" color="g_blue" basis="0" parallel="1" />
+				<marker id="al_m" color="g_magenta" />
+				<marker id="al_s" color="g_blue" />
+				<marker id="rl_m" color="g_magenta" />
+				<marker id="rl_s" color="g_blue" />
 			
 				<!-- Text -->
 				<text x="0 db" y="0 db" text="0" halign="1" valign="1" />
