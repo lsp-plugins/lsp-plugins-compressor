@@ -157,9 +157,9 @@ namespace lsp
             MESH("scg" id, "Compressor sidechain graph" label, 2, compressor_metadata::TIME_MESH_SIZE), \
             MESH("evg" id, "Compressor envelope graph" label, 2, compressor_metadata::TIME_MESH_SIZE), \
             MESH("grg" id, "Compressor gain reduciton" label, 2, compressor_metadata::TIME_MESH_SIZE), \
-            METER_OUT_GAIN("slm" id, "Sidechain level meter" label, GAIN_AMP_P_24_DB), \
-            METER_OUT_GAIN("clm" id, "Curve level meter" label, GAIN_AMP_P_24_DB), \
-            METER_OUT_GAIN("elm" id, "Envelope level meter" label, GAIN_AMP_P_24_DB), \
+            METER_OUT_GAIN("slm" id, "Sidechain level meter" label, GAIN_AMP_P_36_DB), \
+            METER_OUT_GAIN("clm" id, "Curve level meter" label, GAIN_AMP_P_36_DB), \
+            METER_OUT_GAIN("elm" id, "Envelope level meter" label, GAIN_AMP_P_36_DB), \
             METER_GAIN_DFL("rlm" id, "Reduction level meter" label, GAIN_AMP_P_72_DB, GAIN_AMP_0_DB)
 
         #define COMP_AUDIO_METER(id, label) \
@@ -167,8 +167,8 @@ namespace lsp
             SWITCH("olv" id, "Output level visibility" label, 1.0f), \
             MESH("icg" id, "Compressor input" label, 2, compressor_metadata::TIME_MESH_SIZE), \
             MESH("ocg" id, "Compressor output" label, 2, compressor_metadata::TIME_MESH_SIZE), \
-            METER_GAIN("ilm" id, "Input level meter" label, GAIN_AMP_P_24_DB), \
-            METER_GAIN("olm" id, "Output level meter" label, GAIN_AMP_P_24_DB)
+            METER_GAIN("ilm" id, "Input level meter" label, GAIN_AMP_P_36_DB), \
+            METER_GAIN("olm" id, "Output level meter" label, GAIN_AMP_P_36_DB)
 
         static const port_t compressor_mono_ports[] =
         {
