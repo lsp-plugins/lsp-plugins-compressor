@@ -31,10 +31,10 @@
 				</ui:attributes>
 
 				<!-- Meshes -->
-				<mesh id="icg_m" width="2" color="mid_channel_in" visibility=":ilv_m" />
-				<mesh id="icg_s" width="2" color="side_channel_in" visibility=":ilv_s" />
-				<mesh id="ocg_m" width="2" color="mid_channel" visibility=":olv_m" />
-				<mesh id="ocg_s" width="2" color="side_channel" visibility=":olv_s" />
+				<mesh id="icg_m" width="2" color="mid_in" visibility=":ilv_m" />
+				<mesh id="icg_s" width="2" color="side_in" visibility=":ilv_s" />
+				<mesh id="ocg_m" width="2" color="mid" visibility=":olv_m" />
+				<mesh id="ocg_s" width="2" color="side" visibility=":olv_s" />
 				<mesh id="scg_m" width="2" color="bright_green" visibility=":slv_m" />
 				<mesh id="scg_s" width="2" color="bright_green" visibility=":slv_s" />
 				<mesh id="evg_m" width="2" color="bright_magenta" visibility=":elv_m" />
@@ -144,19 +144,19 @@
 				
 				<!-- Gray grid -->
 				<ui:for id="g" first="-60" last="12" step="24">
-					<marker v="${g} db" ox="0" oy="1" color="graph_alt_1" />
+					<marker v="${g} db" color="graph_alt_1" />
 					<marker v="${g} db" ox="1" oy="0" color="graph_alt_1" />
 				</ui:for>
 				
 				<!-- Yellow grid -->
 				<ui:for id="g" first="-48" last="-24" step="24">
-					<marker v="${g} db" ox="0" oy="1" color="graph_sec" />
+					<marker v="${g} db" color="graph_sec" />
 					<marker v="${g} db" ox="1" oy="0" color="graph_sec" />
 				</ui:for>
 			
 				<!-- Axes and boundaries -->
 				<marker v="1" ox="1" oy="0" dv="1" dx=":_a_width" dy=":_a_height" color="graph_alt_1" width="2" smooth="true" />
-				<marker v="24 db" ox="0" oy="1" color="graph_alt_1" />
+				<marker v="24 db" color="graph_alt_1" />
 				<marker v="24 db" ox="1" oy="0"  color="graph_alt_1" />
 				<axis min="-72 db" max="24 db" color="graph_prim" angle="0.0" log="true" />
 				<axis min="-72 db" max="24 db" color="graph_prim" angle="0.5" log="true" />
@@ -166,16 +166,16 @@
 				<marker v="0 db" ox="1" oy="0" width="2" color="graph_prim" />
 				
 				<!-- Meshes -->
-				<mesh id="ccg_m" width="3" color="mid_channel" smooth="true" />
-				<mesh id="ccg_s" width="3" color="side_channel" smooth="true" />
-				<dot x.id="elm_m" y.id="clm_m" color="mid_channel" bcolor="mid_channel" />
-				<dot x.id="elm_s" y.id="clm_s" color="side_channel" bcolor="side_channel" />
+				<mesh id="ccg_m" width="3" color="mid" smooth="true" />
+				<mesh id="ccg_s" width="3" color="side" smooth="true" />
+				<dot x.id="elm_m" y.id="clm_m" color="mid" bcolor="mid" />
+				<dot x.id="elm_s" y.id="clm_s" color="side" bcolor="side" />
 				
 				<!-- Markers -->
-				<marker id="al_m" color="g_magenta" />
-				<marker id="al_s" color="g_blue" />
-				<marker id="rl_m" color="g_magenta" />
-				<marker id="rl_s" color="g_blue" />
+				<marker id="al_m" color="attack_1" />
+				<marker id="al_s" color="attack_2" />
+				<marker id="rl_m" color="release_1" />
+				<marker id="rl_s" color="release_2" />
 			
 				<!-- Text -->
 				<text x="0 db" y="0 db" text="0" halign="1" valign="1" />
@@ -207,16 +207,16 @@
 				<grid rows="2" cols="2">
 					<label text="labels.chan.M_id" font.size="8" />
 					<label text="labels.chan.S_ide" font.size="8" />
-					<button id="ilv_m" size="10" color="mid_channel" led="true" />
-					<button id="ilv_s" size="10" color="side_channel" led="true" />
+					<button id="ilv_m" size="10" color="mid" led="true" />
+					<button id="ilv_s" size="10" color="side" led="true" />
 				</grid>
 				<ledmeter vexpand="true" height.min="256" angle="1">
 					<ledchannel id="ilm_m" min="-72 db" max="24 db" log="true" type="rms_peak"
 						peak.visibility="true" 
-						activity=":ilv_m" value.color="mid_channel" />
+						activity=":ilv_m" value.color="mid" />
 					<ledchannel id="ilm_s" min="-72 db" max="24 db" log="true" type="rms_peak"
 						peak.visibility="true" 
-						activity=":ilv_s" value.color="side_channel" />
+						activity=":ilv_s" value.color="side" />
 				</ledmeter>
 			</vbox>
 			<label text="labels.chan.in" />
@@ -226,16 +226,16 @@
 				<grid rows="2" cols="2">
 					<label text="labels.chan.M_id" font.size="8" />
 					<label text="labels.chan.S_ide" font.size="8" />
-					<button id="olv_m" size="10" color="mid_channel" led="true" />
-					<button id="olv_s" size="10" color="side_channel" led="true" />
+					<button id="olv_m" size="10" color="mid" led="true" />
+					<button id="olv_s" size="10" color="side" led="true" />
 				</grid>
 				<ledmeter vexpand="true" height.min="256" angle="1">
 					<ledchannel id="olm_m" min="-72 db" max="24 db" log="true" type="rms_peak"
 						peak.visibility="true" 
-						activity=":olv_m" value.color="mid_channel" />
+						activity=":olv_m" value.color="mid" />
 					<ledchannel id="olm_s" min="-72 db" max="24 db" log="true" type="rms_peak"
 						peak.visibility="true" 
-						activity=":olv_s" value.color="side_channel" />
+						activity=":olv_s" value.color="side" />
 				</ledmeter>
 			</vbox>
 			<label text="labels.chan.out" />
@@ -246,9 +246,9 @@
 					<cell cols="6">
 						<align hpos="-1" fill="true">
 							<hbox spacing="4">
-								<button id="scl_m" size="16" color="mid_channel" led="true" />
+								<button id="scl_m" size="16" color="mid" led="true" />
 								<label text="labels.sc.listen" />
-								<button id="scl_s" size="16" color="side_channel" led="true" />
+								<button id="scl_s" size="16" color="side" led="true" />
 							</hbox>
 						</align>
 					</cell>
@@ -347,8 +347,8 @@
 					<knob id="at_m" scolor="mid_channel" size="20" />
 					<knob id="rrl_m" scolor="mid_channel" size="20" />
 					<knob id="rt_m" scolor="mid_channel" size="20" />
-					<knob id="cdr_m" scolor="yellow" size="20" />
-					<knob id="cwt_m" scolor="yellow" size="20" />
+					<knob id="cdr_m" scolor="dry" size="20" />
+					<knob id="cwt_m" scolor="wet" size="20" />
 
 					<label />
 					<hbox fill="false">
