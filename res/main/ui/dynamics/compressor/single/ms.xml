@@ -251,27 +251,31 @@
 				<grid rows="9" cols="9" spacing="0" bg.color="bg_schema">
 					<!-- row 1 -->
 					<ui:with pad.h="6" pad.v="4" fill="false" hexpand="true">
-						<label text="labels.sc.preamp"/>
-						<label text="labels.sc.reactivity"/>
-						<label text="labels.sc.lookahead"/>
+						<label text="labels.sc.preamp" vreduce="true"/>
+						<label text="labels.sc.reactivity" vreduce="true"/>
+						<label text="labels.sc.lookahead" vreduce="true"/>
 					</ui:with>
-					<cell bg.color="bg" pad.h="2"><vsep/></cell>
-					<label text="labels.setup" pad.h="6" pad.v="4" fill="false" hexpand="true" />
-					<cell bg.color="bg" pad.h="2"><vsep/></cell>
-					<label text="labels.flt.HPF" pad.h="6" pad.v="4" fill="false" hexpand="true"/>
-					<cell bg.color="bg" pad.h="2"><vsep/></cell>
-					<label text="labels.flt.LPF" pad.h="6" pad.v="4" fill="false" hexpand="true"/>
+					<cell rows="9" bg.color="bg" pad.h="2" hreduce="true"><vsep/></cell>
+					<label text="labels.setup" pad.h="6" pad.v="4" fill="false" vreduce="true" />
+					<cell rows="9" bg.color="bg" pad.h="2" hreduce="true"><vsep/></cell>
+					<label text="labels.flt.HPF" pad.h="6" pad.v="4" fill="false" vreduce="true" />
+					<cell rows="9" bg.color="bg" pad.h="2" hreduce="true"><vsep/></cell>
+					<label text="labels.flt.LPF" pad.h="6" pad.v="4" fill="false" vreduce="true" />
 
 					<!-- row 2 -->
-					<cell cols="9" bg.color="bg" pad.v="2"><hsep/></cell>
+					<ui:with bg.color="bg" pad.v="2" vreduce="true">
+						<cell cols="3" ><hsep/></cell>
+						<hsep/>
+						<hsep/>
+						<hsep/>
+					</ui:with>
 
 					<!-- row 3 -->
-					<cell rows="2"><knob id="scp_m" scolor="mid" expand="true"/></cell>
-					<cell rows="2"><knob id="scr_m" scolor="mid" expand="true"/></cell>
-					<cell rows="2"><knob id="sla_m" scolor="mid" expand="true"/></cell>
-					<cell rows="3" bg.color="bg" pad.h="2"><vsep/></cell>
+					<cell rows="2"><knob id="scp_m" scolor="mid"/></cell>
+					<cell rows="2"><knob id="scr_m" scolor="mid"/></cell>
+					<cell rows="2"><knob id="sla_m" scolor="mid"/></cell>
 					<cell rows="3">
-						<vbox fill="false" spacing="1" expand="true">
+						<vbox fill="false" spacing="1">
 							<ui:with pad.h="6" pad.b="4">
 								<combo id="sct_m" fill="true" pad.t="4"/>
 								<combo id="scm_m" fill="true"/>
@@ -280,32 +284,34 @@
 							</ui:with>
 						</vbox>
 					</cell>
-					<cell rows="3" bg.color="bg" pad.h="2"><vsep/></cell>
-					<combo id="shpm_m" pad.h="6" bright="(:shpm_m igt 0) ? 1 : 0.75" bg.bright="(:shpm_m igt 0) ? 1 : :const_bg_darken" expand="true"/>
-					<cell rows="3" bg.color="bg" pad.h="2"><vsep/></cell>
-					<combo id="slpm_m" pad.h="6" bright="(:slpm_m igt 0) ? 1 : 0.75" bg.bright="(:slpm_m igt 0) ? 1 : :const_bg_darken" expand="true"/>
+					<combo id="shpm_m" pad.h="6" bright="(:shpm_m igt 0) ? 1 : 0.75" bg.bright="(:shpm_m igt 0) ? 1 : :const_bg_darken"/>
+					<combo id="slpm_m" pad.h="6" bright="(:slpm_m igt 0) ? 1 : 0.75" bg.bright="(:slpm_m igt 0) ? 1 : :const_bg_darken"/>
 
 					<!-- row 4 -->
-					<knob id="shpf_m" size="20" scolor="(:shpm_m igt 0) ? 'mid' : 'mid_inactive'" bg.bright="(:shpm_m igt 0) ? 1 : :const_bg_darken" expand="true"/>
-					<knob id="slpf_m" size="20" scolor="(:slpm_m igt 0) ? 'mid' : 'mid_inactive'" bg.bright="(:slpm_m igt 0) ? 1 : :const_bg_darken" expand="true"/>
+					<knob id="shpf_m" size="20" scolor="(:shpm_m igt 0) ? 'mid' : 'mid_inactive'" bg.bright="(:shpm_m igt 0) ? 1 : :const_bg_darken"/>
+					<knob id="slpf_m" size="20" scolor="(:slpm_m igt 0) ? 'mid' : 'mid_inactive'" bg.bright="(:slpm_m igt 0) ? 1 : :const_bg_darken"/>
 
 					<!-- row 5 -->
-					<value id="scp_m" sline="true" width.min="48" expand="true"/>
-					<value id="scr_m" sline="true" expand="true"/>
-					<value id="sla_m" sline="true" expand="true"/>
-					<value id="shpf_m" sline="true" bright="(:shpm_m igt 0) ? 1 : 0.75" bg.bright="(:shpm_m igt 0) ? 1 : :const_bg_darken" expand="true"/>
-					<value id="slpf_m" sline="true" bright="(:slpm_m igt 0) ? 1 : 0.75" bg.bright="(:slpm_m igt 0) ? 1 : :const_bg_darken" expand="true"/>
+					<value id="scp_m" sline="true" width.min="48"/>
+					<value id="scr_m" sline="true"/>
+					<value id="sla_m" sline="true"/>
+					<value id="shpf_m" sline="true" bright="(:shpm_m igt 0) ? 1 : 0.75" bg.bright="(:shpm_m igt 0) ? 1 : :const_bg_darken"/>
+					<value id="slpf_m" sline="true" bright="(:slpm_m igt 0) ? 1 : 0.75" bg.bright="(:slpm_m igt 0) ? 1 : :const_bg_darken"/>
 
 					<!-- row 6 -->
-					<cell cols="9" bg.color="bg" pad.v="2"><hsep/></cell>
+					<ui:with bg.color="bg" pad.v="2" vreduce="true">
+						<cell cols="3" ><hsep/></cell>
+						<hsep/>
+						<hsep/>
+						<hsep/>
+					</ui:with>
 
 					<!-- row 7 -->
-					<cell rows="2"><knob id="scp_s" scolor="side" expand="true"/></cell>
-					<cell rows="2"><knob id="scr_s" scolor="side" expand="true"/></cell>
-					<cell rows="2"><knob id="sla_s" scolor="side" expand="true"/></cell>
-					<cell rows="3" bg.color="bg" pad.h="2"><vsep/></cell>
+					<cell rows="2"><knob id="scp_s" scolor="side"/></cell>
+					<cell rows="2"><knob id="scr_s" scolor="side"/></cell>
+					<cell rows="2"><knob id="sla_s" scolor="side"/></cell>
 					<cell rows="3">
-						<vbox fill="false" spacing="1" expand="true">
+						<vbox fill="false" spacing="1">
 							<ui:with pad.h="6" pad.b="4">
 								<combo id="sct_s" fill="true" pad.t="4"/>
 								<combo id="scm_s" fill="true"/>
@@ -314,16 +320,15 @@
 							</ui:with>
 						</vbox>
 					</cell>
-					<cell rows="3" bg.color="bg" pad.h="2"><vsep/></cell>
-					<combo id="shpm_s" pad.h="6" bright="(:shpm_s igt 0) ? 1 : 0.75" bg.bright="(:shpm_s igt 0) ? 1 : :const_bg_darken" expand="true"/>
-					<cell rows="3" bg.color="bg" pad.h="2"><vsep/></cell>
-					<combo id="slpm_s" pad.h="6" bright="(:slpm_s igt 0) ? 1 : 0.75" bg.bright="(:slpm_s igt 0) ? 1 : :const_bg_darken" expand="true"/>
-					<!-- row 4 -->
-					<knob id="shpf_s" size="20" scolor="(:shpm_s igt 0) ? 'side' : 'side_inactive'" bg.bright="(:shpm_s igt 0) ? 1 : :const_bg_darken" expand="true"/>
-					<knob id="slpf_s" size="20" scolor="(:slpm_s igt 0) ? 'side' : 'side_inactive'" bg.bright="(:slpm_s igt 0) ? 1 : :const_bg_darken" expand="true"/>
+					<combo id="shpm_s" pad.h="6" bright="(:shpm_s igt 0) ? 1 : 0.75" bg.bright="(:shpm_s igt 0) ? 1 : :const_bg_darken"/>
+					<combo id="slpm_s" pad.h="6" bright="(:slpm_s igt 0) ? 1 : 0.75" bg.bright="(:slpm_s igt 0) ? 1 : :const_bg_darken"/>
+					
+					<!-- row 8 -->
+					<knob id="shpf_s" size="20" scolor="(:shpm_s igt 0) ? 'side' : 'side_inactive'" bg.bright="(:shpm_s igt 0) ? 1 : :const_bg_darken"/>
+					<knob id="slpf_s" size="20" scolor="(:slpm_s igt 0) ? 'side' : 'side_inactive'" bg.bright="(:slpm_s igt 0) ? 1 : :const_bg_darken"/>
 
 					<!-- row 9 -->
-					<ui:with sline="true" expand="true">
+					<ui:with sline="true">
 						<value id="scp_s"/>
 						<value id="scr_s"/>
 						<value id="sla_s"/>
@@ -336,28 +341,34 @@
 
 			<group text="groups.plug.compressor" vexpand="false" hexpand="true" ipadding="0">
 
-				<grid rows="11" cols="14" spacing="0" bg.color="bg_schema">
+				<grid rows="9" cols="14" spacing="0" bg.color="bg_schema">
 					<!-- row 1 -->
-					<label text="labels.mode" pad.h="6" pad.v="4" hexpand="true" />
-					<cell bg.color="bg" pad.h="2"><vsep/></cell>
-					<ui:with pad.h="6" pad.v="4" hexpand="true">
-						<label text="labels.ratio" width.min="41"/>
-						<label text="labels.knee"/>
-						<label text="labels.makeup"/>
+					<label text="labels.mode" pad.h="6" pad.v="4" vreduce="true" />
+					<cell rows="9" bg.color="bg" pad.h="2" hreduce="true"><vsep/></cell>
+					<ui:with pad.h="6" pad.v="4">
+						<label text="labels.ratio" width.min="41" vreduce="true" />
+						<label text="labels.knee" vreduce="true" />
+						<label text="labels.makeup" vreduce="true" />
 					</ui:with>
-					<cell bg.color="bg" pad.h="2"><vsep/></cell>
-					<cell cols="2"><label text="labels.attack" pad.h="6" pad.v="4" hexpand="true" /></cell>
-					<cell bg.color="bg" pad.h="2"><vsep/></cell>
-					<cell cols="2"><label text="labels.release" pad.h="6" pad.v="4" hexpand="true" /></cell>
-					<cell bg.color="bg" pad.h="2"><vsep/></cell>
-					<cell cols="2"><label text="labels.mix" pad.h="6" pad.v="4" hexpand="true" /></cell>
+					<cell rows="9" bg.color="bg" pad.h="2" hreduce="true"><vsep/></cell>
+					<cell cols="2"><label text="labels.attack" pad.h="6" pad.v="4" vreduce="true" /></cell>
+					<cell rows="9" bg.color="bg" pad.h="2" hreduce="true"><vsep/></cell>
+					<cell cols="2"><label text="labels.release" pad.h="6" pad.v="4" vreduce="true" /></cell>
+					<cell rows="9" bg.color="bg" pad.h="2" hreduce="true"><vsep/></cell>
+					<cell cols="2"><label text="labels.mix" pad.h="6" pad.v="4" vreduce="true" /></cell>
 
 					<!-- row 2 -->
-					<cell cols="14" bg.color="bg" pad.v="2"><hsep/></cell>
+					<ui:with bg.color="bg" pad.v="2" vreduce="true">  
+						<hsep />
+						<cell cols="3"><hsep /></cell>
+						<cell cols="2"><hsep /></cell>
+						<cell cols="2"><hsep /></cell>
+						<cell cols="2"><hsep /></cell>
+					</ui:with>
 
 					<!-- row 3 -->
 					<cell rows="3" height.min="111">
-						<vbox expand="true">
+						<vbox>
 							<combo id="cm_m" pad.h="6" pad.v="4"/>
 							<label text="labels.boost" bright="(:cm_m ieq 0) ? 0.75 : 1"/>
 							<knob id="bth_m" scolor="(:cm_m ieq 0) ? 'mid_inactive' : 'mid'" visibility=":cm_m ine 2"/>
@@ -366,52 +377,54 @@
 							<value id="bsa_m" detailed="false" bright="(:cm_m ieq 0) ? 0.75 : 1" visibility=":cm_m ieq 2"/>
 						</vbox>
 					</cell>
-					<cell rows="3" bg.color="bg" pad.h="2"><vsep/></cell>
-					<cell rows="2"><knob id="cr_m" scolor="mid" expand="true"/></cell>
-					<cell rows="2"><knob id="kn_m" scolor="mid" expand="true"/></cell>
-					<cell rows="2"><knob id="mk_m" scolor="mid" expand="true"/></cell>
-					<cell rows="3" bg.color="bg" pad.h="2"><vsep/></cell>
-					<label text="labels.thresh_old" expand="true" />
-					<label text="labels.time" expand="true" />
-					<cell bg.color="bg" pad.h="2"><vsep/></cell>
-					<label text="labels.thresh_old" expand="true" />
-					<label text="labels.time" expand="true" />
-					<cell bg.color="bg" pad.h="2"><vsep/></cell>
-					<label text="labels.signal.dry" expand="true" />
-					<label text="labels.signal.wet" expand="true" />
+					<cell rows="2"><knob id="cr_m" scolor="mid"/></cell>
+					<cell rows="2"><knob id="kn_m" scolor="mid"/></cell>
+					<cell rows="2"><knob id="mk_m" scolor="mid"/></cell>
+					<label text="labels.thresh_old" />
+					<label text="labels.time" />
+					<label text="labels.thresh_old" />
+					<label text="labels.time" />
+					<label text="labels.signal.dry" />
+					<label text="labels.signal.wet" />
 
 					<!-- row 4 -->
-					<knob id="al_m" scolor="treshold_2" size="20" pad.h="6" pad.v="4" expand="true"/>
-					<knob id="at_m" scolor="mid" size="20" pad.h="6" pad.v="4" expand="true"/>
-					<cell rows="2" bg.color="bg" pad.h="2"><vsep/></cell>
-					<knob id="rrl_m" scolor="treshold_1" size="20" pad.h="6" pad.v="4" expand="true"/>
-					<knob id="rt_m" scolor="mid" size="20" pad.h="6" pad.v="4" expand="true"/>
-					<cell rows="2" bg.color="bg" pad.h="2"><vsep/></cell>
-					<knob id="cdr_m" scolor="dry" size="20" pad.h="6" pad.v="4" expand="true"/>
-					<knob id="cwt_m" scolor="wet" size="20" pad.h="6" pad.v="4" expand="true"/>
+					<knob id="al_m" scolor="treshold_2" size="20" pad.h="6" pad.v="4"/>
+					<knob id="at_m" scolor="mid" size="20" pad.h="6" pad.v="4"/>
+					<knob id="rrl_m" scolor="treshold_1" size="20" pad.h="6" pad.v="4"/>
+					<knob id="rt_m" scolor="mid" size="20" pad.h="6" pad.v="4"/>
+					<knob id="cdr_m" scolor="dry" size="20" pad.h="6" pad.v="4"/>
+					<knob id="cwt_m" scolor="wet" size="20" pad.h="6" pad.v="4"/>
 
-					<!-- row 6 -->
-					<align valign="-1" pad.t="2" expand="true">
+					<!-- row 5 -->
+					<align valign="-1" pad.t="2">
 						<hbox fill="false">
 							<value id="cr_m" detailed="false"/>
 							<label text=":"/>
 							<label text="1"/>
 						</hbox>
 					</align>
-					<value id="kn_m" width.min="32" expand="true"/>
-					<value id="mk_m" width.min="32" expand="true"/>
-					<value id="al_m" width.min="32" expand="true"/>
-					<value id="at_m" width.min="32" expand="true"/>
-					<value id="rrl_m" width.min="32" expand="true"/>
-					<value id="rt_m" width.min="32" expand="true"/>
-					<value id="cdr_m" width.min="32" expand="true"/>
-					<value id="cwt_m" width.min="32" expand="true"/>
+					<ui:with width.min="32">
+						<value id="kn_m"/>
+						<value id="mk_m"/>
+						<value id="al_m"/>
+						<value id="at_m"/>
+						<value id="rrl_m"/>
+						<value id="rt_m"/>
+						<value id="cdr_m"/>
+						<value id="cwt_m"/>
+					</ui:with>
+
+					<!-- row 6 -->
+					<ui:with bg.color="bg" pad.v="2" vreduce="true">  
+						<hsep />
+						<cell cols="3"><hsep /></cell>
+						<cell cols="2"><hsep /></cell>
+						<cell cols="2"><hsep /></cell>
+						<cell cols="2"><hsep /></cell>
+					</ui:with>
 
 					<!-- row 7 -->
-					<cell cols="14" bg.color="bg" pad.v="2"><hsep/></cell>
-
-					<!-- row 8 -->
-					<cell rows="3" height.min="111" expand="true">
+					<cell rows="3" height.min="111">
 						<vbox>
 							<combo id="cm_s" pad.h="6" pad.v="4"/>
 							<label text="labels.boost" bright="(:cm_s ieq 0) ? 0.75 : 1"/>
@@ -421,39 +434,33 @@
 							<value id="bsa_s" detailed="false" bright="(:cm_s ieq 0) ? 0.75 : 1" visibility=":cm_s ieq 2"/>
 						</vbox>
 					</cell>
-					<cell rows="3" bg.color="bg" pad.h="2"><vsep/></cell>
-					<cell rows="2"><knob id="cr_s" scolor="side" expand="true"/></cell>
-					<cell rows="2"><knob id="kn_s" scolor="side" expand="true"/></cell>
-					<cell rows="2"><knob id="mk_s" scolor="side" expand="true"/></cell>
-					<cell rows="3" bg.color="bg" pad.h="2"><vsep/></cell>
-					<label text="labels.thresh_old" expand="true" />
-					<label text="labels.time" expand="true" />
-					<cell bg.color="bg" pad.h="2"><vsep/></cell>
-					<label text="labels.thresh_old" expand="true" />
-					<label text="labels.time" expand="true" />
-					<cell bg.color="bg" pad.h="2"><vsep/></cell>
-					<label text="labels.signal.dry" expand="true" />
-					<label text="labels.signal.wet" expand="true" />
+					<cell rows="2"><knob id="cr_s" scolor="side"/></cell>
+					<cell rows="2"><knob id="kn_s" scolor="side"/></cell>
+					<cell rows="2"><knob id="mk_s" scolor="side"/></cell>
+					<label text="labels.thresh_old" />
+					<label text="labels.time" />
+					<label text="labels.thresh_old" />
+					<label text="labels.time" />
+					<label text="labels.signal.dry" />
+					<label text="labels.signal.wet" />
 
-					<!-- row 10 -->
-					<knob id="al_s" scolor="treshold_2" size="20" pad.h="6" pad.v="4" expand="true"/>
-					<knob id="at_s" scolor="side" size="20" pad.h="6" pad.v="4" expand="true"/>
-					<cell rows="2" bg.color="bg" pad.h="2"><vsep/></cell>
-					<knob id="rrl_s" scolor="treshold_1" size="20" pad.h="6" pad.v="4" expand="true"/>
-					<knob id="rt_s" scolor="side" size="20" pad.h="6" pad.v="4" expand="true"/>
-					<cell rows="2" bg.color="bg" pad.h="2"><vsep/></cell>
-					<knob id="cdr_s" scolor="dry" size="20" pad.h="6" pad.v="4" expand="true"/>
-					<knob id="cwt_s" scolor="wet" size="20" pad.h="6" pad.v="4" expand="true"/>
+					<!-- row 8 -->
+					<knob id="al_s" scolor="treshold_2" size="20" pad.h="6" pad.v="4"/>
+					<knob id="at_s" scolor="side" size="20" pad.h="6" pad.v="4"/>
+					<knob id="rrl_s" scolor="treshold_1" size="20" pad.h="6" pad.v="4"/>
+					<knob id="rt_s" scolor="side" size="20" pad.h="6" pad.v="4"/>
+					<knob id="cdr_s" scolor="dry" size="20" pad.h="6" pad.v="4"/>
+					<knob id="cwt_s" scolor="wet" size="20" pad.h="6" pad.v="4"/>
 
-					<!-- row 11 -->
-					<align valign="-1" pad.t="2" expand="true">
+					<!-- row 9 -->
+					<align valign="-1" pad.t="2">
 						<hbox fill="false">
 							<value id="cr_s" detailed="false"/>
 							<label text=":"/>
 							<label text="1"/>
 						</hbox>
 					</align>
-					<ui:with width.min="32" expand="true">
+					<ui:with width.min="32">
 						<value id="kn_s" />
 						<value id="mk_s" />
 						<value id="al_s" />
