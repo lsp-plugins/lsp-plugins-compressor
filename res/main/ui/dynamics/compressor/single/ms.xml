@@ -1,7 +1,7 @@
 <plugin resizable="true">
 	<vbox>
 		<!-- Top part -->
-		<grid rows="1" cols="5" hspacing="4" expand="true">
+		<grid rows="1" cols="5" hspacing="4">
 			<vbox expand="true">
 				<group ui:inject="GraphGroup" ipadding="0" expand="true" fill="true" text="labels.graphs.time">
 					<graph width.min="496" height.min="222" expand="true" fill="true">
@@ -242,10 +242,10 @@
 		</grid>
 		
 		<!-- Separator -->
-		<void bg.color="bg" expand="false" fill="true" pad.v="2"/>
+		<void bg.color="bg" fill="true" pad.v="2" reduce="true" />
 		
 		<!-- Bottom part -->
-		<hbox expand="true">
+		<hbox>
 			<group text="groups.sidechain" vexpand="false" ipadding="0">
 
 				<grid rows="9" cols="9" spacing="0" bg.color="bg_schema">
