@@ -83,7 +83,6 @@
 					<hbox spacing="4" vexpand="false" bg.color="bg_schema" pad.h="6" pad.b="4" pad.t="4">
 						<button id="pause" height="22" width="48" text="labels.pause" ui:inject="Button_green"/>
 						<button id="clear" height="22" width="48" text="labels.clear" ui:inject="Button_red"/>
-						<!-- <button id="lrl" height="22" width="48" text="labels.ms_listen" ui:inject="Button_yellow"/> -->
 					</hbox>
 				</align>
 			</vbox>
