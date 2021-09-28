@@ -244,14 +244,6 @@
 					<cell rows="2"><knob id="scr" scolor="kscale"/></cell>
 					<cell rows="2"><knob id="sla" scolor="kscale"/></cell>
 					<cell rows="3">
-						<!-- <vbox fill="false" spacing="1">
-							<ui:with pad.h="6" pad.b="4">
-								<combo id="sct" fill="true" pad.t="4"/>
-								<combo id="scm" fill="true"/>
-								<hsep fill="true" pad.v="2" pad.h="0" bg.color="bg"/>
-								<button id="scl" pad.t="4" height="22" hfill="true" hexpand="true" text="labels.listen" ui:inject="Button_cyan"/>
-							</ui:with>
-						</vbox> -->
 						<grid rows="3" cols="1">
 							<vbox fill="false">
 								<ui:with pad.h="6" >
