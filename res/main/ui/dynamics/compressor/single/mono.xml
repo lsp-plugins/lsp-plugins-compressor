@@ -80,23 +80,14 @@
 				</align>
 			</vbox>
 
-			<grid rows="3" cols="3" hfill="false" hspacing="4" hexpand="false">
+			<grid rows="3" cols="3" hfill="false" hspacing="4" vexpand="true">
 				<ui:with bg.color="bg_schema">
 					<label text="labels.sc.SC" padding="4"/>
 					<label text="labels.Env_elope" padding="4"/>
 					<label text="labels.gain_" padding="4"/>
-
-					<grid rows="2" cols="2" fill="false" hspacing="2">
-						<button id="slv" height="10" width="22" ui:inject="Button_orange" led="true"/>
-					</grid>
-
-					<grid rows="2" cols="2" fill="false" hspacing="2">
-						<button id="elv" height="10" width="22" ui:inject="Button_violet" led="true"/>
-					</grid>
-
-					<grid rows="2" cols="2" fill="false" hspacing="2">
-						<button id="grv" height="10" width="22" ui:inject="Button_blue" led="true"/>
-					</grid>
+					<button id="slv" height="10" width="22" ui:inject="Button_orange" led="true"/>
+					<button id="elv" height="10" width="22" ui:inject="Button_violet" led="true"/>
+					<button id="grv" height="10" width="22" ui:inject="Button_blue" led="true"/>
 				</ui:with>
 
 				<!-- Sidechain signal meter -->
