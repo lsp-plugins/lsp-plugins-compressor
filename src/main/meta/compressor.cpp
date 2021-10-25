@@ -77,14 +77,6 @@ namespace lsp
 
         static const port_item_t comp_modes[] =
         {
-            { "Downward",   "compressor.downward" },
-            { "Upward",     "compressor.upward" },
-            { "Boosting",   "compressor.boosting" },
-            { NULL, NULL }
-        };
-
-        static const port_item_t comp_modes_short[] =
-        {
             { "Down",       "compressor.down_ward" },
             { "Up",         "compressor.up_ward" },
             { "Boot",       "compressor.boost_ing" },
@@ -199,8 +191,8 @@ namespace lsp
             COMP_COMMON,
             COMP_SC_STEREO_CHANNEL("_l", " Left", comp_sc_type),
             COMP_SC_STEREO_CHANNEL("_r", " Right", comp_sc_type),
-            COMP_CHANNEL("_l", " Left", comp_modes_short),
-            COMP_CHANNEL("_r", " Right", comp_modes_short),
+            COMP_CHANNEL("_l", " Left", comp_modes),
+            COMP_CHANNEL("_r", " Right", comp_modes),
             COMP_AUDIO_METER("_l", " Left"),
             COMP_AUDIO_METER("_r", " Right"),
 
@@ -213,8 +205,8 @@ namespace lsp
             COMP_MS_COMMON,
             COMP_SC_STEREO_CHANNEL("_m", " Mid", comp_sc_type),
             COMP_SC_STEREO_CHANNEL("_s", " Side", comp_sc_type),
-            COMP_CHANNEL("_m", " Mid", comp_modes_short),
-            COMP_CHANNEL("_s", " Side", comp_modes_short),
+            COMP_CHANNEL("_m", " Mid", comp_modes),
+            COMP_CHANNEL("_s", " Side", comp_modes),
             COMP_AUDIO_METER("_m", " Mid"),
             COMP_AUDIO_METER("_s", " Side"),
 
@@ -253,8 +245,8 @@ namespace lsp
             COMP_COMMON,
             COMP_SC_STEREO_CHANNEL("_l", " Left", comp_sc2_type),
             COMP_SC_STEREO_CHANNEL("_r", " Right", comp_sc2_type),
-            COMP_CHANNEL("_l", " Left", comp_modes_short),
-            COMP_CHANNEL("_r", " Right", comp_modes_short),
+            COMP_CHANNEL("_l", " Left", comp_modes),
+            COMP_CHANNEL("_r", " Right", comp_modes),
             COMP_AUDIO_METER("_l", " Left"),
             COMP_AUDIO_METER("_r", " Right"),
 
@@ -268,8 +260,8 @@ namespace lsp
             COMP_MS_COMMON,
             COMP_SC_STEREO_CHANNEL("_m", " Mid", comp_sc2_type),
             COMP_SC_STEREO_CHANNEL("_s", " Side", comp_sc2_type),
-            COMP_CHANNEL("_m", " Mid", comp_modes_short),
-            COMP_CHANNEL("_s", " Side", comp_modes_short),
+            COMP_CHANNEL("_m", " Mid", comp_modes),
+            COMP_CHANNEL("_s", " Side", comp_modes),
             COMP_AUDIO_METER("_m", " Mid"),
             COMP_AUDIO_METER("_s", " Side"),
 
