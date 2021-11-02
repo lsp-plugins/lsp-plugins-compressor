@@ -1,5 +1,7 @@
 {
 	"compressor": {
+		"boost_ing": "Boost",
+		"boosting": "Boosting",
 		"down_ward": "Giù",
 		"downward": "Verso il basso",
 		"up_ward": "Su",
