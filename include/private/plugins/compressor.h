@@ -183,17 +183,17 @@ namespace lsp
                 virtual ~compressor();
 
             public:
-                virtual void init(plug::IWrapper *wrapper);
-                virtual void destroy();
+                virtual void    init(plug::IWrapper *wrapper, plug::IPort **ports);
+                virtual void    destroy();
 
-                virtual void update_settings();
-                virtual void update_sample_rate(long sr);
-                virtual void ui_activated();
+                virtual void    update_settings();
+                virtual void    update_sample_rate(long sr);
+                virtual void    ui_activated();
 
-                virtual void process(size_t samples);
-                virtual bool inline_display(plug::ICanvas *cv, size_t width, size_t height);
+                virtual void    process(size_t samples);
+                virtual bool    inline_display(plug::ICanvas *cv, size_t width, size_t height);
 
-                virtual void dump(dspu::IStateDumper *v) const;
+                virtual void    dump(dspu::IStateDumper *v) const;
         };
     } // namespace plugins
 } // namespace lsp
