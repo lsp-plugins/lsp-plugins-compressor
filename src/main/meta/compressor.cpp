@@ -268,6 +268,15 @@ namespace lsp
             PORTS_END
         };
 
+        const meta::bundle_t compressor_bundle =
+        {
+            "compressor",
+            "Compressor",
+            B_DYNAMICS,
+            "HXOjx3jfw2I",
+            "This plugin performs compression of input signal. Flexible sidechain\nconfiguration available. Different types of compression are possible:\ndownward, upward and parallel. Also compressor may work as limiter in\nPeak mode with high Ratio and low Attack time."
+        };
+
         // Compressor
         const meta::plugin_t compressor_mono =
         {
@@ -287,7 +296,8 @@ namespace lsp
             compressor_mono_ports,
             "dynamics/compressor/single/mono.xml",
             NULL,
-            mono_plugin_port_groups
+            mono_plugin_port_groups,
+            &compressor_bundle
         };
 
         const meta::plugin_t  compressor_stereo =
@@ -308,7 +318,8 @@ namespace lsp
             compressor_stereo_ports,
             "dynamics/compressor/single/stereo.xml",
             NULL,
-            stereo_plugin_port_groups
+            stereo_plugin_port_groups,
+            &compressor_bundle
         };
 
         const meta::plugin_t  compressor_lr =
@@ -329,7 +340,8 @@ namespace lsp
             compressor_lr_ports,
             "dynamics/compressor/single/lr.xml",
             NULL,
-            stereo_plugin_port_groups
+            stereo_plugin_port_groups,
+            &compressor_bundle
         };
 
         const meta::plugin_t  compressor_ms =
@@ -350,7 +362,8 @@ namespace lsp
             compressor_ms_ports,
             "dynamics/compressor/single/ms.xml",
             NULL,
-            stereo_plugin_port_groups
+            stereo_plugin_port_groups,
+            &compressor_bundle
         };
 
         // Sidechain compressor
@@ -372,7 +385,8 @@ namespace lsp
             sc_compressor_mono_ports,
             "dynamics/compressor/single/mono.xml",
             NULL,
-            mono_plugin_sidechain_port_groups
+            mono_plugin_sidechain_port_groups,
+            &compressor_bundle
         };
 
         const meta::plugin_t  sc_compressor_stereo =
@@ -393,7 +407,8 @@ namespace lsp
             sc_compressor_stereo_ports,
             "dynamics/compressor/single/stereo.xml",
             NULL,
-            stereo_plugin_sidechain_port_groups
+            stereo_plugin_sidechain_port_groups,
+            &compressor_bundle
         };
 
         const meta::plugin_t  sc_compressor_lr =
@@ -414,7 +429,8 @@ namespace lsp
             sc_compressor_lr_ports,
             "dynamics/compressor/single/lr.xml",
             NULL,
-            stereo_plugin_sidechain_port_groups
+            stereo_plugin_sidechain_port_groups,
+            &compressor_bundle
         };
 
         const meta::plugin_t  sc_compressor_ms =
@@ -435,7 +451,8 @@ namespace lsp
             sc_compressor_ms_ports,
             "dynamics/compressor/single/ms.xml",
             NULL,
-            stereo_plugin_sidechain_port_groups
+            stereo_plugin_sidechain_port_groups,
+            &compressor_bundle
         };
     } // namespace meta
 } // namespace lsp
