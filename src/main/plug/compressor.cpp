@@ -111,21 +111,22 @@ namespace lsp
             plug::Module::init(wrapper, ports);
             size_t channels = (nMode == CM_MONO) ? 1 : 2;
 
-            // Allocate channels
-            vChannels       = new channel_t[channels];
-            if (vChannels == NULL)
-                return;
-
             // Allocate temporary buffers
+            size_t channel_size     = align_size(sizeof(channel_t) * channels, DEFAULT_ALIGN);
             size_t buf_size         = COMP_BUF_SIZE * sizeof(float);
             size_t curve_size       = (meta::compressor_metadata::CURVE_MESH_SIZE) * sizeof(float);
             size_t history_size     = (meta::compressor_metadata::TIME_MESH_SIZE) * sizeof(float);
-            size_t allocate         = buf_size * channels * 5 + curve_size + history_size + DEFAULT_ALIGN;
-            uint8_t *ptr            = new uint8_t[allocate];
+            size_t allocate         = channel_size +
+                                      buf_size * channels * 5 +
+                                      curve_size +
+                                      history_size;
+
+            uint8_t *ptr            = alloc_aligned<uint8_t>(pData, allocate);
             if (ptr == NULL)
                 return;
-            pData                   = ptr;
-            ptr                     = align_ptr(ptr, DEFAULT_ALIGN);
+
+            vChannels               = reinterpret_cast<channel_t *>(ptr);
+            ptr                    += channel_size;
             vCurve                  = reinterpret_cast<float *>(ptr);
             ptr                    += curve_size;
             vTime                   = reinterpret_cast<float *>(ptr);
@@ -134,8 +135,20 @@ namespace lsp
             // Initialize channels
             for (size_t i=0; i<channels; ++i)
             {
+                // Construct the channel
                 channel_t *c = &vChannels[i];
+                c->sBypass.construct();
+                c->sSC.construct();
+                c->sSCEq.construct();
+                c->sComp.construct();
+                c->sLaDelay.construct();
+                c->sInDelay.construct();
+                c->sOutDelay.construct();
+                c->sDryDelay.construct();
+                for (size_t j=0; j<G_TOTAL; ++j)
+                    c->sGraph[j].construct();
 
+                // Init the channel
                 if (!c->sSC.init(channels, meta::compressor_metadata::REACTIVITY_MAX))
                     return;
                 if (!c->sSCEq.init(2, 12))
@@ -422,20 +435,26 @@ namespace lsp
                 size_t channels = (nMode == CM_MONO) ? 1 : 2;
                 for (size_t i=0; i<channels; ++i)
                 {
-                    vChannels[i].sSC.destroy();
-                    vChannels[i].sSCEq.destroy();
-                    vChannels[i].sDelay.destroy();
-                    vChannels[i].sCompDelay.destroy();
-                    vChannels[i].sDryDelay.destroy();
+                    channel_t *c = &vChannels[i];
+
+                    c->sBypass.destroy();
+                    c->sSC.destroy();
+                    c->sSCEq.destroy();
+                    c->sComp.destroy();
+                    c->sLaDelay.destroy();
+                    c->sInDelay.destroy();
+                    c->sOutDelay.destroy();
+                    c->sDryDelay.destroy();
+                    for (size_t j=0; j<G_TOTAL; ++j)
+                        c->sGraph[j].destroy();
                 }
 
-                delete [] vChannels;
                 vChannels = NULL;
             }
 
             if (pData != NULL)
             {
-                delete [] pData;
+                free_aligned(pData);
                 pData = NULL;
             }
 
@@ -459,8 +478,9 @@ namespace lsp
                 c->sComp.set_sample_rate(sr);
                 c->sSC.set_sample_rate(sr);
                 c->sSCEq.set_sample_rate(sr);
-                c->sDelay.init(max_delay);
-                c->sCompDelay.init(max_delay);
+                c->sLaDelay.init(max_delay);
+                c->sInDelay.init(max_delay);
+                c->sOutDelay.init(max_delay);
                 c->sDryDelay.init(max_delay);
 
                 for (size_t j=0; j<G_TOTAL; ++j)
@@ -533,9 +553,8 @@ namespace lsp
 
                 // Update delay and estimate overall delay
                 size_t delay    = dspu::millis_to_samples(fSampleRate, (c->pScLookahead != NULL) ? c->pScLookahead->value() : 0);
-                c->sDelay.set_delay(delay);
-                if (delay > latency)
-                    latency         = delay;
+                c->sLaDelay.set_delay(delay);
+                latency         = lsp_max(latency, delay);
 
                 // Update compressor settings
                 float attack    = c->pAttackLvl->value();
@@ -574,7 +593,8 @@ namespace lsp
             for (size_t i=0; i<channels; ++i)
             {
                 channel_t *c    = &vChannels[i];
-                c->sCompDelay.set_delay(latency - c->sDelay.get_delay());
+                c->sInDelay.set_delay(latency);
+                c->sOutDelay.set_delay(latency - c->sLaDelay.get_delay());
                 c->sDryDelay.set_delay(latency);
             }
 
@@ -645,8 +665,6 @@ namespace lsp
                 // Analyze channel mode
                 if (c->nScType == SCT_FEED_BACK)
                     feedback |= (1 << i);
-
-    //            lsp_dumpf("in_buf", "%g", in_buf[i], samples);
             }
 
             // Perform compression
@@ -720,7 +738,6 @@ namespace lsp
                             in[0]   = (vChannels[1].nScType == SCT_EXTERNAL) ? sc_buf[0] : vChannels[0].vIn;
                             in[1]   = (vChannels[1].nScType == SCT_EXTERNAL) ? sc_buf[1] : vChannels[1].vIn;
                             process_non_feedback(&vChannels[1], in, to_process);
-    //                        vChannels[1].fFeedback      = vChannels[1].vOut[to_process-1]; // do not update feedback at this time
 
                             // Process feedback channel
                             for (size_t i=0; i<to_process; ++i)
@@ -750,7 +767,6 @@ namespace lsp
                         in[0]   = (vChannels[0].nScType == SCT_EXTERNAL) ? sc_buf[0] : vChannels[0].vIn;
                         in[1]   = (vChannels[0].nScType == SCT_EXTERNAL) ? sc_buf[1] : vChannels[1].vIn;
                         process_non_feedback(&vChannels[0], in, to_process);
-    //                    vChannels[0].fFeedback      = vChannels[0].vOut[to_process-1]; // do not update feedback at this time
 
                         // Process feedback channel
                         for (size_t i=0; i<to_process; ++i)
@@ -779,16 +795,15 @@ namespace lsp
                         break;
                 }
 
-                // Apply gain to each channel and process meters
+                // Apply gain to each channel, compensate latency and process meters
                 for (size_t i=0; i<channels; ++i)
                 {
                     channel_t *c        = &vChannels[i];
 
                     // Add delay to original signal and apply gain
-                    c->sDelay.process(c->vOut, c->vIn, c->vGain, to_process);
-
-                    // Apply latency compensation delay
-                    c->sCompDelay.process(c->vOut, c->vOut, to_process);
+                    c->sLaDelay.process(c->vOut, c->vIn, c->vGain, to_process);
+                    c->sInDelay.process(c->vIn, c->vIn, to_process);
+                    c->sOutDelay.process(c->vOut, c->vOut, to_process);
 
                     // Process graph outputs
                     if ((i == 0) || (nMode != CM_STEREO))
@@ -846,10 +861,8 @@ namespace lsp
                 {
                     // Apply bypass
                     channel_t *c        = &vChannels[i];
-                    c->sDryDelay.process(c->vIn, in_buf[i], to_process);                    // Apply latency compensation
+                    c->sDryDelay.process(c->vIn, in_buf[i], to_process);
                     c->sBypass.process(out_buf[i], c->vIn, vChannels[i].vOut, to_process);
-
-    //                dump_buffer("out_buf", out_buf[i], samples);
 
                     in_buf[i]          += to_process;
                     out_buf[i]         += to_process;
@@ -1071,8 +1084,9 @@ namespace lsp
                     v->write_object("sSC", &c->sSC);
                     v->write_object("sSCEq", &c->sSCEq);
                     v->write_object("sComp", &c->sComp);
-                    v->write_object("sDelay", &c->sDelay);
-                    v->write_object("sCompDelay", &c->sCompDelay);
+                    v->write_object("sLaDelay", &c->sLaDelay);
+                    v->write_object("sInDelay", &c->sInDelay);
+                    v->write_object("sOutDelay", &c->sOutDelay);
                     v->write_object("sDryDelay", &c->sDryDelay);
 
                     v->begin_array("sGraph", c->sGraph, G_TOTAL);

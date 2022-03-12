@@ -95,8 +95,9 @@ namespace lsp
                     dspu::Sidechain       sSC;                // Sidechain module
                     dspu::Equalizer       sSCEq;              // Sidechain equalizer
                     dspu::Compressor      sComp;              // Compression module
-                    dspu::Delay           sDelay;             // Lookahead delay
-                    dspu::Delay           sCompDelay;         // Compensation delay
+                    dspu::Delay           sLaDelay;           // Lookahead delay
+                    dspu::Delay           sInDelay;           // Input compensation delay
+                    dspu::Delay           sOutDelay;          // Output compensation delay
                     dspu::Delay           sDryDelay;          // Dry delay
                     dspu::MeterGraph      sGraph[G_TOTAL];    // Input meter graph
 
