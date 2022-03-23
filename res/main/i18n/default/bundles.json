@@ -1,0 +1,7 @@
+{
+	"compressor": {
+		"name": "Compressor",
+		"description": "This plugin performs compression of input signal. Flexible sidechain\nconfiguration available. Different types of compression are possible:\ndownward, upward and parallel. Also compressor may work as limiter in\nPeak mode with high Ratio and low Attack time."
+	}
+}
+
