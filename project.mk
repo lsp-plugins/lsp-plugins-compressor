@@ -24,7 +24,7 @@ ARTIFACT_NAME               = lsp-plugins-compressor
 ARTIFACT_TYPE               = plug
 ARTIFACT_DESC               = LSP Compressor Plugin Series
 ARTIFACT_HEADERS            = lsp-plug.in
-ARTIFACT_VERSION            = 1.0.4
+ARTIFACT_VERSION            = 1.0.5
 
 
 
