@@ -1,0 +1,11 @@
+{
+	"compressor": {
+		"boost_ing": "Boost",
+		"boosting": "Boosting",
+		"down_ward": "Runter",
+		"downward": "Absteigend",
+		"up_ward": "Hoch",
+		"upward": "Ansteigend"
+	}
+}
+
