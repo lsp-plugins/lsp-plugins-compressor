@@ -3,6 +3,7 @@
 *******************************************************************************
 
 === 1.0.8 ===
+* Updated compressor: added negative boosting gain option in 'Boosting' mode.
 * Assigned more correct names for sidechain types.
 * Updated build scripts and dependencies.
 
