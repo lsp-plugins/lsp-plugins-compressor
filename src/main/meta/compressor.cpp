@@ -53,10 +53,12 @@ namespace lsp
 
         static const port_item_t comp_sc_sources[] =
         {
-            { "Middle",     "sidechain.middle" },
-            { "Side",       "sidechain.side" },
-            { "Left",       "sidechain.left" },
-            { "Right",      "sidechain.right" },
+            { "Middle",         "sidechain.middle"          },
+            { "Side",           "sidechain.side"            },
+            { "Left",           "sidechain.left"            },
+            { "Right",          "sidechain.right"           },
+            { "Min",            "sidechain.min"             },
+            { "Max",            "sidechain.max"             },
             { NULL, NULL }
         };
 
