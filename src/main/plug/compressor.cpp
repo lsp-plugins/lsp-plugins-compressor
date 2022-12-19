@@ -214,7 +214,7 @@ namespace lsp
                 c->pReleaseOut      = NULL;
             }
 
-            lsp_assert(ptr < &pData[allocate]);
+            lsp_assert(ptr <= &pData[allocate]);
 
             // Bind ports
             size_t port_id              = 0;

@@ -2,6 +2,10 @@
 * RECENT CHANGES
 *******************************************************************************
 
+=== 1.0.9 ===
+* Added 'Min' and 'Max' sidechain sources for the compressor.
+* Updated build scripts and dependencies.
+
 === 1.0.8 ===
 * Updated compressor: added negative boosting gain option in 'Boosting' mode.
 * Assigned more correct names for sidechain types.
