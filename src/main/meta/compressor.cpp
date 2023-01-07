@@ -40,7 +40,9 @@ namespace lsp
     {
         //-------------------------------------------------------------------------
         // Compressor
-        static const int compressor_classes[] = { C_COMPRESSOR, -1 };
+        static const int plugin_classes[]           = { C_COMPRESSOR, -1 };
+        static const int clap_features_mono[]       = { CF_AUDIO_EFFECT, CF_COMPRESSOR, CF_MONO, -1 };
+        static const int clap_features_stereo[]     = { CF_AUDIO_EFFECT, CF_COMPRESSOR, CF_STEREO, -1 };
 
         static const port_item_t comp_sc_modes[] =
         {
@@ -292,8 +294,10 @@ namespace lsp
             "bgsy",
             LSP_LADSPA_COMPRESSOR_BASE + 0,
             LSP_LADSPA_URI("compressor_mono"),
+            LSP_CLAP_URI("compressor_mono"),
             LSP_PLUGINS_COMPRESSOR_VERSION,
-            compressor_classes,
+            plugin_classes,
+            clap_features_mono,
             E_INLINE_DISPLAY | E_DUMP_STATE,
             compressor_mono_ports,
             "dynamics/compressor/single/mono.xml",
@@ -314,8 +318,10 @@ namespace lsp
             "unsc",
             LSP_LADSPA_COMPRESSOR_BASE + 1,
             LSP_LADSPA_URI("compressor_stereo"),
+            LSP_CLAP_URI("compressor_stereo"),
             LSP_PLUGINS_COMPRESSOR_VERSION,
-            compressor_classes,
+            plugin_classes,
+            clap_features_stereo,
             E_INLINE_DISPLAY | E_DUMP_STATE,
             compressor_stereo_ports,
             "dynamics/compressor/single/stereo.xml",
@@ -336,8 +342,10 @@ namespace lsp
             "3nam",
             LSP_LADSPA_COMPRESSOR_BASE + 2,
             LSP_LADSPA_URI("compressor_lr"),
+            LSP_CLAP_URI("compressor_lr"),
             LSP_PLUGINS_COMPRESSOR_VERSION,
-            compressor_classes,
+            plugin_classes,
+            clap_features_stereo,
             E_INLINE_DISPLAY | E_DUMP_STATE,
             compressor_lr_ports,
             "dynamics/compressor/single/lr.xml",
@@ -358,8 +366,10 @@ namespace lsp
             "jjef",
             LSP_LADSPA_COMPRESSOR_BASE + 3,
             LSP_LADSPA_URI("compressor_ms"),
+            LSP_CLAP_URI("compressor_ms"),
             LSP_PLUGINS_COMPRESSOR_VERSION,
-            compressor_classes,
+            plugin_classes,
+            clap_features_stereo,
             E_INLINE_DISPLAY | E_DUMP_STATE,
             compressor_ms_ports,
             "dynamics/compressor/single/ms.xml",
@@ -381,8 +391,10 @@ namespace lsp
             "lyjq",
             LSP_LADSPA_COMPRESSOR_BASE + 4,
             LSP_LADSPA_URI("sc_compressor_mono"),
+            LSP_CLAP_URI("sc_compressor_mono"),
             LSP_PLUGINS_COMPRESSOR_VERSION,
-            compressor_classes,
+            plugin_classes,
+            clap_features_mono,
             E_INLINE_DISPLAY | E_DUMP_STATE,
             sc_compressor_mono_ports,
             "dynamics/compressor/single/mono.xml",
@@ -403,8 +415,10 @@ namespace lsp
             "5xzi",
             LSP_LADSPA_COMPRESSOR_BASE + 5,
             LSP_LADSPA_URI("sc_compressor_stereo"),
+            LSP_CLAP_URI("sc_compressor_stereo"),
             LSP_PLUGINS_COMPRESSOR_VERSION,
-            compressor_classes,
+            plugin_classes,
+            clap_features_stereo,
             E_INLINE_DISPLAY | E_DUMP_STATE,
             sc_compressor_stereo_ports,
             "dynamics/compressor/single/stereo.xml",
@@ -425,8 +439,10 @@ namespace lsp
             "fowg",
             LSP_LADSPA_COMPRESSOR_BASE + 6,
             LSP_LADSPA_URI("sc_compressor_lr"),
+            LSP_CLAP_URI("sc_compressor_lr"),
             LSP_PLUGINS_COMPRESSOR_VERSION,
-            compressor_classes,
+            plugin_classes,
+            clap_features_stereo,
             E_INLINE_DISPLAY | E_DUMP_STATE,
             sc_compressor_lr_ports,
             "dynamics/compressor/single/lr.xml",
@@ -447,8 +463,10 @@ namespace lsp
             "ioqg",
             LSP_LADSPA_COMPRESSOR_BASE + 7,
             LSP_LADSPA_URI("sc_compressor_ms"),
+            LSP_CLAP_URI("sc_compressor_ms"),
             LSP_PLUGINS_COMPRESSOR_VERSION,
-            compressor_classes,
+            plugin_classes,
+            clap_features_stereo,
             E_INLINE_DISPLAY | E_DUMP_STATE,
             sc_compressor_ms_ports,
             "dynamics/compressor/single/ms.xml",
@@ -456,5 +474,5 @@ namespace lsp
             stereo_plugin_sidechain_port_groups,
             &compressor_bundle
         };
-    } // namespace meta
-} // namespace lsp
+    } /* namespace meta */
+} /* namespace lsp */
