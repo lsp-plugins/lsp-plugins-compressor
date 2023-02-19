@@ -21,7 +21,7 @@
 			echo " and additional sidechain input" . (($m == 'm') ? '' : 's') . " are ";
 		else
 			echo " is";
-	?>provided. Different types of compression are
+	?> provided. Different types of compression are
 	possible: <b>downward</b>, <b>upward</b> and <b>parallel</b>. Also compressor may work as limiter
 	in <b>Peak</b> mode with high <b>Ratio</b> and low <b>Attack</b> time. 
 </p>
@@ -71,7 +71,7 @@
 			<?php }?>
 		<?php }?>
 		<li><b>Peak</b> - peak mode.</li>
-		<li><b>RMS</b> - Root Mean Square (SMA) of the input signal.</li>
+		<li><b>RMS</b> - Root Mean Square (RMS) of the input signal.</li>
 		<li><b>LPF</b> - input signal processed by recursive 1-pole Low-Pass Filter (LPF).</li>
 		<li><b>SMA</b> - input signal processed by Simple Moving Average (SMA) filter.</li>
 		<?php if ($m != 'm') { ?>
