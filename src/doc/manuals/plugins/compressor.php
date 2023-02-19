@@ -104,7 +104,9 @@
 	</li>
 	<li><b>Attack Thresh</b> - threshold of the compressor, placed in the middle of the knee.</li>
 	<li><b>Attack Time</b> - attack time of the compressor.</li>
-	<li><b>Release Thresh</b> - relative to the <b>Attack Thresh</b> threshold that sets up the threshold of <b>Release Time</b>.</li>
+	<li><b>Release Thresh</b> - relative to the <b>Attack Thresh</b> threshold that sets up the threshold of <b>Release Time</b>.
+		If the current compressor's envelope value is below the configured <b>Release Threshold</b>, the release time is
+		being considered to be the same to the <b>attack time</b>.</li>
 	<li><b>Release Time</b> - release time of the compressor.</li>
 	<li><b>Mix Dry</b> - the amount of dry (unprocessed) signal, useful for parallel compression.</li>
 	<li><b>Mix Wet</b> - the amount of wet (processed) signal, useful for parallel compression.</li>
