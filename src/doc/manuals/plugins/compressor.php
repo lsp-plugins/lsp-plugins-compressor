@@ -21,7 +21,7 @@
 			echo " and additional sidechain input" . (($m == 'm') ? '' : 's') . " are ";
 		else
 			echo " is";
-	?>provided. Different types of compression are
+	?> provided. Different types of compression are
 	possible: <b>downward</b>, <b>upward</b> and <b>parallel</b>. Also compressor may work as limiter
 	in <b>Peak</b> mode with high <b>Ratio</b> and low <b>Attack</b> time. 
 </p>
@@ -71,7 +71,7 @@
 			<?php }?>
 		<?php }?>
 		<li><b>Peak</b> - peak mode.</li>
-		<li><b>RMS</b> - Root Mean Square (SMA) of the input signal.</li>
+		<li><b>RMS</b> - Root Mean Square (RMS) of the input signal.</li>
 		<li><b>LPF</b> - input signal processed by recursive 1-pole Low-Pass Filter (LPF).</li>
 		<li><b>SMA</b> - input signal processed by Simple Moving Average (SMA) filter.</li>
 		<?php if ($m != 'm') { ?>
@@ -104,7 +104,9 @@
 	</li>
 	<li><b>Attack Thresh</b> - threshold of the compressor, placed in the middle of the knee.</li>
 	<li><b>Attack Time</b> - attack time of the compressor.</li>
-	<li><b>Release Thresh</b> - relative to the <b>Attack Thresh</b> threshold that sets up the threshold of <b>Release Time</b>.</li>
+	<li><b>Release Thresh</b> - relative to the <b>Attack Thresh</b> threshold that sets up the threshold of <b>Release Time</b>.
+		If the current compressor's envelope value is below the configured <b>Release Threshold</b>, the release time is
+		being considered to be the same to the <b>attack time</b>.</li>
 	<li><b>Release Time</b> - release time of the compressor.</li>
 	<li><b>Mix Dry</b> - the amount of dry (unprocessed) signal, useful for parallel compression.</li>
 	<li><b>Mix Wet</b> - the amount of wet (processed) signal, useful for parallel compression.</li>
