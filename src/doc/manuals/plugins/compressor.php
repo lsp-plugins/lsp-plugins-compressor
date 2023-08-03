@@ -43,7 +43,7 @@ keeping the same settings for the left and right channels.</p>
 	<li><b>Pause</b> - pauses any updates of the compressor graph.</li>
 	<li><b>Clear</b> - clears all graphs.</li>
 	<?php if ($m == 's') { ?>
-	<li><b>Stereo Split</b> - enables independent compression of left and right channels.</li>
+		<li><b>Stereo Split</b> - enables independent compression of left and right channels.</li>
 	<?php } elseif ($m == 'ms') { ?>
 		<li><b>MS Listen</b> - passes mid-side signal to the output of compressor instead of stereo signal.</li>
 	<?php } ?>
