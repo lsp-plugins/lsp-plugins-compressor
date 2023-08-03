@@ -32,8 +32,8 @@
 	taken as a release time for processing.
 </p>
 <?php if ($m == 's') { ?>
-<li>Additionally, <b>Stereo split mode</b> allows to apply processing to the left and right channels independently while
-keeping the same settings for the left and right channels.</li>
+<p>Additionally, <b>Stereo split mode</b> allows to apply processing to the left and right channels independently while
+keeping the same settings for the left and right channels.</p>
 <?php } ?>
 <p><b>Controls:</b></p>
 <ul>
