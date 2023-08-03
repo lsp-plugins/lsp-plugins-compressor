@@ -161,6 +161,7 @@ namespace lsp
                 bool            bPause;         // Pause button
                 bool            bClear;         // Clear button
                 bool            bMSListen;      // Mid/Side listen
+                bool            bStereoSplit;   // Stereo split
                 float           fInGain;        // Input gain
                 bool            bUISync;
                 core::IDBuffer *pIDisplay;      // Inline display buffer
@@ -171,13 +172,16 @@ namespace lsp
                 plug::IPort    *pPause;         // Pause gain
                 plug::IPort    *pClear;         // Cleanup gain
                 plug::IPort    *pMSListen;      // Mid/Side listen
+                plug::IPort    *pStereoSplit;   // Stereo split mode
+                plug::IPort    *pScSpSource;    // Sidechain source for stereo split mode
 
                 uint8_t        *pData;          // Compressor data
 
             protected:
                 float           process_feedback(channel_t *c, size_t i, size_t channels);
                 void            process_non_feedback(channel_t *c, float **in, size_t samples);
-                static dspu::compressor_mode_t    decode_mode(int mode);
+                static dspu::compressor_mode_t      decode_mode(int mode);
+                static dspu::sidechain_source_t     decode_sidechain_source(int source, bool split, size_t channel);
 
             public:
                 explicit compressor(const meta::plugin_t *metadata, bool sc, size_t mode);

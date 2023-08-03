@@ -1,6 +1,6 @@
 /*
- * Copyright (C) 2021 Linux Studio Plugins Project <https://lsp-plug.in/>
- *           (C) 2021 Vladimir Sadovnikov <sadko4u@gmail.com>
+ * Copyright (C) 2023 Linux Studio Plugins Project <https://lsp-plug.in/>
+ *           (C) 2023 Vladimir Sadovnikov <sadko4u@gmail.com>
  *
  * This file is part of lsp-plugins-compressor
  * Created on: 3 авг. 2021 г.
@@ -64,6 +64,17 @@ namespace lsp
             { NULL, NULL }
         };
 
+        static const port_item_t comp_sc_split_sources[] =
+        {
+            { "Left/Right",     "sidechain.left_right"      },
+            { "Right/Left",     "sidechain.right_left"      },
+            { "Mid/Side",       "sidechain.mid_side"        },
+            { "Side/Mid",       "sidechain.side_mid"        },
+            { "Min",            "sidechain.min"             },
+            { "Max",            "sidechain.max"             },
+            { NULL, NULL }
+        };
+
         static const port_item_t comp_sc_type[] =
         {
             { "Feed-forward",   "sidechain.feed_forward" },
@@ -107,6 +118,10 @@ namespace lsp
             COMP_COMMON,        \
             SWITCH("msl", "Mid/Side listen", 0.0f)
 
+        #define COMP_SPLIT_COMMON \
+            SWITCH("ssplit", "Stereo split", 0.0f), \
+            COMBO("sscs", "Split sidechain source", compressor_metadata::SC_SPLIT_SOURCE_DFL, comp_sc_split_sources)
+
         #define COMP_SC_MONO_CHANNEL(sct) \
             COMBO("sct", "Sidechain type", compressor_metadata::SC_TYPE_DFL, sct), \
             COMBO("scm", "Sidechain mode", compressor_metadata::SC_MODE_DFL, comp_sc_modes), \
@@ -146,23 +161,23 @@ namespace lsp
             AMP_GAIN10("cdr" id, "Dry gain" label, GAIN_AMP_M_INF_DB),     \
             AMP_GAIN10("cwt" id, "Wet gain" label, GAIN_AMP_0_DB), \
             METER_OUT_GAIN("rl" id, "Release level" label, 20.0f), \
+            MESH("ccg" id, "Compressor curve graph" label, 2, compressor_metadata::CURVE_MESH_SIZE)
+
+        #define COMP_AUDIO_METER(id, label) \
             SWITCH("slv" id, "Sidechain level visibility" label, 1.0f), \
             SWITCH("elv" id, "Envelope level visibility" label, 1.0f), \
             SWITCH("grv" id, "Gain reduction visibility" label, 1.0f), \
-            MESH("ccg" id, "Compressor curve graph" label, 2, compressor_metadata::CURVE_MESH_SIZE), \
+            SWITCH("ilv" id, "Input level visibility" label, 1.0f), \
+            SWITCH("olv" id, "Output level visibility" label, 1.0f), \
             MESH("scg" id, "Compressor sidechain graph" label, 2, compressor_metadata::TIME_MESH_SIZE), \
             MESH("evg" id, "Compressor envelope graph" label, 2, compressor_metadata::TIME_MESH_SIZE), \
             MESH("grg" id, "Compressor gain reduciton" label, 2, compressor_metadata::TIME_MESH_SIZE), \
+            MESH("icg" id, "Compressor input" label, 2, compressor_metadata::TIME_MESH_SIZE), \
+            MESH("ocg" id, "Compressor output" label, 2, compressor_metadata::TIME_MESH_SIZE), \
             METER_OUT_GAIN("slm" id, "Sidechain level meter" label, GAIN_AMP_P_36_DB), \
             METER_OUT_GAIN("clm" id, "Curve level meter" label, GAIN_AMP_P_36_DB), \
             METER_OUT_GAIN("elm" id, "Envelope level meter" label, GAIN_AMP_P_36_DB), \
-            METER_GAIN_DFL("rlm" id, "Reduction level meter" label, GAIN_AMP_P_72_DB, GAIN_AMP_0_DB)
-
-        #define COMP_AUDIO_METER(id, label) \
-            SWITCH("ilv" id, "Input level visibility" label, 1.0f), \
-            SWITCH("olv" id, "Output level visibility" label, 1.0f), \
-            MESH("icg" id, "Compressor input" label, 2, compressor_metadata::TIME_MESH_SIZE), \
-            MESH("ocg" id, "Compressor output" label, 2, compressor_metadata::TIME_MESH_SIZE), \
+            METER_GAIN_DFL("rlm" id, "Reduction level meter" label, GAIN_AMP_P_72_DB, GAIN_AMP_0_DB), \
             METER_GAIN("ilm" id, "Input level meter" label, GAIN_AMP_P_36_DB), \
             METER_GAIN("olm" id, "Output level meter" label, GAIN_AMP_P_36_DB)
 
@@ -181,6 +196,7 @@ namespace lsp
         {
             PORTS_STEREO_PLUGIN,
             COMP_COMMON,
+            COMP_SPLIT_COMMON,
             COMP_SC_STEREO_CHANNEL("", "", comp_sc_type),
             COMP_CHANNEL("", "", comp_modes),
             COMP_AUDIO_METER("_l", " Left"),
@@ -234,6 +250,7 @@ namespace lsp
             PORTS_STEREO_PLUGIN,
             PORTS_STEREO_SIDECHAIN,
             COMP_COMMON,
+            COMP_SPLIT_COMMON,
             COMP_SC_STEREO_CHANNEL("", "", comp_sc2_type),
             COMP_CHANNEL("", "", comp_modes),
             COMP_AUDIO_METER("_l", " Left"),
