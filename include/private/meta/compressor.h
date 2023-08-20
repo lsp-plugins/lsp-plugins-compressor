@@ -89,6 +89,7 @@ namespace lsp
 
             static constexpr size_t SC_MODE_DFL             = 1;
             static constexpr size_t SC_SOURCE_DFL           = 0;
+            static constexpr size_t SC_SPLIT_SOURCE_DFL     = 0;
             static constexpr size_t SC_TYPE_DFL             = 0;
 
             static constexpr float  HPF_MIN                 = 10.0f;
