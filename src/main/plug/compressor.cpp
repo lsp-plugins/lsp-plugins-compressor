@@ -113,6 +113,7 @@ namespace lsp
 
         compressor::~compressor()
         {
+            do_destroy();
         }
 
         void compressor::init(plug::IWrapper *wrapper, plug::IPort **ports)
@@ -379,6 +380,12 @@ namespace lsp
         }
 
         void compressor::destroy()
+        {
+            Module::destroy();
+            do_destroy();
+        }
+
+        void compressor::do_destroy()
         {
             if (vChannels != NULL)
             {
@@ -1177,7 +1184,7 @@ namespace lsp
 
             v->write("pData", pData);
         }
-    } // namespace plugins
-} // namespace lsp
+    } /* namespace plugins */
+} /* namespace lsp */
 
 
