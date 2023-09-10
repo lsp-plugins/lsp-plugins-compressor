@@ -2,6 +2,9 @@
 * RECENT CHANGES
 *******************************************************************************
 
+=== 1.0.18 ===
+* Updated build scripts and dependencies.
+
 === 1.0.17 ===
 * Implemented Stereo Split mode for stereo versions of plugins.
 * Updated build scripts and dependencies.

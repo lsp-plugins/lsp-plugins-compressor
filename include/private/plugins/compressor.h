@@ -1,6 +1,6 @@
 /*
- * Copyright (C) 2021 Linux Studio Plugins Project <https://lsp-plug.in/>
- *           (C) 2021 Vladimir Sadovnikov <sadko4u@gmail.com>
+ * Copyright (C) 2023 Linux Studio Plugins Project <https://lsp-plug.in/>
+ *           (C) 2023 Vladimir Sadovnikov <sadko4u@gmail.com>
  *
  * This file is part of lsp-plugins-compressor
  * Created on: 3 авг. 2021 г.
@@ -180,6 +180,9 @@ namespace lsp
             protected:
                 float           process_feedback(channel_t *c, size_t i, size_t channels);
                 void            process_non_feedback(channel_t *c, float **in, size_t samples);
+                void            do_destroy();
+
+            protected:
                 static dspu::compressor_mode_t      decode_mode(int mode);
                 static dspu::sidechain_source_t     decode_sidechain_source(int source, bool split, size_t channel);
 
@@ -200,7 +203,7 @@ namespace lsp
 
                 virtual void    dump(dspu::IStateDumper *v) const override;
         };
-    } // namespace plugins
-} // namespace lsp
+    } /* namespace plugins */
+} /* namespace lsp */
 
 #endif /* PRIVATE_PLUGINS_COMPRESSOR_H_ */
