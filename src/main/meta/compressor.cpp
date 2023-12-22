@@ -25,7 +25,7 @@
 
 #define LSP_PLUGINS_COMPRESSOR_VERSION_MAJOR       1
 #define LSP_PLUGINS_COMPRESSOR_VERSION_MINOR       0
-#define LSP_PLUGINS_COMPRESSOR_VERSION_MICRO       20
+#define LSP_PLUGINS_COMPRESSOR_VERSION_MICRO       21
 
 #define LSP_PLUGINS_COMPRESSOR_VERSION  \
     LSP_MODULE_VERSION( \
@@ -303,6 +303,7 @@ namespace lsp
         {
             "Kompressor Mono",
             "Compressor Mono",
+            "Compressor Mono",
             "K1M",
             &developers::v_sadovnikov,
             "compressor_mono",
@@ -326,6 +327,7 @@ namespace lsp
         const meta::plugin_t  compressor_stereo =
         {
             "Kompressor Stereo",
+            "Compressor Stereo",
             "Compressor Stereo",
             "K1S",
             &developers::v_sadovnikov,
@@ -351,6 +353,7 @@ namespace lsp
         {
             "Kompressor LeftRight",
             "Compressor LeftRight",
+            "Compressor L/R",
             "K1LR",
             &developers::v_sadovnikov,
             "compressor_lr",
@@ -375,6 +378,7 @@ namespace lsp
         {
             "Kompressor MidSide",
             "Compressor MidSide",
+            "Compressor M/S",
             "K1MS",
             &developers::v_sadovnikov,
             "compressor_ms",
@@ -400,6 +404,7 @@ namespace lsp
         {
             "Sidechain-Kompressor Mono",
             "Sidechain Compressor Mono",
+            "SC Compressor Mono",
             "SCK1M",
             &developers::v_sadovnikov,
             "sc_compressor_mono",
@@ -424,6 +429,7 @@ namespace lsp
         {
             "Sidechain-Kompressor Stereo",
             "Sidechain Compressor Stereo",
+            "SC Compressor Stereo",
             "SCK1S",
             &developers::v_sadovnikov,
             "sc_compressor_stereo",
@@ -448,6 +454,7 @@ namespace lsp
         {
             "Sidechain-Kompressor LeftRight",
             "Sidechain Compressor LeftRight",
+            "SC Compressor L/R",
             "SCK1LR",
             &developers::v_sadovnikov,
             "sc_compressor_lr",
@@ -472,6 +479,7 @@ namespace lsp
         {
             "Sidechain-Kompressor MidSide",
             "Sidechain Compressor MidSide",
+            "SC Compressor M/S",
             "SCK1MS",
             &developers::v_sadovnikov,
             "sc_compressor_ms",
