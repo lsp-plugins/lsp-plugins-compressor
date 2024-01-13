@@ -129,9 +129,9 @@ namespace lsp
             SWITCH("scl", "Sidechain listen", 0.0f), \
             LOG_CONTROL("scr", "Sidechain reactivity", U_MSEC, compressor_metadata::REACTIVITY), \
             AMP_GAIN100("scp", "Sidechain preamp", GAIN_AMP_0_DB), \
-            COMBO("shpm", "High-pass filter mode", 0, comp_filter_slope),      \
+            COMBO("shpm", "High-pass filter mode", 2, comp_filter_slope),      \
             LOG_CONTROL("shpf", "High-pass filter frequency", U_HZ, compressor_metadata::HPF),   \
-            COMBO("slpm", "Low-pass filter mode", 0, comp_filter_slope),      \
+            COMBO("slpm", "Low-pass filter mode", 2, comp_filter_slope),      \
             LOG_CONTROL("slpf", "Low-pass filter frequency", U_HZ, compressor_metadata::LPF)
 
         #define COMP_SC_STEREO_CHANNEL(id, label, sct) \
@@ -142,9 +142,9 @@ namespace lsp
             COMBO("scs" id, "Sidechain source" label, compressor_metadata::SC_SOURCE_DFL, comp_sc_sources), \
             LOG_CONTROL("scr" id, "Sidechain reactivity" label, U_MSEC, compressor_metadata::REACTIVITY), \
             AMP_GAIN100("scp" id, "Sidechain preamp" label, GAIN_AMP_0_DB), \
-            COMBO("shpm" id, "High-pass filter mode" label, 0, comp_filter_slope),      \
+            COMBO("shpm" id, "High-pass filter mode" label, 2, comp_filter_slope),      \
             LOG_CONTROL("shpf" id, "High-pass filter frequency" label, U_HZ, compressor_metadata::HPF),   \
-            COMBO("slpm" id, "Low-pass filter mode" label, 0, comp_filter_slope),      \
+            COMBO("slpm" id, "Low-pass filter mode" label, 2, comp_filter_slope),      \
             LOG_CONTROL("slpf" id, "Low-pass filter frequency" label, U_HZ, compressor_metadata::LPF)
 
         #define COMP_CHANNEL(id, label, modes) \

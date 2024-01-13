@@ -54,7 +54,7 @@ namespace lsp
 
             static constexpr float  KNEE_MIN                = GAIN_AMP_M_24_DB;
             static constexpr float  KNEE_MAX                = GAIN_AMP_0_DB;
-            static constexpr float  KNEE_DFL                = GAIN_AMP_M_6_DB;
+            static constexpr float  KNEE_DFL                = GAIN_AMP_0_DB;
             static constexpr float  KNEE_STEP               = 0.01f;
 
             static constexpr float  BTH_MIN                 = GAIN_AMP_M_120_DB;

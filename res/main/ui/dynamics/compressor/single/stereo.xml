@@ -7,6 +7,14 @@
 					<graph width.min="496" height.min="222" expand="true" fill="true">
 						<origin hpos="1" vpos="-1" visible="false"/>
 
+						<ui:eval id="min_signal" value="-48 db"/>
+						<ui:eval id="max_signal" value="6 db"/>
+
+						<!-- Axis -->
+						<axis min="3" max="5" angle="1.0" log="false" color="graph_prim" visibility="false"/>
+						<!-- oy 0 -->
+						<axis min="${min_signal}" max="${max_signal}" angle="0.5" log="true" color="graph_prim" visibility="false"/>
+
 						<!-- Gray grid -->
 						<ui:for id="t" first="0" last="4" step="1">
 							<ui:attributes ox="0" oy="1">
@@ -33,24 +41,27 @@
 						</ui:attributes>
 
 						<!-- Meshes -->
-						<mesh id="icg_l" width="2" color="left_in" visibility=":ilv_l"/>
-						<mesh id="icg_r" width="2" color="right_in" visibility=":ilv_r"/>
-						<mesh id="ocg_l" width="2" color="left" visibility=":olv_l"/>
-						<mesh id="ocg_r" width="2" color="right" visibility=":olv_r"/>
-						<mesh id="scg_l" width="2" color="sidechain_1" visibility=":slv_l"/>
-						<mesh id="scg_r" width="2" color="sidechain_2" visibility=":slv_r"/>
-						<mesh id="evg_l" width="2" color="envelope_1" visibility=":elv_l"/>
-						<mesh id="evg_r" width="2" color="envelope_2" visibility=":elv_r"/>
-						<mesh id="grg_l" width="2" color="bright_blue" visibility=":grv_l"/>
-						<mesh id="grg_r" width="2" color="bright_blue" visibility=":grv_r"/>
+						<!-- TODO: Show input signal if sidechain compression is used -->
+						<!-- <mesh id="icg_l" width="2" color="left_in" visibility=":ilv_l"/>
+						<mesh id="icg_r" width="2" color="right_in" visibility=":ilv_r"/> -->
+						<!-- <mesh id="ocg_l" width="2" color="left" visibility=":olv_l"/>
+						<mesh id="ocg_r" width="2" color="right" visibility=":olv_r"/> -->
+
+						<!-- Input signal -->
+						<mesh id="scg_l" width="0" fcolor="#666" fill="true" visibility=":slv_l"/>
+						<mesh id="scg_r" width="0" fcolor="#666" fill="true" visibility=":slv_r"/>
+
+						<!-- Gain reduction/expansion -->
+						<mesh id="grg_l" width="0" fill="true" fcolor="#bf993333" visibility=":grv_l"/>
+						<mesh id="grg_r" width="0" fill="true" fcolor="#bf993333" visibility=":grv_r"/>
+
+						<!-- Compression detector curve -->
+						<mesh id="evg_l" width="3" color="cyan" visibility=":elv_l"/>
+						<mesh id="evg_r" width="3" color="cyan" visibility=":elv_r"/>
 
 						<!-- Boundaries -->
 						<marker v="24 db" ox="1" oy="0" color="graph_prim" visibility="false"/>
 						<marker v="5" ox="0" oy="1" color="graph_prim" visibility="false"/>
-
-						<!-- Axis -->
-						<axis min="0" max="5" angle="1.0" log="false" color="graph_prim" visibility="false"/>
-						<axis min="-72 db" max="24 db" angle="0.5" log="true" color="graph_prim" visibility="false"/>
 
 						<!-- Markers -->
 						<ui:attributes ox="1" oy="0">
@@ -91,7 +102,7 @@
 					<label text="labels.sc.SC" padding="4"/>
 					<label text="labels.Env_elope" padding="4"/>
 					<label text="labels.gain_" padding="4"/>
-					<grid rows="2" cols="2" fill="false" hspacing="2">
+					<!-- <grid rows="2" cols="2" fill="false" hspacing="2">
 						<button id="slv_l" size="10" ui:inject="Button_orange" led="true"/>
 						<button id="slv_r" size="10" ui:inject="Button_orange" led="true"/>
 					</grid>
@@ -104,136 +115,147 @@
 					<grid rows="2" cols="2" fill="false" hspacing="2">
 						<button id="grv_l" size="10" ui:inject="Button_blue" led="true"/>
 						<button id="grv_r" size="10" ui:inject="Button_blue" led="true"/>
-					</grid>
+					</grid> -->
 				</ui:with>
 
 				<!-- Sidechain signal meter -->
 				<ledmeter vexpand="true" height.min="256" angle="1">
-					<ledchannel id="slm_l" min="-72 db" max="24 db" log="true" type="peak" activity=":slv_l" value.color="sidechain"/>
-					<ledchannel id="slm_r" min="-72 db" max="24 db" log="true" type="peak" activity=":slv_r" value.color="sidechain"/>
+					<ledchannel id="slm_l" min="${min_signal}" max="${max_signal}" log="true" type="peak" activity=":slv_l" value.color="gray"/>
+					<ledchannel id="slm_r" min="${min_signal}" max="${max_signal}" log="true" type="peak" activity=":slv_r" value.color="gray"/>
 				</ledmeter>
 
 				<!-- Envelope signal meter -->
 				<ledmeter vexpand="true" height.min="256" angle="1">
-					<ledchannel id="elm_l" min="-72 db" max="24 db" log="true" type="peak" activity=":elv_l" value.color="envelope"/>
-					<ledchannel id="elm_r" min="-72 db" max="24 db" log="true" type="peak" activity=":elv_r" value.color="envelope"/>
+					<ledchannel id="elm_l" min="${min_signal}" max="${max_signal}" log="true" type="peak" activity=":elv_l" value.color="cyan"/>
+					<ledchannel id="elm_r" min="${min_signal}" max="${max_signal}" log="true" type="peak" activity=":elv_r" value.color="cyan"/>
 				</ledmeter>
 
 				<!-- Gain signal meter -->
 				<ledmeter vexpand="true" height.min="256" angle="1">
-					<ledchannel id="rlm_l" min="-48 db" max="48 db" log="true" balance="0 db" balance.visibility="true" type="peak" activity=":grv_l" value.color="blue"/>
-					<ledchannel id="rlm_r" min="-48 db" max="48 db" log="true" balance="0 db" balance.visibility="true" type="peak" activity=":grv_r" value.color="blue"/>
+					<ledchannel id="rlm_l" min="-48 db" max="48 db" log="true" balance="0 db" balance.visibility="true" type="peak" activity=":grv_l" value.color="red"/>
+					<ledchannel id="rlm_r" min="-48 db" max="48 db" log="true" balance="0 db" balance.visibility="true" type="peak" activity=":grv_r" value.color="red"/>
 				</ledmeter>
 			</grid>
 
-			<group ui:inject="GraphGroup" ipadding="0" expand="true" fill="true" text="labels.graphs.compression">
-				<!-- Curve graph -->
-				<graph width.min="256" height.min="256" expand="true" fill="true">
-					<origin hpos="-1" vpos="-1" visible="false"/>
+			<group ui:inject="GraphGroup" ipadding="0" expand="true" fill="true" text.show="false">
+				<vbox>
+					<!-- Top panel -->
+					<hbox bg.color="bg_schema" fill="true">
+						<align halign="-1">
+							<label text="labels.graphs.compression"  />
+						</align>
 
-					<!-- Gray grid -->
-					<ui:for id="g" first="-60" last="12" step="24">
-						<marker v="${g} db" color="graph_alt_1"/>
-						<marker v="${g} db" ox="1" oy="0" color="graph_alt_1"/>
-					</ui:for>
+						<label text="labels.knee" vreduce="true"/>
+						<knob id="kn" size="10" ssize="3" scolor="kscale"/>
+						<value id="kn" sline="true" width="64" />
+					</hbox>
 
-					<!-- Yellow grid -->
-					<ui:for id="g" first="-48" last="-24" step="24">
-						<marker v="${g} db" color="graph_sec"/>
-						<marker v="${g} db" ox="1" oy="0" color="graph_sec"/>
-					</ui:for>
+					<hbox>
+						<!-- Curve graph -->
+						<graph width.min="256" height.min="256" expand="true" fill="true">
+							<origin hpos="-1" vpos="-1" visible="false"/>
 
-					<!-- Axes and boundaries -->
-					<marker v="1" ox="1" oy="0" dv="1" dx=":_a_width" dy=":_a_height" color="graph_alt_1" width="2" smooth="true"/>
-					<marker v="24 db" color="graph_alt_1" visibility="false"/>
-					<marker v="24 db" ox="1" oy="0" color="graph_alt_1" visibility="false"/>
-					<axis min="-72 db" max="24 db" color="graph_prim" angle="0.0" log="true" visibility="false"/>
-					<axis min="-72 db" max="24 db" color="graph_prim" angle="0.5" log="true" visibility="false"/>
+							<axis min="-64 db" max="12 db" color="graph_prim" angle="0.0" log="true" visibility="false"/>
+							<axis min="-64 db" max="12 db" color="graph_prim" angle="0.5" log="true" visibility="false"/>
 
-					<!-- 0 dB markers -->
-					<marker v="0 db" ox="0" oy="1" width="2" color="graph_prim"/>
-					<marker v="0 db" ox="1" oy="0" width="2" color="graph_prim"/>
+							<!-- Gray grid -->
+							<ui:for id="g" first="-60" last="12" step="24">
+								<marker v="${g} db" color="graph_alt_1"/>
+								<marker v="${g} db" ox="1" oy="0" color="graph_alt_1"/>
+							</ui:for>
 
-					<!-- Meshes -->
-					<mesh id="ccg" width="3" color="graph_mesh" smooth="true"/>
-					<dot x.id="elm_l" y.id="clm_l" color="graph_mesh" bcolor="graph_mesh" visibility="!:ssplit"/>
-					<dot x.id="elm_l" y.id="clm_l" color="left" bcolor="left" visibility=":ssplit"/>
-					<dot x.id="elm_r" y.id="clm_r" color="right" bcolor="right" visibility=":ssplit"/>
+							<!-- Yellow grid -->
+							<ui:for id="g" first="-48" last="-24" step="24">
+								<marker v="${g} db" color="graph_sec"/>
+								<marker v="${g} db" ox="1" oy="0" color="graph_sec"/>
+							</ui:for>
 
-					<!-- Markers -->
-					<marker id="al" editable="true" width="2" pointer="hsize" color="attack_1" hcolor="attack_1"/>
-					<marker id="rl" color="release_1"/>
+							<!-- Axes and boundaries -->
+							<marker v="1" ox="1" oy="0" dv="1" dx=":_a_width" dy=":_a_height" color="graph_alt_1" width="2" smooth="true"/>
+							<marker v="24 db" color="graph_alt_1" visibility="false"/>
+							<marker v="24 db" ox="1" oy="0" color="graph_alt_1" visibility="false"/>
 
-					<!-- Text -->
-					<text x="0 db" y="0 db" text="0" halign="1" valign="1"/>
-					<ui:attributes x="0 db" halign="1" valign="-1">
-						<text y="24 db" text="graph.units.db"/>
-						<text y="12 db" text="+12"/>
-						<text y="-12 db" text="-12"/>
-						<text y="-24 db" text="-24"/>
-						<text y="-36 db" text="-36"/>
-						<text y="-48 db" text="-48"/>
-						<text y="-60 db" text="-60"/>
-						<text y="-72 db" text="graph.axis.out" valign="1"/>
-					</ui:attributes>
-					<ui:attributes y="0 db" halign="-1" valign="1">
-						<text x="24 db" text="graph.units.db"/>
-						<text x="12 db" text="+12"/>
-						<text x="-12 db" text="-12"/>
-						<text x="-24 db" text="-24"/>
-						<text x="-36 db" text="-36"/>
-						<text x="-48 db" text="-48"/>
-						<text x="-60 db" text="-60"/>
-						<text x="-72 db" text="graph.axis.in" halign="1"/>
-					</ui:attributes>
-				</graph>
-			</group>
+							<!-- 0 dB markers -->
+							<marker v="0 db" ox="0" oy="1" width="2" color="graph_prim"/>
+							<marker v="0 db" ox="1" oy="0" width="2" color="graph_prim"/>
 
-			<grid rows="3" cols="2" hfill="false" hexpand="false" hspacing="4">
-				<ui:with bg.color="bg_schema">
-					<label text="labels.chan.in" padding="4"/>
-					<label text="labels.chan.out" padding="4"/>
+							<!-- Meshes -->
+							<mesh id="ccg" width="3" color="graph_mesh" smooth="true"/>
+							<dot x.id="elm_l" y.id="clm_l" color="graph_mesh" bcolor="graph_mesh" visibility="!:ssplit"/>
+							<dot x.id="elm_l" y.id="clm_l" color="left" bcolor="left" visibility=":ssplit"/>
+							<dot x.id="elm_r" y.id="clm_r" color="right" bcolor="right" visibility=":ssplit"/>
 
-					<grid rows="2" cols="2" fill="false" hspacing="2">
-						<button id="ilv_l" size="10" ui:inject="Button_left" led="true"/>
-						<button id="ilv_r" size="10" ui:inject="Button_right" led="true"/>
-					</grid>
+							<!-- Markers -->
+							<marker id="al" editable="true" width="2" pointer="hsize" color="attack_1" hcolor="attack_1"/>
+							<marker id="rl" color="release_1"/>
 
-					<grid rows="2" cols="2" fill="false" hspacing="2">
-						<button id="olv_l" size="10" ui:inject="Button_left" led="true"/>
-						<button id="olv_r" size="10" ui:inject="Button_right" led="true"/>
-					</grid>
-				</ui:with>
+							<!-- Text -->
+							<text x="0 db" y="0 db" text="0" halign="1" valign="1"/>
+							<ui:attributes x="0 db" halign="1" valign="-1">
+								<text y="24 db" text="graph.units.db"/>
+								<text y="12 db" text="+12"/>
+								<text y="-12 db" text="-12"/>
+								<text y="-24 db" text="-24"/>
+								<text y="-36 db" text="-36"/>
+								<text y="-48 db" text="-48"/>
+								<text y="-60 db" text="-60"/>
+								<text y="-72 db" text="graph.axis.out" valign="1"/>
+							</ui:attributes>
+							<ui:attributes y="0 db" halign="-1" valign="1">
+								<text x="24 db" text="graph.units.db"/>
+								<text x="12 db" text="+12"/>
+								<text x="-12 db" text="-12"/>
+								<text x="-24 db" text="-24"/>
+								<text x="-36 db" text="-36"/>
+								<text x="-48 db" text="-48"/>
+								<text x="-60 db" text="-60"/>
+								<text x="-72 db" text="graph.axis.in" halign="1"/>
+							</ui:attributes>
 
-				<!-- Input signal meter -->
-				<ledmeter vexpand="true" height.min="256" angle="1">
-					<ledchannel id="ilm_l" min="-72 db" max="24 db" log="true" type="rms_peak" peak.visibility="true" activity=":ilv_l" value.color="left_in"/>
-					<ledchannel id="ilm_r" min="-72 db" max="24 db" log="true" type="rms_peak" peak.visibility="true" activity=":ilv_r" value.color="right_in"/>
-				</ledmeter>
+							<!-- Compression rate -->
+							<!-- <text x="-10 db" y="-60 db" text="${cr}:1" text.eval="true" size="18" halign="1" font.bold="true" valign="1" color="cyan" /> -->
+						</graph>
 
-				<!-- Output signal meter -->
-				<ledmeter vexpand="true" height.min="256" angle="1">
-					<ledchannel id="olm_l" min="-72 db" max="24 db" log="true" type="rms_peak" peak.visibility="true" activity=":olv_l" value.color="left"/>
-					<ledchannel id="olm_r" min="-72 db" max="24 db" log="true" type="rms_peak" peak.visibility="true" activity=":olv_r" value.color="right"/>
-				</ledmeter>
-			</grid>
-
-			<!-- Signal control -->
-			<group text="groups.signal" vexpand="true" hexpand="false" ipadding="0">
-				<vbox vexpand="true">
-					<ui:with pad="6">
-						<label text="labels.input"/>
-						<knob id="g_in"/>
-						<value id="g_in"/>
-						<hsep bg.color="bg" fill="true" pad.h="0" pad.v="2"/>
-						<label text="labels.output"/>
-						<knob id="g_out"/>
-						<value id="g_out"/>
-					</ui:with>
-					<hsep bg.color="bg" fill="true" pad.v="2"/>
-					<label vexpand="true"/>
+						<fader id="cr" vexpand="true" angle="1" ui:inject="Fader" />
+					</hbox>
 				</vbox>
 			</group>
+
+			<!-- Signal meters -->
+			<hbox>
+				<!-- Input -->
+				<vbox>
+					<ui:with bg.color="bg_schema">
+						<label text="labels.chan.in" padding="4" />
+					</ui:with>
+
+					<hbox>
+						<fader id="g_in" vexpand="true" angle="1" ui:inject="Fader_prophessor" />
+
+						<ledmeter vexpand="true" height.min="256" angle="1">
+							<ledchannel id="ilm_l" min="${min_signal}" max="${max_signal}" log="true" type="rms_peak" peak.visibility="true" activity=":ilv_l" value.color="left_in"/>
+							<ledchannel id="ilm_r" min="${min_signal}" max="${max_signal}" log="true" type="rms_peak" peak.visibility="true" activity=":ilv_r" value.color="right_in"/>
+						</ledmeter>
+					</hbox>
+				</vbox>
+
+				<!-- Output -->
+				<vbox>
+					<ui:with bg.color="bg_schema">
+						<label text="labels.chan.out" padding="4" />
+					</ui:with>
+
+					<hbox>
+						<fader id="g_out" vexpand="true" angle="1" ui:inject="Fader_prophessor" />
+
+						<ledmeter vexpand="true" height.min="256" angle="1">
+							<ledchannel id="olm_l" min="${min_signal}" max="${max_signal}" log="true" type="rms_peak" peak.visibility="true" activity=":olv_l" value.color="left"/>
+							<ledchannel id="olm_r" min="${min_signal}" max="${max_signal}" log="true" type="rms_peak" peak.visibility="true" activity=":olv_r" value.color="right"/>
+						</ledmeter>
+					</hbox>
+				</vbox>
+
+			</hbox>
 		</grid>
 
 		<!-- Separator -->
@@ -242,136 +264,182 @@
 		<!-- Bottom part -->
 		<hbox>
 			<group text="groups.sidechain" vexpand="false" ipadding="0">
+				<hbox bg.color="bg_schema">
+					<!-- Setup -->
+					<vbox>
+						<label text="labels.setup" pad.h="6" pad.v="4" fill="false" vreduce="true"/>
+						<ui:with pad.h="6" pad.b="4" hfill="true">
+							<combo id="sct" pad.t="4"/>
+							<combo id="scm" />
+							<combo id="scs" visibility="!:ssplit" />
+							<combo id="sscs" visibility=":ssplit" />
+							<button id="scl" height="22" text="labels.listen" ui:inject="Button_cyan"/>
+						</ui:with>
+					</vbox>
 
-				<grid rows="5" cols="9" spacing="0" bg.color="bg_schema">
-					<!-- row 1 -->
-					<ui:with pad.h="6" pad.v="4" fill="false" hexpand="true">
-						<label text="labels.sc.preamp" vreduce="true"/>
+					<!-- Lookahead/Reactivity -->
+					<vbox width="90">
 						<label text="labels.sc.reactivity" vreduce="true"/>
+						<knob id="scr" scolor="kscale" size="20"/>
+						<value id="scr" sline="true"/>
+
 						<label text="labels.sc.lookahead" vreduce="true"/>
-					</ui:with>
-					<cell rows="9" bg.color="bg" pad.h="2" hreduce="true"><vsep/></cell>
-					<label text="labels.setup" pad.h="6" pad.v="4" fill="false" vreduce="true"/>
-					<cell rows="9" bg.color="bg" pad.h="2" hreduce="true"><vsep/></cell>
-					<label text="labels.flt.HPF" pad.h="6" pad.v="4" fill="false" vreduce="true"/>
-					<cell rows="9" bg.color="bg" pad.h="2" hreduce="true"><vsep/></cell>
-					<label text="labels.flt.LPF" pad.h="6" pad.v="4" fill="false" vreduce="true"/>
+						<knob id="sla" scolor="kscale" size="20"/>
+						<value id="sla" sline="true"/>
+					</vbox>
 
-					<!-- row 2 -->
-					<ui:with bg.color="bg" pad.v="2" vreduce="true">
-						<cell cols="3"><hsep/></cell>
-						<hsep/>
-						<hsep/>
-						<hsep/>
-					</ui:with>
+					<!-- Filters -->
 
-					<!-- row 3 -->
-					<cell rows="2"><knob id="scp" scolor="kscale"/></cell>
-					<cell rows="2"><knob id="scr" scolor="kscale"/></cell>
-					<cell rows="2"><knob id="sla" scolor="kscale"/></cell>
-					<cell rows="3">
-						<vbox fill="false" spacing="1">
-							<ui:with pad.h="6" pad.b="4" hfill="true">
-								<combo id="sct" pad.t="4"/>
-								<combo id="scm" />
-								<combo id="scs" visibility="!:ssplit" />
-								<combo id="sscs" visibility=":ssplit" />
-								<button id="scl" height="22" text="labels.listen" ui:inject="Button_cyan"/>
-							</ui:with>
-						</vbox>
-					</cell>
-					<combo id="shpm" pad.h="6" bright="(:shpm igt 0) ? 1 : 0.75" bg.bright="(:shpm igt 0) ? 1 : :const_bg_darken"/>
-					<combo id="slpm" pad.h="6" bright="(:slpm igt 0) ? 1 : 0.75" bg.bright="(:slpm igt 0) ? 1 : :const_bg_darken"/>
+					<!-- HPF -->
+					<vbox>
+						<label text="labels.flt.HPF" pad.h="6" pad.v="4" fill="false" vreduce="true"/>
+						<combo id="shpm" pad.h="6" bright="(:shpm igt 0) ? 1 : 0.75" bg.bright="(:shpm igt 0) ? 1 : :const_bg_darken"/>
+						<knob id="shpf" size="40" scolor="(:shpm igt 0) ? 'kscale' : 'kscale_inactive'" bg.bright="(:shpm igt 0) ? 1 : :const_bg_darken"/>
+						<value id="shpf" sline="true" bright="(:shpm igt 0) ? 1 : 0.75" bg.bright="(:shpm igt 0) ? 1 : :const_bg_darken"/>
+					</vbox>
 
-					<!-- row 4 -->
-					<knob id="shpf" size="20" scolor="(:shpm igt 0) ? 'kscale' : 'kscale_inactive'" bg.bright="(:shpm igt 0) ? 1 : :const_bg_darken"/>
-					<knob id="slpf" size="20" scolor="(:slpm igt 0) ? 'kscale' : 'kscale_inactive'" bg.bright="(:slpm igt 0) ? 1 : :const_bg_darken"/>
-
-					<!-- row 5 -->
-					<value id="scp" sline="true" width.min="48"/>
-					<value id="scr" sline="true"/>
-					<value id="sla" sline="true"/>
-					<value id="shpf" sline="true" bright="(:shpm igt 0) ? 1 : 0.75" bg.bright="(:shpm igt 0) ? 1 : :const_bg_darken"/>
-					<value id="slpf" sline="true" bright="(:slpm igt 0) ? 1 : 0.75" bg.bright="(:slpm igt 0) ? 1 : :const_bg_darken"/>
-				</grid>
+					<!-- LPF -->
+					<vbox>
+						<label text="labels.flt.LPF" pad.h="6" pad.v="4" fill="false" vreduce="true"/>
+						<combo id="slpm" pad.h="6" bright="(:slpm igt 0) ? 1 : 0.75" bg.bright="(:slpm igt 0) ? 1 : :const_bg_darken"/>
+						<knob id="slpf" size="40" scolor="(:slpm igt 0) ? 'kscale' : 'kscale_inactive'" bg.bright="(:slpm igt 0) ? 1 : :const_bg_darken"/>
+						<value id="slpf" sline="true" bright="(:slpm igt 0) ? 1 : 0.75" bg.bright="(:slpm igt 0) ? 1 : :const_bg_darken"/>
+					</vbox>
+				</hbox>
 			</group>
 			<hsep pad.h="2" bg.color="bg"/>
 
 			<group text="groups.plug.compressor" vexpand="false" hexpand="true" ipadding="0">
 
-				<grid rows="5" cols="14" spacing="0" bg.color="bg_schema">
-					<!-- row 1 -->
-					<label text="labels.mode" pad.h="6" pad.v="4" vreduce="true"/>
-					<cell rows="9" bg.color="bg" pad.h="2" hreduce="true"><vsep/></cell>
-					<ui:with pad.h="6" pad.v="4">
-						<label text="labels.ratio" width.min="41" vreduce="true"/>
-						<label text="labels.knee" vreduce="true"/>
-						<label text="labels.makeup" vreduce="true"/>
-					</ui:with>
-					<cell rows="9" bg.color="bg" pad.h="2" hreduce="true"><vsep/></cell>
-					<cell cols="2"><label text="labels.attack" pad.h="6" pad.v="4" vreduce="true"/></cell>
-					<cell rows="9" bg.color="bg" pad.h="2" hreduce="true"><vsep/></cell>
-					<cell cols="2"><label text="labels.release" pad.h="6" pad.v="4" vreduce="true"/></cell>
-					<cell rows="9" bg.color="bg" pad.h="2" hreduce="true"><vsep/></cell>
-					<cell cols="2"><label text="labels.mix" pad.h="6" pad.v="4" vreduce="true"/></cell>
+				<vbox rows="5" cols="14" spacing="0" bg.color="bg_schema">
+
+					<hbox>
+						<!-- Mode -->
+						<vbox>
+							<label text="labels.mode" pad.h="6" pad.v="4" vreduce="true"/>
+
+							<vbox>
+								<combo id="cm" pad.h="6" pad.v="4"/>
+								<vbox visibility=":cm ine 0">
+									<label text="labels.boost" />
+									<knob id="bth" scolor="kscale" visibility=":cm ine 2"/>
+									<value id="bth" detailed="false" visibility=":cm ine 2"/>
+									<knob id="bsa" scolor="kscale" visibility=":cm ieq 2"/>
+									<value id="bsa" detailed="false" visibility=":cm ieq 2"/>
+								</vbox>
+							</vbox>
+
+							<void vexpand="true" />
+						</vbox>
+
+						<vbox>
+							<label text="labels.threshold" width.min="41" vreduce="true"/>
+							<knob id="al" size="40" scolor="attack_1"/>
+							<value id="al" detailed="true" sline="true" />
+						</vbox>
+
+						<vbox>
+							<label text="labels.ratio" width.min="41" vreduce="true"/>
+							<knob id="cr" size="50" scolor="kscale"/>
+							<align valign="-1" pad.t="2">
+								<hbox fill="false">
+									<value id="cr" detailed="false"/>
+									<label text=":"/>
+									<label text="1"/>
+								</hbox>
+							</align>
+						</vbox>
+
+						<vbox width.min="75" >
+							<vbox>
+								<label text="labels.attack" />
+								<knob id="at" size="30" ssize="3" scolor="pink" pad.t="4" />
+								<value id="at" sline="true" pad.h="6" pad.v="4" width.min="48" />
+							</vbox>
+
+							<vbox>
+								<label text="labels.release"/>
+								<knob id="rt" size="30" ssize="3" scolor="release_1" pad.t="4" />
+								<!-- TODO: It will be convenient if the value also displays fraction time in ms -->
+								<value id="rt" sline="true" pad.h="6" pad.v="4" width.min="48" />
+								<!-- <frac visibility=":rm_${i} ieq 1" id="rdf_${i}" den.id="rdd_${i}" color="green"/> -->
+								<!-- <button text="BPM" id="rm_${i}" ui:inject="Button_cyan" /> -->
+							</vbox>
+						</vbox>
+
+						<vbox>
+							<label text="labels.signal.wet"/>
+							<knob id="cwt" scolor="wet" size="30" />
+							<value id="cwt" sline="true" />
+
+							<label text="labels.signal.dry"/>
+							<knob id="cdr" scolor="dry" size="30" />
+							<value id="cdr" sline="true" />
+						</vbox>
+					</hbox>
+
+					<!-- <hbox>
+						<ui:with pad.h="6" pad.v="4">
+
+							<label visibility="false" text="labels.knee" vreduce="true"/>
+							<label visibility="false" text="labels.makeup" vreduce="true"/>
+						</ui:with>
+						<cell rows="9" bg.color="bg" pad.h="2" hreduce="true"><vsep/></cell>
+						<cell cols="2"><label text="labels.attack" pad.h="6" pad.v="4" vreduce="true"/></cell>
+						<cell rows="9" bg.color="bg" pad.h="2" hreduce="true"><vsep/></cell>
+						<cell cols="2"><label text="labels.release" pad.h="6" pad.v="4" vreduce="true"/></cell>
+						<cell rows="9" bg.color="bg" pad.h="2" hreduce="true"><vsep/></cell>
+						<cell cols="2"><label visibility="false" text="labels.mix" pad.h="6" pad.v="4" vreduce="true"/></cell>
+					</hbox> -->
 
 					<!-- row 2 -->
-					<ui:with bg.color="bg" pad.v="2" vreduce="true">
-						<hsep/>
-						<cell cols="3"><hsep/></cell>
-						<cell cols="2"><hsep/></cell>
-						<cell cols="2"><hsep/></cell>
-						<cell cols="2"><hsep/></cell>
-					</ui:with>
+					<!-- <hbox>
+						<ui:with bg.color="bg" pad.v="2" vreduce="true">
+							<hsep/>
+							<cell cols="3"><hsep/></cell>
+							<cell cols="2"><hsep/></cell>
+							<cell cols="2"><hsep/></cell>
+							<cell cols="2"><hsep/></cell>
+						</ui:with>
+					</hbox> -->
 
 					<!-- row 3 -->
-					<cell rows="3" height.min="111">
-						<vbox>
-							<combo id="cm" pad.h="6" pad.v="4"/>
-							<label text="labels.boost" bright="(:cm ieq 0) ? 0.75 : 1"/>
-							<knob id="bth" scolor="(:cm ieq 0) ? 'kscale_inactive' : 'kscale'" visibility=":cm ine 2"/>
-							<value id="bth" detailed="false" bright="(:cm ieq 0) ? 0.75 : 1" visibility=":cm ine 2"/>
-							<knob id="bsa" scolor="(:cm ieq 0) ? 'kscale_inactive' : 'kscale'" visibility=":cm ieq 2"/>
-							<value id="bsa" detailed="false" bright="(:cm ieq 0) ? 0.75 : 1" visibility=":cm ieq 2"/>
-						</vbox>
-					</cell>
-					<cell rows="2"><knob id="cr" scolor="kscale"/></cell>
-					<cell rows="2"><knob id="kn" scolor="kscale"/></cell>
-					<cell rows="2"><knob id="mk" scolor="kscale"/></cell>
-					<label text="labels.thresh_old"/>
-					<label text="labels.time"/>
-					<label text="labels.thresh_old"/>
-					<label text="labels.time"/>
-					<label text="labels.signal.dry"/>
-					<label text="labels.signal.wet"/>
+					<!-- <hbox>
+
+						<cell rows="2"><knob visibility="false" id="kn" scolor="kscale"/></cell>
+						<cell rows="2"><knob visibility="false" id="mk" scolor="kscale"/></cell>
+						<label visibility="false" text="labels.time"/>
+						<label text="labels.attack"/>
+						<label text="labels.thresh_old"/>
+						<label text="labels.time"/>
+						<label visibility="false" text="labels.signal.dry"/>
+						<label visibility="false" text="labels.signal.wet"/>
+					</hbox> -->
 
 					<!-- row 4 -->
-					<knob id="al" scolor="attack_1" size="20" pad.h="6" pad.v="4"/>
-					<knob id="at" scolor="kscale" size="20" pad.h="6" pad.v="4"/>
-					<knob id="rrl" scolor="release_1" size="20" pad.h="6" pad.v="4"/>
-					<knob id="rt" scolor="kscale" size="20" pad.h="6" pad.v="4"/>
-					<knob id="cdr" scolor="dry" size="20" pad.h="6" pad.v="4"/>
-					<knob id="cwt" scolor="wet" size="20" pad.h="6" pad.v="4"/>
+					<!-- <hbox>
+						<knob id="al" scolor="attack_1" size="20" pad.h="6" pad.v="4"/>
+						<knob id="at" scolor="kscale" size="20" pad.h="6" pad.v="4"/>
+						<knob id="rrl" scolor="release_1" size="20" pad.h="6" pad.v="4"/>
+						<knob id="rt" scolor="kscale" size="20" pad.h="6" pad.v="4"/>
+						<knob visibility="false" id="cdr" scolor="dry" size="20" pad.h="6" pad.v="4"/>
+						<knob visibility="false" id="cwt" scolor="wet" size="20" pad.h="6" pad.v="4"/>
+					</hbox> -->
 
 					<!-- row 5 -->
-					<align valign="-1" pad.t="2">
-						<hbox fill="false">
-							<value id="cr" detailed="false"/>
-							<label text=":"/>
-							<label text="1"/>
-						</hbox>
-					</align>
-					<ui:with width.min="32">
-						<value id="kn"/>
-						<value id="mk"/>
-						<value id="al"/>
-						<value id="at"/>
-						<value id="rrl"/>
-						<value id="rt"/>
-						<value id="cdr"/>
-						<value id="cwt"/>
-					</ui:with>
-				</grid>
+					<!-- <hbox>
+						<ui:with width.min="32">
+							<value visibility="false" id="kn"/>
+							<value visibility="false" id="mk"/>
+							<value id="al"/>
+							<value id="at"/>
+							<value id="rrl"/>
+							<value id="rt"/>
+							<value visibility="false" id="cdr"/>
+							<value visibility="false" id="cwt"/>
+						</ui:with>
+					</hbox> -->
+				</vbox>
 			</group>
 		</hbox>
 	</vbox>

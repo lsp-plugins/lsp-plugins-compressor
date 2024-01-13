@@ -901,6 +901,18 @@ namespace lsp
                             // Fill mesh with new values
                             dsp::copy(mesh->pvData[0], vTime, meta::compressor_metadata::TIME_MESH_SIZE);
                             dsp::copy(mesh->pvData[1], c->sGraph[j].data(), meta::compressor_metadata::TIME_MESH_SIZE);
+                            if (j == G_SC)
+                            {
+                                // Add points to fill the mesh
+                                mesh->pvData[1][0] = 0.0f;
+                                mesh->pvData[1][meta::compressor_metadata::TIME_MESH_SIZE-1] = 0.0f;
+                            }
+                            else if (j == G_GAIN)
+                            {
+                                // Add points to fill the mesh (reverse)
+                                mesh->pvData[1][0] = 1.0f;
+                                mesh->pvData[1][meta::compressor_metadata::TIME_MESH_SIZE-1] = 1.0f;
+                            }
                             mesh->data(2, meta::compressor_metadata::TIME_MESH_SIZE);
                         }
                     } // for j
