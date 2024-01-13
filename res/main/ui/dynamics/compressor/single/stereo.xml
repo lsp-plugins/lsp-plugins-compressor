@@ -216,7 +216,7 @@
 							<!-- <text x="-10 db" y="-60 db" text="${cr}:1" text.eval="true" size="18" halign="1" font.bold="true" valign="1" color="cyan" /> -->
 						</graph>
 
-						<fader id="cr" vexpand="true" angle="1" ui:inject="Fader" />
+						<fader id="cr" vexpand="true" angle="1" ui:inject="Fader_prophessor_ratio" min="100" max="1" step="-0.0025" />
 					</hbox>
 				</vbox>
 			</group>
@@ -333,13 +333,15 @@
 						</vbox>
 
 						<vbox>
-							<label text="labels.threshold" width.min="41" vreduce="true"/>
-							<knob id="al" size="40" scolor="attack_1"/>
-							<value id="al" detailed="true" sline="true" />
+							<label text="labels.threshold" vreduce="false"/>
+							<knob id="al" size="50" scolor="attack_1"/>
+							<align valign="-1" pad.t="2">
+								<value id="al" detailed="true" sline="true" />
+							</align>
 						</vbox>
 
 						<vbox>
-							<label text="labels.ratio" width.min="41" vreduce="true"/>
+							<label text="labels.ratio" vreduce="false"/>
 							<knob id="cr" size="50" scolor="kscale"/>
 							<align valign="-1" pad.t="2">
 								<hbox fill="false">
