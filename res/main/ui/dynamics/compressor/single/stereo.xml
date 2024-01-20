@@ -223,7 +223,7 @@
 
 							<!-- Ratio dot -->
 							<!-- <marker id="cr" min="1" max="100" ox="2" oy="0" editable="true" pointer="vsize" color="cyan" width="2" hcolor="cyan" /> -->
-							<dot x="9 db" y.id="cr" y.min="1" y.max="100" y.editable="true" size="7" hover.size="7" pointer="drag" oy="2" color="cyan" />
+							<!-- <dot x="9 db" y.id="cr" y.min="1" y.max="100" y.editable="true" size="7" hover.size="7" pointer="drag" oy="2" color="cyan" /> -->
 
 							<!-- Compression rate -->
 							<!-- <text x="-10 db" y="-60 db" text="${cr}:1" text.eval="true" size="18" halign="1" font.bold="true" valign="1" color="cyan" /> -->
@@ -356,7 +356,7 @@
 						<vbox>
 							<label text="labels.ratio" vreduce="false"/>
 							<knob id="cr" size="50" scolor="kscale"/>
-							<knob id="rrl" size="20" scolor="kscale"/>
+							<!-- <knob id="rrl" size="20" scolor="kscale"/> -->
 							<align valign="-1" pad.t="2">
 								<hbox fill="false">
 									<value id="cr" detailed="false"/>
@@ -387,6 +387,8 @@
 							<label text="labels.signal.wet"/>
 							<knob id="cwt" scolor="wet" size="30" />
 							<value id="cwt" sline="true" />
+
+							<button id="amk" pad.h="6" height="18" width="70" text="Auto gain" ui:inject="Button_orange_8"/>
 
 							<label text="labels.signal.dry"/>
 							<knob id="cdr" scolor="dry" size="30" />

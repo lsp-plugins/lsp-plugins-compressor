@@ -136,15 +136,16 @@ namespace lsp
                     plug::IPort          *pScLpfFreq;         // Sidechain low-pass filter frequency
 
                     plug::IPort          *pMode;              // Mode
-                    plug::IPort          *pAttackLvl;         // Attack level
+                    plug::IPort          *pAttackLvl;         // Attack level (threshold)
                     plug::IPort          *pReleaseLvl;        // Release level
                     plug::IPort          *pAttackTime;        // Attack time
                     plug::IPort          *pReleaseTime;       // Release time
                     plug::IPort          *pRatio;             // Ratio
                     plug::IPort          *pKnee;              // Knee
                     plug::IPort          *pBThresh;           // Boost threshold
-                    plug::IPort          *pBoost;             // Boost signal amount
+                    plug::IPort          *pBoost;             // Boost signal amount (threshold)
                     plug::IPort          *pMakeup;            // Makeup
+                    plug::IPort          *pAutoMakeup;        // Auto makeup signal
 
                     plug::IPort          *pDryGain;           // Dry gain
                     plug::IPort          *pWetGain;           // Wet gain

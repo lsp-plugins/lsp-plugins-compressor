@@ -218,6 +218,7 @@ namespace lsp
                 c->pBThresh         = NULL;
                 c->pBoost           = NULL;
                 c->pMakeup          = NULL;
+                c->pAutoMakeup      = NULL;
                 c->pDryGain         = NULL;
                 c->pWetGain         = NULL;
                 c->pCurve           = NULL;
@@ -320,6 +321,7 @@ namespace lsp
                     c->pBThresh         = sc->pBThresh;
                     c->pBoost           = sc->pBoost;
                     c->pMakeup          = sc->pMakeup;
+                    c->pAutoMakeup      = sc->pAutoMakeup;
                     c->pDryGain         = sc->pDryGain;
                     c->pWetGain         = sc->pWetGain;
                 }
@@ -335,6 +337,7 @@ namespace lsp
                     c->pBThresh         =   TRACE_PORT(ports[port_id++]);
                     c->pBoost           =   TRACE_PORT(ports[port_id++]);
                     c->pMakeup          =   TRACE_PORT(ports[port_id++]);
+                    c->pAutoMakeup      =   TRACE_PORT(ports[port_id++]);
                     c->pDryGain         =   TRACE_PORT(ports[port_id++]);
                     c->pWetGain         =   TRACE_PORT(ports[port_id++]);
                     c->pReleaseOut      =   TRACE_PORT(ports[port_id++]);
@@ -566,7 +569,18 @@ namespace lsp
                 // Update compressor settings
                 float attack    = c->pAttackLvl->value();
                 float release   = c->pReleaseLvl->value() * attack;
+                float ratio     = c->pRatio->value();
                 float makeup    = c->pMakeup->value();
+                float threshold = attack;
+                float knee      = c->pKnee->value();
+
+                if (c->pAutoMakeup->value() >= 0.5f) {
+                    // TODO: Make math-true and move to smth like dspu::calc_makeup_gain
+                    // makeup         /= threshold * (1.0f / (ratio / 8.0f));
+                    // makeup          = 1 + (1.f / threshold) * ((log(ratio)) / 16.f);
+                    makeup          = 1 + (1.f / threshold) * ((log(ratio) - (log(knee) * 2.f)) / 64.f);
+                }
+
                 dspu::compressor_mode_t mode = decode_mode(c->pMode->value());
 
                 c->sComp.set_threshold(attack, release);
@@ -1166,6 +1180,7 @@ namespace lsp
                     v->write("pBThresh", c->pBThresh);
                     v->write("pBoost", c->pBoost);
                     v->write("pMakeup", c->pMakeup);
+                    v->write("pAutoMakeup", c->pAutoMakeup);
 
                     v->write("pDryGain", c->pDryGain);
                     v->write("pWetGain", c->pWetGain);
