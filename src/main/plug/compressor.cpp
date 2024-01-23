@@ -49,26 +49,26 @@ namespace lsp
 
         static const meta::plugin_t *plugins[] =
         {
-            &meta::compressor_mono,
-            &meta::compressor_stereo,
-            &meta::compressor_lr,
-            &meta::compressor_ms,
-            &meta::sc_compressor_mono,
+            // &meta::compressor_mono,
+            // &meta::compressor_stereo,
+            // &meta::compressor_lr,
+            // &meta::compressor_ms,
+            // &meta::sc_compressor_mono,
             &meta::sc_compressor_stereo,
-            &meta::sc_compressor_lr,
-            &meta::sc_compressor_ms
+            // &meta::sc_compressor_lr,
+            // &meta::sc_compressor_ms
         };
 
         static const plugin_settings_t plugin_settings[] =
         {
-            { &meta::compressor_mono,       false, compressor::CM_MONO          },
+            // { &meta::compressor_mono,       false, compressor::CM_MONO          },
             { &meta::compressor_stereo,     false, compressor::CM_STEREO        },
-            { &meta::compressor_lr,         false, compressor::CM_LR            },
-            { &meta::compressor_ms,         false, compressor::CM_MS            },
-            { &meta::sc_compressor_mono,    true,  compressor::CM_MONO          },
+            // { &meta::compressor_lr,         false, compressor::CM_LR            },
+            // { &meta::compressor_ms,         false, compressor::CM_MS            },
+            // { &meta::sc_compressor_mono,    true,  compressor::CM_MONO          },
             { &meta::sc_compressor_stereo,  true,  compressor::CM_STEREO        },
-            { &meta::sc_compressor_lr,      true,  compressor::CM_LR            },
-            { &meta::sc_compressor_ms,      true,  compressor::CM_MS            },
+            // { &meta::sc_compressor_lr,      true,  compressor::CM_LR            },
+            // { &meta::sc_compressor_ms,      true,  compressor::CM_MS            },
 
             { NULL, 0, false }
         };
@@ -81,7 +81,7 @@ namespace lsp
             return NULL;
         }
 
-        static plug::Factory factory(plugin_factory, plugins, 8);
+        static plug::Factory factory(plugin_factory, plugins, 2);
 
         //-------------------------------------------------------------------------
         compressor::compressor(const meta::plugin_t *metadata, bool sc, size_t mode): plug::Module(metadata)
