@@ -1,6 +1,6 @@
 /*
- * Copyright (C) 2023 Linux Studio Plugins Project <https://lsp-plug.in/>
- *           (C) 2023 Vladimir Sadovnikov <sadko4u@gmail.com>
+ * Copyright (C) 2024 Linux Studio Plugins Project <https://lsp-plug.in/>
+ *           (C) 2024 Vladimir Sadovnikov <sadko4u@gmail.com>
  *
  * This file is part of lsp-plugins-compressor
  * Created on: 3 авг. 2021 г.
@@ -310,6 +310,8 @@ namespace lsp
             LSP_LV2_URI("compressor_mono"),
             LSP_LV2UI_URI("compressor_mono"),
             "bgsy",
+            LSP_VST3_UID("k1m     bgsy"),
+            LSP_VST3UI_UID("k1m     bgsy"),
             LSP_LADSPA_COMPRESSOR_BASE + 0,
             LSP_LADSPA_URI("compressor_mono"),
             LSP_CLAP_URI("compressor_mono"),
@@ -335,6 +337,8 @@ namespace lsp
             LSP_LV2_URI("compressor_stereo"),
             LSP_LV2UI_URI("compressor_stereo"),
             "unsc",
+            LSP_VST3_UID("k1s     unsc"),
+            LSP_VST3UI_UID("k1s     unsc"),
             LSP_LADSPA_COMPRESSOR_BASE + 1,
             LSP_LADSPA_URI("compressor_stereo"),
             LSP_CLAP_URI("compressor_stereo"),
@@ -360,6 +364,8 @@ namespace lsp
             LSP_LV2_URI("compressor_lr"),
             LSP_LV2UI_URI("compressor_lr"),
             "3nam",
+            LSP_VST3_UID("k1lr    3nam"),
+            LSP_VST3UI_UID("k1lr    3nam"),
             LSP_LADSPA_COMPRESSOR_BASE + 2,
             LSP_LADSPA_URI("compressor_lr"),
             LSP_CLAP_URI("compressor_lr"),
@@ -385,6 +391,8 @@ namespace lsp
             LSP_LV2_URI("compressor_ms"),
             LSP_LV2UI_URI("compressor_ms"),
             "jjef",
+            LSP_VST3_UID("k1ms    jjef"),
+            LSP_VST3UI_UID("k1ms    jjef"),
             LSP_LADSPA_COMPRESSOR_BASE + 3,
             LSP_LADSPA_URI("compressor_ms"),
             LSP_CLAP_URI("compressor_ms"),
@@ -411,6 +419,8 @@ namespace lsp
             LSP_LV2_URI("sc_compressor_mono"),
             LSP_LV2UI_URI("sc_compressor_mono"),
             "lyjq",
+            LSP_VST3_UID("sck1m   lyjq"),
+            LSP_VST3UI_UID("sck1m   lyjq"),
             LSP_LADSPA_COMPRESSOR_BASE + 4,
             LSP_LADSPA_URI("sc_compressor_mono"),
             LSP_CLAP_URI("sc_compressor_mono"),
@@ -436,6 +446,8 @@ namespace lsp
             LSP_LV2_URI("sc_compressor_stereo"),
             LSP_LV2UI_URI("sc_compressor_stereo"),
             "5xzi",
+            LSP_VST3_UID("sck1s   5xzi"),
+            LSP_VST3UI_UID("sck1s   5xzi"),
             LSP_LADSPA_COMPRESSOR_BASE + 5,
             LSP_LADSPA_URI("sc_compressor_stereo"),
             LSP_CLAP_URI("sc_compressor_stereo"),
@@ -461,6 +473,8 @@ namespace lsp
             LSP_LV2_URI("sc_compressor_lr"),
             LSP_LV2UI_URI("sc_compressor_lr"),
             "fowg",
+            LSP_VST3_UID("sck1lr  fowg"),
+            LSP_VST3UI_UID("sck1lr  fowg"),
             LSP_LADSPA_COMPRESSOR_BASE + 6,
             LSP_LADSPA_URI("sc_compressor_lr"),
             LSP_CLAP_URI("sc_compressor_lr"),
@@ -486,6 +500,8 @@ namespace lsp
             LSP_LV2_URI("sc_compressor_ms"),
             LSP_LV2UI_URI("sc_compressor_ms"),
             "ioqg",
+            LSP_VST3_UID("sck1ms  ioqg"),
+            LSP_VST3UI_UID("sck1ms  ioqg"),
             LSP_LADSPA_COMPRESSOR_BASE + 7,
             LSP_LADSPA_URI("sc_compressor_ms"),
             LSP_CLAP_URI("sc_compressor_ms"),
