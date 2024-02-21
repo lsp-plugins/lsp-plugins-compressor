@@ -339,7 +339,7 @@
 
 			<group text="groups.plug.compressor" vexpand="false" hexpand="true" ipadding="0">
 
-				<grid rows="9" cols="14" spacing="0" bg.color="bg_schema">
+				<grid rows="9" cols="16" spacing="0" bg.color="bg_schema">
 					<!-- row 1 -->
 					<label text="labels.mode" pad.h="6" pad.v="4" vreduce="true"/>
 					<cell rows="9" bg.color="bg" pad.h="2" hreduce="true"><vsep/></cell>
@@ -353,6 +353,8 @@
 					<cell rows="9" bg.color="bg" pad.h="2" hreduce="true"><vsep/></cell>
 					<cell cols="2"><label text="labels.release" pad.h="6" pad.v="4" vreduce="true"/></cell>
 					<cell rows="9" bg.color="bg" pad.h="2" hreduce="true"><vsep/></cell>
+					<label text="labels.hold" pad.h="6" pad.v="4" vreduce="true"/>
+					<cell rows="9" bg.color="bg" pad.h="2" hreduce="true"><vsep/></cell>
 					<cell cols="2"><label text="labels.mix" pad.h="6" pad.v="4" vreduce="true"/></cell>
 
 					<!-- row 2 -->
@@ -361,6 +363,7 @@
 						<cell cols="3"><hsep/></cell>
 						<cell cols="2"><hsep/></cell>
 						<cell cols="2"><hsep/></cell>
+						<hsep/>
 						<cell cols="2"><hsep/></cell>
 					</ui:with>
 
@@ -382,6 +385,7 @@
 					<label text="labels.time"/>
 					<label text="labels.thresh_old"/>
 					<label text="labels.time"/>
+					<cell rows="2"><knob id="hold_l" pad.h="6" scolor="left"/></cell>
 					<label text="labels.signal.dry"/>
 					<label text="labels.signal.wet"/>
 
@@ -408,6 +412,7 @@
 						<value id="at_l"/>
 						<value id="rrl_l"/>
 						<value id="rt_l"/>
+						<value id="hold_l"/>
 						<value id="cdr_l"/>
 						<value id="cwt_l"/>
 					</ui:with>
@@ -418,6 +423,7 @@
 						<cell cols="3"><hsep/></cell>
 						<cell cols="2"><hsep/></cell>
 						<cell cols="2"><hsep/></cell>
+						<hsep/>
 						<cell cols="2"><hsep/></cell>
 					</ui:with>
 
@@ -439,6 +445,7 @@
 					<label text="labels.time"/>
 					<label text="labels.thresh_old"/>
 					<label text="labels.time"/>
+					<cell rows="2"><knob id="hold_r" pad.h="6" scolor="right"/></cell>
 					<label text="labels.signal.dry"/>
 					<label text="labels.signal.wet"/>
 
@@ -465,6 +472,7 @@
 						<value id="at_r"/>
 						<value id="rrl_r"/>
 						<value id="rt_r"/>
+						<value id="hold_r"/>
 						<value id="cdr_r"/>
 						<value id="cwt_r"/>
 					</ui:with>

@@ -153,6 +153,7 @@ namespace lsp
             LOG_CONTROL("at" id, "Attack time" label, U_MSEC, compressor_metadata::ATTACK_TIME), \
             LOG_CONTROL("rrl" id, "Release threshold" label, U_GAIN_AMP, compressor_metadata::RELEASE_LVL), \
             LOG_CONTROL("rt" id, "Release time" label, U_MSEC, compressor_metadata::RELEASE_TIME), \
+            LOG_CONTROL("hold" id, "Hold time" label, U_MSEC, compressor_metadata::HOLD_TIME), \
             LOG_CONTROL("cr" id, "Ratio" label, U_NONE, compressor_metadata::RATIO), \
             LOG_CONTROL("kn" id, "Knee" label, U_GAIN_AMP, compressor_metadata::KNEE), \
             EXT_LOG_CONTROL("bth" id, "Boost threshold" label, U_GAIN_AMP, compressor_metadata::BTH), \

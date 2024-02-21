@@ -24,6 +24,7 @@
 #include <lsp-plug.in/dsp/dsp.h>
 #include <lsp-plug.in/dsp-units/units.h>
 #include <lsp-plug.in/common/alloc.h>
+#include <lsp-plug.in/shared/debug.h>
 #include <lsp-plug.in/shared/id_colors.h>
 
 #define COMP_BUF_SIZE           0x1000
@@ -32,12 +33,6 @@ namespace lsp
 {
     namespace plugins
     {
-        static plug::IPort *TRACE_PORT(plug::IPort *p)
-        {
-            lsp_trace("  port id=%s", (p)->metadata()->id);
-            return p;
-        }
-
         //-------------------------------------------------------------------------
         // Plugin factory
         typedef struct plugin_settings_t
@@ -213,6 +208,7 @@ namespace lsp
                 c->pReleaseLvl      = NULL;
                 c->pAttackTime      = NULL;
                 c->pReleaseTime     = NULL;
+                c->pHoldTime        = NULL;
                 c->pRatio           = NULL;
                 c->pKnee            = NULL;
                 c->pBThresh         = NULL;
@@ -232,34 +228,34 @@ namespace lsp
             // Input ports
             lsp_trace("Binding input ports");
             for (size_t i=0; i<channels; ++i)
-                vChannels[i].pIn        =   TRACE_PORT(ports[port_id++]);
+                BIND_PORT(vChannels[i].pIn);
 
             // Output ports
             lsp_trace("Binding output ports");
             for (size_t i=0; i<channels; ++i)
-                vChannels[i].pOut       =   TRACE_PORT(ports[port_id++]);
+                BIND_PORT(vChannels[i].pOut);
 
             // Sidechain ports
             if (bSidechain)
             {
                 lsp_trace("Binding sidechain ports");
                 for (size_t i=0; i<channels; ++i)
-                    vChannels[i].pSC        =   TRACE_PORT(ports[port_id++]);
+                    BIND_PORT(vChannels[i].pSC);
             }
 
             // Common ports
             lsp_trace("Binding common ports");
-            pBypass                 =   TRACE_PORT(ports[port_id++]);
-            pInGain                 =   TRACE_PORT(ports[port_id++]);
-            pOutGain                =   TRACE_PORT(ports[port_id++]);
-            pPause                  =   TRACE_PORT(ports[port_id++]);
-            pClear                  =   TRACE_PORT(ports[port_id++]);
+            BIND_PORT(pBypass);
+            BIND_PORT(pInGain);
+            BIND_PORT(pOutGain);
+            BIND_PORT(pPause);
+            BIND_PORT(pClear);
             if (nMode == CM_MS)
-                pMSListen               =   TRACE_PORT(ports[port_id++]);
+                BIND_PORT(pMSListen);
             if (nMode == CM_STEREO)
             {
-                pStereoSplit            =   TRACE_PORT(ports[port_id++]);
-                pScSpSource             =   TRACE_PORT(ports[port_id++]);
+                BIND_PORT(pStereoSplit);
+                BIND_PORT(pScSpSource);
             }
 
             // Sidechain ports
@@ -285,18 +281,18 @@ namespace lsp
                 }
                 else
                 {
-                    c->pScType          =   TRACE_PORT(ports[port_id++]);
-                    c->pScMode          =   TRACE_PORT(ports[port_id++]);
-                    c->pScLookahead     =   TRACE_PORT(ports[port_id++]);
-                    c->pScListen        =   TRACE_PORT(ports[port_id++]);
+                    BIND_PORT(c->pScType);
+                    BIND_PORT(c->pScMode);
+                    BIND_PORT(c->pScLookahead);
+                    BIND_PORT(c->pScListen);
                     if (nMode != CM_MONO)
-                        c->pScSource        =   TRACE_PORT(ports[port_id++]);
-                    c->pScReactivity    =   TRACE_PORT(ports[port_id++]);
-                    c->pScPreamp        =   TRACE_PORT(ports[port_id++]);
-                    c->pScHpfMode       =   TRACE_PORT(ports[port_id++]);
-                    c->pScHpfFreq       =   TRACE_PORT(ports[port_id++]);
-                    c->pScLpfMode       =   TRACE_PORT(ports[port_id++]);
-                    c->pScLpfFreq       =   TRACE_PORT(ports[port_id++]);
+                        BIND_PORT(c->pScSource);
+                    BIND_PORT(c->pScReactivity);
+                    BIND_PORT(c->pScPreamp);
+                    BIND_PORT(c->pScHpfMode);
+                    BIND_PORT(c->pScHpfFreq);
+                    BIND_PORT(c->pScLpfMode);
+                    BIND_PORT(c->pScLpfFreq);
                 }
             }
 
@@ -315,6 +311,7 @@ namespace lsp
                     c->pAttackTime      = sc->pAttackTime;
                     c->pReleaseLvl      = sc->pReleaseLvl;
                     c->pReleaseTime     = sc->pReleaseTime;
+                    c->pHoldTime        = sc->pHoldTime;
                     c->pRatio           = sc->pRatio;
                     c->pKnee            = sc->pKnee;
                     c->pBThresh         = sc->pBThresh;
@@ -325,20 +322,21 @@ namespace lsp
                 }
                 else
                 {
-                    c->pMode            =   TRACE_PORT(ports[port_id++]);
-                    c->pAttackLvl       =   TRACE_PORT(ports[port_id++]);
-                    c->pAttackTime      =   TRACE_PORT(ports[port_id++]);
-                    c->pReleaseLvl      =   TRACE_PORT(ports[port_id++]);
-                    c->pReleaseTime     =   TRACE_PORT(ports[port_id++]);
-                    c->pRatio           =   TRACE_PORT(ports[port_id++]);
-                    c->pKnee            =   TRACE_PORT(ports[port_id++]);
-                    c->pBThresh         =   TRACE_PORT(ports[port_id++]);
-                    c->pBoost           =   TRACE_PORT(ports[port_id++]);
-                    c->pMakeup          =   TRACE_PORT(ports[port_id++]);
-                    c->pDryGain         =   TRACE_PORT(ports[port_id++]);
-                    c->pWetGain         =   TRACE_PORT(ports[port_id++]);
-                    c->pReleaseOut      =   TRACE_PORT(ports[port_id++]);
-                    c->pCurve           =   TRACE_PORT(ports[port_id++]);
+                    BIND_PORT(c->pMode);
+                    BIND_PORT(c->pAttackLvl);
+                    BIND_PORT(c->pAttackTime);
+                    BIND_PORT(c->pReleaseLvl);
+                    BIND_PORT(c->pReleaseTime);
+                    BIND_PORT(c->pHoldTime);
+                    BIND_PORT(c->pRatio);
+                    BIND_PORT(c->pKnee);
+                    BIND_PORT(c->pBThresh);
+                    BIND_PORT(c->pBoost);
+                    BIND_PORT(c->pMakeup);
+                    BIND_PORT(c->pDryGain);
+                    BIND_PORT(c->pWetGain);
+                    BIND_PORT(c->pReleaseOut);
+                    BIND_PORT(c->pCurve);
                 }
             }
 
@@ -349,23 +347,23 @@ namespace lsp
                 channel_t *c = &vChannels[i];
 
                 // Skip meters visibility controls
-                TRACE_PORT(ports[port_id++]);
-                TRACE_PORT(ports[port_id++]);
-                TRACE_PORT(ports[port_id++]);
-                TRACE_PORT(ports[port_id++]);
-                TRACE_PORT(ports[port_id++]);
+                SKIP_PORT("Sidechain switch");
+                SKIP_PORT("Envelope switch");
+                SKIP_PORT("Gain reduction switch");
+                SKIP_PORT("Input switch");
+                SKIP_PORT("Output switch");
 
-                c->pGraph[G_SC]     =   TRACE_PORT(ports[port_id++]);
-                c->pGraph[G_ENV]    =   TRACE_PORT(ports[port_id++]);
-                c->pGraph[G_GAIN]   =   TRACE_PORT(ports[port_id++]);
-                c->pGraph[G_IN]     =   TRACE_PORT(ports[port_id++]);
-                c->pGraph[G_OUT]    =   TRACE_PORT(ports[port_id++]);
-                c->pMeter[M_SC]     =   TRACE_PORT(ports[port_id++]);
-                c->pMeter[M_CURVE]  =   TRACE_PORT(ports[port_id++]);
-                c->pMeter[M_ENV]    =   TRACE_PORT(ports[port_id++]);
-                c->pMeter[M_GAIN]   =   TRACE_PORT(ports[port_id++]);
-                c->pMeter[M_IN]     =   TRACE_PORT(ports[port_id++]);
-                c->pMeter[M_OUT]    =   TRACE_PORT(ports[port_id++]);
+                BIND_PORT(c->pGraph[G_SC]);
+                BIND_PORT(c->pGraph[G_ENV]);
+                BIND_PORT(c->pGraph[G_GAIN]);
+                BIND_PORT(c->pGraph[G_IN]);
+                BIND_PORT(c->pGraph[G_OUT]);
+                BIND_PORT(c->pMeter[M_SC]);
+                BIND_PORT(c->pMeter[M_CURVE]);
+                BIND_PORT(c->pMeter[M_ENV]);
+                BIND_PORT(c->pMeter[M_GAIN]);
+                BIND_PORT(c->pMeter[M_IN]);
+                BIND_PORT(c->pMeter[M_OUT]);
             }
 
             // Initialize curve (logarithmic) in range of -72 .. +24 db
@@ -571,6 +569,7 @@ namespace lsp
 
                 c->sComp.set_threshold(attack, release);
                 c->sComp.set_timings(c->pAttackTime->value(), c->pReleaseTime->value());
+                c->sComp.set_hold(c->pHoldTime->value());
                 c->sComp.set_ratio(c->pRatio->value());
                 c->sComp.set_knee(c->pKnee->value());
                 c->sComp.set_boost_threshold((mode != dspu::CM_BOOSTING) ? c->pBThresh->value() : c->pBoost->value());

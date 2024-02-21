@@ -3,6 +3,7 @@
 *******************************************************************************
 
 === 1.0.22 ===
+* Implemented Hold option.
 * Updated build scripts and dependencies.
 
 === 1.0.21 ===

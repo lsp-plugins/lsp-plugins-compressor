@@ -299,7 +299,7 @@
 
 			<group text="groups.plug.compressor" vexpand="false" hexpand="true" ipadding="0">
 
-				<grid rows="5" cols="14" spacing="0" bg.color="bg_schema">
+				<grid rows="5" cols="16" spacing="0" bg.color="bg_schema">
 					<!-- row 1 -->
 					<label text="labels.mode" pad.h="6" pad.v="4" vreduce="true"/>
 					<cell rows="9" bg.color="bg" pad.h="2" hreduce="true"><vsep/></cell>
@@ -313,6 +313,8 @@
 					<cell rows="9" bg.color="bg" pad.h="2" hreduce="true"><vsep/></cell>
 					<cell cols="2"><label text="labels.release" pad.h="6" pad.v="4" vreduce="true"/></cell>
 					<cell rows="9" bg.color="bg" pad.h="2" hreduce="true"><vsep/></cell>
+					<label text="labels.hold" pad.h="6" pad.v="4" vreduce="true"/>
+					<cell rows="9" bg.color="bg" pad.h="2" hreduce="true"><vsep/></cell>
 					<cell cols="2"><label text="labels.mix" pad.h="6" pad.v="4" vreduce="true"/></cell>
 
 					<!-- row 2 -->
@@ -321,6 +323,7 @@
 						<cell cols="3"><hsep/></cell>
 						<cell cols="2"><hsep/></cell>
 						<cell cols="2"><hsep/></cell>
+						<hsep/>
 						<cell cols="2"><hsep/></cell>
 					</ui:with>
 
@@ -342,6 +345,7 @@
 					<label text="labels.time"/>
 					<label text="labels.thresh_old"/>
 					<label text="labels.time"/>
+					<cell rows="2"><knob id="hold" size="20" pad.h="6" /></cell>
 					<label text="labels.signal.dry"/>
 					<label text="labels.signal.wet"/>
 
@@ -368,6 +372,7 @@
 						<value id="at"/>
 						<value id="rrl"/>
 						<value id="rt"/>
+						<value id="hold"/>
 						<value id="cdr"/>
 						<value id="cwt"/>
 					</ui:with>
