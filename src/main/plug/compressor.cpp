@@ -905,9 +905,29 @@ namespace lsp
                         if ((mesh != NULL) && (mesh->isEmpty()))
                         {
                             // Fill mesh with new values
+                            if ((j == G_IN) || (j == G_GAIN))
+                            {
+                                float *x = mesh->pvData[0];
+                                float *y = mesh->pvData[1];
+                                float y_zero = (j == G_IN) ? 0.0f : 1.0f;
+
+                                dsp::copy(&x[1], vTime, meta::compressor_metadata::TIME_MESH_SIZE);
+                                dsp::copy(&y[1], c->sGraph[j].data(), meta::compressor_metadata::TIME_MESH_SIZE);
+
+                                x[0] = x[1];
+                                y[0] = y_zero;
+
+                                x[meta::compressor_metadata::TIME_MESH_SIZE + 1] = x[meta::compressor_metadata::TIME_MESH_SIZE];
+                                y[meta::compressor_metadata::TIME_MESH_SIZE + 1] = y_zero;
+
+                                mesh->data(2, meta::compressor_metadata::TIME_MESH_SIZE + 2);
+                            }
+                            else
+                            {
                             dsp::copy(mesh->pvData[0], vTime, meta::compressor_metadata::TIME_MESH_SIZE);
                             dsp::copy(mesh->pvData[1], c->sGraph[j].data(), meta::compressor_metadata::TIME_MESH_SIZE);
                             mesh->data(2, meta::compressor_metadata::TIME_MESH_SIZE);
+                            }
                         }
                     } // for j
                 }
