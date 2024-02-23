@@ -53,9 +53,9 @@ namespace lsp
             static constexpr float  RELEASE_TIME_STEP       = 0.0025f;
 
             static constexpr float  HOLD_TIME_MIN           = 0.0f;
-            static constexpr float  HOLD_TIME_MAX           = 5000.0f;
+            static constexpr float  HOLD_TIME_MAX           = 1000.0f;
             static constexpr float  HOLD_TIME_DFL           = 0.0f;
-            static constexpr float  HOLD_TIME_STEP          = 0.0025f;
+            static constexpr float  HOLD_TIME_STEP          = 0.1f;
 
             static constexpr float  KNEE_MIN                = GAIN_AMP_M_24_DB;
             static constexpr float  KNEE_MAX                = GAIN_AMP_0_DB;

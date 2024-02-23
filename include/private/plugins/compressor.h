@@ -147,8 +147,10 @@ namespace lsp
                     plug::IPort          *pBoost;             // Boost signal amount
                     plug::IPort          *pMakeup;            // Makeup
 
+                    plug::IPort          *pDryWetOn;          // Dry/Wet balance enable
                     plug::IPort          *pDryGain;           // Dry gain
                     plug::IPort          *pWetGain;           // Wet gain
+                    plug::IPort          *pDryWet;            // Dry/Wet balance
                     plug::IPort          *pCurve;             // Curve graph
                     plug::IPort          *pReleaseOut;        // Output release level
                 } channel_t;

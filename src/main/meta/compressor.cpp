@@ -3,7 +3,7 @@
  *           (C) 2024 Vladimir Sadovnikov <sadko4u@gmail.com>
  *
  * This file is part of lsp-plugins-compressor
- * Created on: 3 авг. 2021 г.
+ * Created on: 3 авг. 2024 г.
  *
  * lsp-plugins-compressor is free software: you can redistribute it and/or modify
  * it under the terms of the GNU Lesser General Public License as published by
@@ -153,14 +153,16 @@ namespace lsp
             LOG_CONTROL("at" id, "Attack time" label, U_MSEC, compressor_metadata::ATTACK_TIME), \
             LOG_CONTROL("rrl" id, "Release threshold" label, U_GAIN_AMP, compressor_metadata::RELEASE_LVL), \
             LOG_CONTROL("rt" id, "Release time" label, U_MSEC, compressor_metadata::RELEASE_TIME), \
-            LOG_CONTROL("hold" id, "Hold time" label, U_MSEC, compressor_metadata::HOLD_TIME), \
+            CONTROL("hold" id, "Hold time" label, U_MSEC, compressor_metadata::HOLD_TIME), \
             LOG_CONTROL("cr" id, "Ratio" label, U_NONE, compressor_metadata::RATIO), \
             LOG_CONTROL("kn" id, "Knee" label, U_GAIN_AMP, compressor_metadata::KNEE), \
             EXT_LOG_CONTROL("bth" id, "Boost threshold" label, U_GAIN_AMP, compressor_metadata::BTH), \
             EXT_LOG_CONTROL("bsa" id, "Boost signal amount" label, U_GAIN_AMP, compressor_metadata::BSA), \
             LOG_CONTROL("mk" id, "Makeup gain" label, U_GAIN_AMP, compressor_metadata::MAKEUP), \
+            SWITCH("dwe" id, "Dry/Wet balance enable", 0), \
             AMP_GAIN10("cdr" id, "Dry gain" label, GAIN_AMP_M_INF_DB),     \
             AMP_GAIN10("cwt" id, "Wet gain" label, GAIN_AMP_0_DB), \
+            PERCENTS("cdw" id, "Dry/Wet balance" label, 100.0f, 0.1f), \
             METER_OUT_GAIN("rl" id, "Release level" label, 20.0f), \
             MESH("ccg" id, "Compressor curve graph" label, 2, compressor_metadata::CURVE_MESH_SIZE)
 

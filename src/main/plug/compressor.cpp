@@ -1,6 +1,6 @@
 /*
- * Copyright (C) 2023 Linux Studio Plugins Project <https://lsp-plug.in/>
- *           (C) 2023 Vladimir Sadovnikov <sadko4u@gmail.com>
+ * Copyright (C) 2024 Linux Studio Plugins Project <https://lsp-plug.in/>
+ *           (C) 2024 Vladimir Sadovnikov <sadko4u@gmail.com>
  *
  * This file is part of lsp-plugins-compressor
  * Created on: 3 авг. 2021 г.
@@ -214,8 +214,10 @@ namespace lsp
                 c->pBThresh         = NULL;
                 c->pBoost           = NULL;
                 c->pMakeup          = NULL;
+                c->pDryWetOn        = NULL;
                 c->pDryGain         = NULL;
                 c->pWetGain         = NULL;
+                c->pDryWet          = NULL;
                 c->pCurve           = NULL;
                 c->pReleaseOut      = NULL;
             }
@@ -317,8 +319,10 @@ namespace lsp
                     c->pBThresh         = sc->pBThresh;
                     c->pBoost           = sc->pBoost;
                     c->pMakeup          = sc->pMakeup;
+                    c->pDryWetOn        = sc->pDryWetOn;
                     c->pDryGain         = sc->pDryGain;
                     c->pWetGain         = sc->pWetGain;
+                    c->pDryWet          = sc->pDryWet;
                 }
                 else
                 {
@@ -333,8 +337,10 @@ namespace lsp
                     BIND_PORT(c->pBThresh);
                     BIND_PORT(c->pBoost);
                     BIND_PORT(c->pMakeup);
+                    BIND_PORT(c->pDryWetOn);
                     BIND_PORT(c->pDryGain);
                     BIND_PORT(c->pWetGain);
+                    BIND_PORT(c->pDryWet);
                     BIND_PORT(c->pReleaseOut);
                     BIND_PORT(c->pCurve);
                 }
@@ -586,8 +592,17 @@ namespace lsp
                 }
 
                 // Update gains
-                c->fDryGain         = c->pDryGain->value() * out_gain;
-                c->fWetGain         = c->pWetGain->value() * out_gain;
+                if (c->pDryWetOn->value() >= 0.5f)
+                {
+                    const float drywet  = c->pDryWet->value() * 0.01f;
+                    c->fDryGain         = (1.0f - drywet) * out_gain;
+                    c->fWetGain         = drywet * out_gain;
+                }
+                else
+                {
+                    c->fDryGain         = c->pDryGain->value() * out_gain;
+                    c->fWetGain         = c->pWetGain->value() * out_gain;
+                }
                 if (c->fMakeup != makeup)
                 {
                     c->fMakeup          = makeup;
@@ -1148,14 +1163,17 @@ namespace lsp
                     v->write("pReleaseLvl", c->pReleaseLvl);
                     v->write("pAttackTime", c->pAttackTime);
                     v->write("pReleaseTime", c->pReleaseTime);
+                    v->write("pHoldTime", c->pHoldTime);
                     v->write("pRatio", c->pRatio);
                     v->write("pKnee", c->pKnee);
                     v->write("pBThresh", c->pBThresh);
                     v->write("pBoost", c->pBoost);
                     v->write("pMakeup", c->pMakeup);
 
+                    v->write("pDryWetOn", c->pDryWetOn);
                     v->write("pDryGain", c->pDryGain);
                     v->write("pWetGain", c->pWetGain);
+                    v->write("pDryWet", c->pDryWet);
                     v->write("pCurve", c->pCurve);
                     v->write("pReleaseOut", c->pReleaseOut);
                 }

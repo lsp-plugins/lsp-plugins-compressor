@@ -273,7 +273,7 @@
 
 			<group text="groups.plug.compressor" vexpand="false" hexpand="true" ipadding="0">
 
-				<grid rows="5" cols="16" spacing="0" bg.color="bg_schema">
+				<grid rows="5" cols="17" spacing="0" bg.color="bg_schema">
 					<!-- row 1 -->
 					<label text="labels.mode" pad.h="6" pad.v="4" vreduce="true"/>
 					<cell rows="9" bg.color="bg" pad.h="2" hreduce="true"><vsep/></cell>
@@ -289,7 +289,7 @@
 					<cell rows="9" bg.color="bg" pad.h="2" hreduce="true"><vsep/></cell>
 					<label text="labels.hold" pad.h="6" pad.v="4" vreduce="true"/>
 					<cell rows="9" bg.color="bg" pad.h="2" hreduce="true"><vsep/></cell>
-					<cell cols="2"><label text="labels.mix" pad.h="6" pad.v="4" vreduce="true"/></cell>
+					<cell cols="3"><label text="labels.mix" pad.h="6" pad.v="4" vreduce="true"/></cell>
 
 					<!-- row 2 -->
 					<ui:with bg.color="bg" pad.v="2" vreduce="true">
@@ -298,7 +298,7 @@
 						<cell cols="2"><hsep/></cell>
 						<cell cols="2"><hsep/></cell>
 						<hsep/>
-						<cell cols="2"><hsep/></cell>
+						<cell cols="3"><hsep/></cell>
 					</ui:with>
 
 					<!-- row 3 -->
@@ -322,6 +322,7 @@
 					<cell rows="2"><knob id="hold" size="20" pad.h="6"/></cell>
 					<label text="labels.signal.dry"/>
 					<label text="labels.signal.wet"/>
+					<button id="dwe" text="labels.signal.drywet"/>
 
 					<!-- row 4 -->
 					<knob id="al" scolor="attack_1" size="20" pad.h="6" pad.v="4"/>
@@ -330,6 +331,7 @@
 					<knob id="rt" scolor="kscale" size="20" pad.h="6" pad.v="4"/>
 					<knob id="cdr" scolor="dry" size="20" pad.h="6" pad.v="4"/>
 					<knob id="cwt" scolor="wet" size="20" pad.h="6" pad.v="4"/>
+					<knob id="cdw" size="20" pad.h="6" pad.v="4"/>
 
 					<!-- row 5 -->
 					<align valign="-1" pad.t="2">
@@ -349,6 +351,7 @@
 						<value id="hold"/>
 						<value id="cdr"/>
 						<value id="cwt"/>
+						<value id="cdw"/>
 					</ui:with>
 				</grid>
 			</group>
