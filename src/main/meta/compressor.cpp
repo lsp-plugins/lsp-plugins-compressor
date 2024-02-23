@@ -174,7 +174,7 @@ namespace lsp
             SWITCH("olv" id, "Output level visibility" label, 1.0f), \
             MESH("scg" id, "Compressor sidechain graph" label, 2, compressor_metadata::TIME_MESH_SIZE), \
             MESH("evg" id, "Compressor envelope graph" label, 2, compressor_metadata::TIME_MESH_SIZE), \
-            MESH("grg" id, "Compressor gain reduciton" label, 2, compressor_metadata::TIME_MESH_SIZE + 2), \
+            MESH("grg" id, "Compressor gain reduciton" label, 2, compressor_metadata::TIME_MESH_SIZE + 4), \
             MESH("icg" id, "Compressor input" label, 2, compressor_metadata::TIME_MESH_SIZE + 2), \
             MESH("ocg" id, "Compressor output" label, 2, compressor_metadata::TIME_MESH_SIZE), \
             METER_OUT_GAIN("slm" id, "Sidechain level meter" label, GAIN_AMP_P_36_DB), \
