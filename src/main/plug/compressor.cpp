@@ -130,12 +130,9 @@ namespace lsp
             if (ptr == NULL)
                 return;
 
-            vChannels               = reinterpret_cast<channel_t *>(ptr);
-            ptr                    += channel_size;
-            vCurve                  = reinterpret_cast<float *>(ptr);
-            ptr                    += curve_size;
-            vTime                   = reinterpret_cast<float *>(ptr);
-            ptr                    += history_size;
+            vChannels               = advance_ptr<channel_t>(ptr, channel_size);
+            vCurve                  = advance_ptr<float>(ptr, curve_size);
+            vTime                   = advance_ptr<float>(ptr, history_size);
 
             // Initialize channels
             for (size_t i=0; i<channels; ++i)
@@ -161,16 +158,11 @@ namespace lsp
                 c->sSCEq.set_mode(dspu::EQM_IIR);
                 c->sSC.set_pre_equalizer(&c->sSCEq);
 
-                c->vIn              = reinterpret_cast<float *>(ptr);
-                ptr                += buf_size;
-                c->vOut             = reinterpret_cast<float *>(ptr);
-                ptr                += buf_size;
-                c->vSc              = reinterpret_cast<float *>(ptr);
-                ptr                += buf_size;
-                c->vEnv             = reinterpret_cast<float *>(ptr);
-                ptr                += buf_size;
-                c->vGain            = reinterpret_cast<float *>(ptr);
-                ptr                += buf_size;
+                c->vIn              = advance_ptr<float>(ptr, buf_size);
+                c->vOut             = advance_ptr<float>(ptr, buf_size);
+                c->vSc              = advance_ptr<float>(ptr, buf_size);
+                c->vEnv             = advance_ptr<float>(ptr, buf_size);
+                c->vGain            = advance_ptr<float>(ptr, buf_size);
                 c->bScListen        = false;
                 c->nSync            = S_ALL;
                 c->nScType          = SCT_FEED_FORWARD;
