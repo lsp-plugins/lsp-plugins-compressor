@@ -41,8 +41,8 @@
 						<mesh id="scg_s" width="2" color="sidechain_2" visibility=":slv_s"/>
 						<mesh id="evg_m" width="2" color="envelope_1" visibility=":elv_m"/>
 						<mesh id="evg_s" width="2" color="envelope_2" visibility=":elv_s"/>
-						<mesh id="grg_m" width="2" color="mid" fcolor="mid" fcolor.a="0.8" fill="true" visibility=":grv_m"/>
-						<mesh id="grg_s" width="2" color="side" fcolor="side" fcolor.a="0.8" fill="true" visibility=":grv_s"/>
+						<mesh id="grg_m" width="2" color="bright_blue" fcolor="bright_blue" fcolor.a="0.8" fill="true" visibility=":grv_m"/>
+						<mesh id="grg_s" width="2" color="bright_blue" fcolor="bright_blue" fcolor.a="0.8" fill="true" visibility=":grv_s"/>
 
 						<!-- Boundaries -->
 						<marker v="24 db" ox="1" oy="0" color="graph_prim" visibility="false"/>
@@ -82,8 +82,8 @@
 				<hbox spacing="4" vexpand="false" bg.color="bg_schema" pad.h="6">
 					<button id="pause" height="22" width="48" text="labels.pause" pad.v="4" ui:inject="Button_green"/>
 					<button id="clear" height="22" width="48" text="labels.clear" pad.v="4" ui:inject="Button_red"/>
-					<void hexpand="true" />
-					<vsep pad.h="2" bg.color="bg" reduce="true" />
+					<void hexpand="true"/>
+					<vsep pad.h="2" bg.color="bg" reduce="true"/>
 					<button id="msl" height="22" width="48" text="labels.ms_listen" pad.v="4" ui:inject="Button_yellow"/>
 				</hbox>
 			</vbox>
@@ -105,8 +105,8 @@
 					</grid>
 
 					<grid rows="2" cols="2" fill="false" hspacing="2">
-						<button id="grv_m" size="10" ui:inject="Button_mid" led="true"/>
-						<button id="grv_s" size="10" ui:inject="Button_side" led="true"/>
+						<button id="grv_m" size="10" ui:inject="Button_blue" led="true"/>
+						<button id="grv_s" size="10" ui:inject="Button_blue" led="true"/>
 					</grid>
 				</ui:with>
 
@@ -124,8 +124,8 @@
 
 				<!-- Gain signal meter -->
 				<ledmeter vexpand="true" height.min="256" angle="1">
-					<ledchannel id="rlm_m" min="-48 db" max="48 db" log="true" balance="0 db" balance.visibility="true" type="peak" value.color="mid"/>
-					<ledchannel id="rlm_s" min="-48 db" max="48 db" log="true" balance="0 db" balance.visibility="true" type="peak" value.color="side"/>
+					<ledchannel id="rlm_m" min="-48 db" max="48 db" log="true" balance="0 db" balance.visibility="true" type="peak" value.color="blue"/>
+					<ledchannel id="rlm_s" min="-48 db" max="48 db" log="true" balance="0 db" balance.visibility="true" type="peak" value.color="blue"/>
 				</ledmeter>
 			</grid>
 
@@ -164,8 +164,8 @@
 					<dot x.id="elm_s" y.id="clm_s" color="side" bcolor="side"/>
 
 					<!-- Markers -->
-					<marker id="al_m" editable="true" width="2" pointer="hsize" color="attack_1" hcolor="attack_1"/>
-					<marker id="al_s" editable="true" width="2" pointer="hsize" color="attack_2" hcolor="attack_2"/>
+					<marker id="al_m" editable="true" width="2" pointer="hsize" color="threshold" hcolor="threshold"/>
+					<marker id="al_s" editable="true" width="2" pointer="hsize" color="threshold" hcolor="threshold"/>
 					<marker id="rl_m" color="release_1"/>
 					<marker id="rl_s" color="release_2"/>
 
@@ -278,8 +278,8 @@
 						<vbox fill="false" spacing="1">
 							<ui:with pad.h="6" pad.b="4" hfill="true">
 								<combo id="sct_m" pad.t="4"/>
-								<combo id="scm_m" />
-								<combo id="scs_m" />
+								<combo id="scm_m"/>
+								<combo id="scs_m"/>
 								<button id="scl_m" height="22" text="labels.listen" ui:inject="Button_mid"/>
 							</ui:with>
 						</vbox>
@@ -314,8 +314,8 @@
 						<vbox fill="false" spacing="1">
 							<ui:with pad.h="6" pad.b="4" hfill="true">
 								<combo id="sct_s" pad.t="4"/>
-								<combo id="scm_s" />
-								<combo id="scs_s" />
+								<combo id="scm_s"/>
+								<combo id="scs_s"/>
 								<button id="scl_s" height="22" text="labels.listen" ui:inject="Button_side"/>
 							</ui:with>
 						</vbox>
@@ -388,19 +388,19 @@
 					<label text="labels.thresh_old"/>
 					<label text="labels.time"/>
 					<cell rows="2"><knob id="hold_m" scolor="mid" pad.h="6"/></cell>
-					<label text="labels.signal.dry" bright="(!:dwe_m) ? 1 : 0.75" bg.bright="(!:dwe_m) ? 1 : :const_bg_darken"/>
-					<label text="labels.signal.wet" bright="(!:dwe_m) ? 1 : 0.75" bg.bright="(!:dwe_m) ? 1 : :const_bg_darken"/>
+					<label text="labels.signal.dry"/>
+					<label text="labels.signal.wet"/>
 					<cell rows="3" bg.color="bg" pad.h="2" hreduce="true"><vsep/></cell>
-					<button id="dwe_m" text="labels.signal.drywet" pad.h="6" pad.t="4" bright="(:dwe_m) ? 1 : 0.75" bg.bright="(:dwe_m) ? 1 : :const_bg_darken"/>
+					<label text="labels.signal.drywet" pad.h="6"/>
 
 					<!-- row 4 -->
 					<knob id="al_m" scolor="attack_1" size="20" pad.h="6" pad.v="4"/>
 					<knob id="at_m" scolor="mid" size="20" pad.h="6" pad.v="4"/>
 					<knob id="rrl_m" scolor="release_1" size="20" pad.h="6" pad.v="4"/>
 					<knob id="rt_m" scolor="mid" size="20" pad.h="6" pad.v="4"/>
-					<knob id="cdr_m" size="20" pad.h="6" pad.v="4" scolor="(!:dwe_m) ? 'dry' : 'cycle_inactive'" bg.bright="(!:dwe_m) ? 1 : :const_bg_darken"/>
-					<knob id="cwt_m" size="20" pad.h="6" pad.v="4" scolor="(!:dwe_m) ? 'wet' : 'cycle_inactive'" bg.bright="(!:dwe_m) ? 1 : :const_bg_darken"/>
-					<knob id="cdw_m" size="20" pad.h="6" pad.v="4" scolor="(:dwe_m) ? 'kscale' : 'cycle_inactive'" bg.bright="(:dwe_m) ? 1 : :const_bg_darken"/>
+					<knob id="cdr_m" size="20" pad.h="6" pad.v="4" scolor="dry"/>
+					<knob id="cwt_m" size="20" pad.h="6" pad.v="4" scolor="wet"/>
+					<knob id="cdw_m" size="20" pad.h="6" pad.v="4" scolor="drywet"/>
 
 					<!-- row 5 -->
 					<align valign="-1" pad.t="2">
@@ -418,9 +418,9 @@
 						<value id="rrl_m"/>
 						<value id="rt_m"/>
 						<value id="hold_m"/>
-						<value id="cdr_m" bright="(!:dwe_m) ? 1 : 0.75" bg.bright="(!:dwe_m) ? 1 : :const_bg_darken"/>
-						<value id="cwt_m" bright="(!:dwe_m) ? 1 : 0.75" bg.bright="(!:dwe_m) ? 1 : :const_bg_darken"/>
-						<value id="cdw_m" bright="(:dwe_m) ? 1 : 0.75" bg.bright="(:dwe_m) ? 1 : :const_bg_darken"/>
+						<value id="cdr_m"/>
+						<value id="cwt_m"/>
+						<value id="cdw_m"/>
 					</ui:with>
 
 					<!-- row 6 -->
@@ -452,19 +452,19 @@
 					<label text="labels.thresh_old"/>
 					<label text="labels.time"/>
 					<cell rows="2"><knob id="hold_s" scolor="side" pad.h="6"/></cell>
-					<label text="labels.signal.dry" bright="(!:dwe_s) ? 1 : 0.75" bg.bright="(!:dwe_s) ? 1 : :const_bg_darken"/>
-					<label text="labels.signal.wet" bright="(!:dwe_s) ? 1 : 0.75" bg.bright="(!:dwe_s) ? 1 : :const_bg_darken"/>
+					<label text="labels.signal.dry"/>
+					<label text="labels.signal.wet"/>
 					<cell rows="3" bg.color="bg" pad.h="2" hreduce="true"><vsep/></cell>
-					<button id="dwe_s" text="labels.signal.drywet" pad.h="6" pad.t="4" bright="(:dwe_s) ? 1 : 0.75" bg.bright="(:dwe_s) ? 1 : :const_bg_darken"/>
+					<label text="labels.signal.drywet" pad.h="6"/>
 
 					<!-- row 8 -->
 					<knob id="al_s" scolor="attack_2" size="20" pad.h="6" pad.v="4"/>
 					<knob id="at_s" scolor="side" size="20" pad.h="6" pad.v="4"/>
 					<knob id="rrl_s" scolor="release_2" size="20" pad.h="6" pad.v="4"/>
 					<knob id="rt_s" scolor="side" size="20" pad.h="6" pad.v="4"/>
-					<knob id="cdr_s" size="20" pad.h="6" pad.v="4" scolor="(!:dwe_s) ? 'dry' : 'cycle_inactive'" bg.bright="(!:dwe_s) ? 1 : :const_bg_darken"/>
-					<knob id="cwt_s" size="20" pad.h="6" pad.v="4" scolor="(!:dwe_s) ? 'wet' : 'cycle_inactive'" bg.bright="(!:dwe_s) ? 1 : :const_bg_darken"/>
-					<knob id="cdw_s" size="20" pad.h="6" pad.v="4" scolor="(:dwe_s) ? 'kscale' : 'cycle_inactive'" bg.bright="(:dwe_s) ? 1 : :const_bg_darken"/>
+					<knob id="cdr_s" size="20" pad.h="6" pad.v="4" scolor="dry"/>
+					<knob id="cwt_s" size="20" pad.h="6" pad.v="4" scolor="wet"/>
+					<knob id="cdw_s" size="20" pad.h="6" pad.v="4" scolor="drywet"/>
 
 					<!-- row 9 -->
 					<align valign="-1" pad.t="2">
@@ -482,9 +482,9 @@
 						<value id="rrl_s"/>
 						<value id="rt_s"/>
 						<value id="hold_s"/>
-						<value id="cdr_s" bright="(!:dwe_s) ? 1 : 0.75" bg.bright="(!:dwe_s) ? 1 : :const_bg_darken"/>
-						<value id="cwt_s" bright="(!:dwe_s) ? 1 : 0.75" bg.bright="(!:dwe_s) ? 1 : :const_bg_darken"/>
-						<value id="cdw_s" bright="(:dwe_s) ? 1 : 0.75" bg.bright="(:dwe_s) ? 1 : :const_bg_darken"/>
+						<value id="cdr_s"/>
+						<value id="cwt_s"/>
+						<value id="cdw_s"/>
 					</ui:with>
 				</grid>
 			</group>

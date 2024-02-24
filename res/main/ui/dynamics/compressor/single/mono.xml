@@ -75,7 +75,7 @@
 				<hbox spacing="4" vexpand="false" bg.color="bg_schema" pad.h="6">
 					<button id="pause" height="22" width="48" text="labels.pause" pad.v="4" ui:inject="Button_green"/>
 					<button id="clear" height="22" width="48" text="labels.clear" pad.v="4" ui:inject="Button_red"/>
-					<void hexpand="true" />
+					<void hexpand="true"/>
 				</hbox>
 			</vbox>
 
@@ -138,7 +138,7 @@
 					<dot x.id="elm" y.id="clm" color="graph_mesh" bcolor="graph_mesh"/>
 
 					<!-- Markers -->
-					<marker id="al" editable="true" width="2" pointer="hsize" color="attack_1" hcolor="attack_1"/>
+					<marker id="al" editable="true" width="2" pointer="hsize" color="threshold" hcolor="threshold"/>
 					<marker id="rl" color="release_1"/>
 
 					<!-- Text -->
@@ -247,11 +247,11 @@
 							<vbox fill="false">
 								<ui:with pad.h="6" hfill="true">
 									<combo id="sct" pad.b="4"/>
-									<combo id="scm" />
+									<combo id="scm"/>
 								</ui:with>
 							</vbox>
 							<hsep fill="true" pad.v="2" reduce="true" bg.color="bg"/>
-							<button id="scl"  height="22" pad.h="6" hfill="true" text="labels.listen" ui:inject="Button_cyan"/>
+							<button id="scl" height="22" pad.h="6" hfill="true" text="labels.listen" ui:inject="Button_cyan"/>
 						</grid>
 					</cell>
 					<combo id="shpm" pad.h="6" bright="(:shpm igt 0) ? 1 : 0.75" bg.bright="(:shpm igt 0) ? 1 : :const_bg_darken"/>
@@ -320,19 +320,19 @@
 					<label text="labels.thresh_old"/>
 					<label text="labels.time"/>
 					<cell rows="2"><knob id="hold" size="20" pad.h="6"/></cell>
-					<label text="labels.signal.dry" bright="(!:dwe) ? 1 : 0.75" bg.bright="(!:dwe) ? 1 : :const_bg_darken"/>
-					<label text="labels.signal.wet" bright="(!:dwe) ? 1 : 0.75" bg.bright="(!:dwe) ? 1 : :const_bg_darken"/>
+					<label text="labels.signal.dry"/>
+					<label text="labels.signal.wet"/>
 					<cell rows="3" bg.color="bg" pad.h="2" hreduce="true"><vsep/></cell>
-					<button id="dwe" pad.h="6" pad.t="4" text="labels.signal.drywet" bright="(:dwe) ? 1 : 0.75" bg.bright="(:dwe) ? 1 : :const_bg_darken"/>
+					<label text="labels.signal.drywet" pad.h="6"/>
 
 					<!-- row 4 -->
 					<knob id="al" scolor="attack_1" size="20" pad.h="6" pad.v="4"/>
 					<knob id="at" scolor="kscale" size="20" pad.h="6" pad.v="4"/>
 					<knob id="rrl" scolor="release_1" size="20" pad.h="6" pad.v="4"/>
 					<knob id="rt" scolor="kscale" size="20" pad.h="6" pad.v="4"/>
-					<knob id="cdr" size="20" pad.h="6" pad.v="4" scolor="(!:dwe) ? 'dry' : 'cycle_inactive'" bg.bright="(!:dwe) ? 1 : :const_bg_darken"/>
-					<knob id="cwt" size="20" pad.h="6" pad.v="4" scolor="(!:dwe) ? 'wet' : 'cycle_inactive'" bg.bright="(!:dwe) ? 1 : :const_bg_darken"/>
-					<knob id="cdw" size="20" pad.h="6" pad.v="4" scolor="(:dwe) ? 'kscale' : 'cycle_inactive'" bg.bright="(:dwe) ? 1 : :const_bg_darken"/>
+					<knob id="cdr" size="20" pad.h="6" pad.v="4" scolor="dry"/>
+					<knob id="cwt" size="20" pad.h="6" pad.v="4" scolor="wet"/>
+					<knob id="cdw" size="20" pad.h="6" pad.v="4" scolor="drywet"/>
 
 					<!-- row 5 -->
 					<align valign="-1" pad.t="2">
@@ -350,9 +350,9 @@
 						<value id="rrl"/>
 						<value id="rt"/>
 						<value id="hold"/>
-						<value id="cdr" bright="(!:dwe) ? 1 : 0.75" bg.bright="(!:dwe) ? 1 : :const_bg_darken"/>
-						<value id="cwt" bright="(!:dwe) ? 1 : 0.75" bg.bright="(!:dwe) ? 1 : :const_bg_darken"/>
-						<value id="cdw" bright="(:dwe) ? 1 : 0.75" bg.bright="(:dwe) ? 1 : :const_bg_darken"/>
+						<value id="cdr"/>
+						<value id="cwt"/>
+						<value id="cdw"/>
 					</ui:with>
 				</grid>
 			</group>
