@@ -1,6 +1,6 @@
 /*
- * Copyright (C) 2023 Linux Studio Plugins Project <https://lsp-plug.in/>
- *           (C) 2023 Vladimir Sadovnikov <sadko4u@gmail.com>
+ * Copyright (C) 2024 Linux Studio Plugins Project <https://lsp-plug.in/>
+ *           (C) 2024 Vladimir Sadovnikov <sadko4u@gmail.com>
  *
  * This file is part of lsp-plugins-compressor
  * Created on: 3 авг. 2021 г.
@@ -147,7 +147,6 @@ namespace lsp
                     plug::IPort          *pBoost;             // Boost signal amount
                     plug::IPort          *pMakeup;            // Makeup
 
-                    plug::IPort          *pDryWetOn;          // Dry/Wet balance enable
                     plug::IPort          *pDryGain;           // Dry gain
                     plug::IPort          *pWetGain;           // Wet gain
                     plug::IPort          *pDryWet;            // Dry/Wet balance
