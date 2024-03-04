@@ -323,7 +323,7 @@ namespace lsp
             E_INLINE_DISPLAY | E_DUMP_STATE,
             compressor_mono_ports,
             "dynamics/compressor/single/mono.xml",
-            NULL,
+            "dynamics/compressor/single/mono",
             mono_plugin_port_groups,
             &compressor_bundle
         };
@@ -350,7 +350,7 @@ namespace lsp
             E_INLINE_DISPLAY | E_DUMP_STATE,
             compressor_stereo_ports,
             "dynamics/compressor/single/stereo.xml",
-            NULL,
+            "dynamics/compressor/single/stereo",
             stereo_plugin_port_groups,
             &compressor_bundle
         };
@@ -377,7 +377,7 @@ namespace lsp
             E_INLINE_DISPLAY | E_DUMP_STATE,
             compressor_lr_ports,
             "dynamics/compressor/single/lr.xml",
-            NULL,
+            "dynamics/compressor/single/lr",
             stereo_plugin_port_groups,
             &compressor_bundle
         };
@@ -404,7 +404,7 @@ namespace lsp
             E_INLINE_DISPLAY | E_DUMP_STATE,
             compressor_ms_ports,
             "dynamics/compressor/single/ms.xml",
-            NULL,
+            "dynamics/compressor/single/ms",
             stereo_plugin_port_groups,
             &compressor_bundle
         };
@@ -432,7 +432,7 @@ namespace lsp
             E_INLINE_DISPLAY | E_DUMP_STATE,
             sc_compressor_mono_ports,
             "dynamics/compressor/single/mono.xml",
-            NULL,
+            "dynamics/compressor/single/mono",
             mono_plugin_sidechain_port_groups,
             &compressor_bundle
         };
@@ -459,7 +459,7 @@ namespace lsp
             E_INLINE_DISPLAY | E_DUMP_STATE,
             sc_compressor_stereo_ports,
             "dynamics/compressor/single/stereo.xml",
-            NULL,
+            "dynamics/compressor/single/stereo",
             stereo_plugin_sidechain_port_groups,
             &compressor_bundle
         };
@@ -486,7 +486,7 @@ namespace lsp
             E_INLINE_DISPLAY | E_DUMP_STATE,
             sc_compressor_lr_ports,
             "dynamics/compressor/single/lr.xml",
-            NULL,
+            "dynamics/compressor/single/lr",
             stereo_plugin_sidechain_port_groups,
             &compressor_bundle
         };
@@ -513,7 +513,7 @@ namespace lsp
             E_INLINE_DISPLAY | E_DUMP_STATE,
             sc_compressor_ms_ports,
             "dynamics/compressor/single/ms.xml",
-            NULL,
+            "dynamics/compressor/single/ms",
             stereo_plugin_sidechain_port_groups,
             &compressor_bundle
         };
