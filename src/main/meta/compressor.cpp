@@ -1,9 +1,9 @@
 /*
- * Copyright (C) 2023 Linux Studio Plugins Project <https://lsp-plug.in/>
- *           (C) 2023 Vladimir Sadovnikov <sadko4u@gmail.com>
+ * Copyright (C) 2024 Linux Studio Plugins Project <https://lsp-plug.in/>
+ *           (C) 2024 Vladimir Sadovnikov <sadko4u@gmail.com>
  *
  * This file is part of lsp-plugins-compressor
- * Created on: 3 авг. 2021 г.
+ * Created on: 3 авг. 2024 г.
  *
  * lsp-plugins-compressor is free software: you can redistribute it and/or modify
  * it under the terms of the GNU Lesser General Public License as published by
@@ -25,7 +25,7 @@
 
 #define LSP_PLUGINS_COMPRESSOR_VERSION_MAJOR       1
 #define LSP_PLUGINS_COMPRESSOR_VERSION_MINOR       0
-#define LSP_PLUGINS_COMPRESSOR_VERSION_MICRO       21
+#define LSP_PLUGINS_COMPRESSOR_VERSION_MICRO       22
 
 #define LSP_PLUGINS_COMPRESSOR_VERSION  \
     LSP_MODULE_VERSION( \
@@ -153,6 +153,7 @@ namespace lsp
             LOG_CONTROL("at" id, "Attack time" label, U_MSEC, compressor_metadata::ATTACK_TIME), \
             LOG_CONTROL("rrl" id, "Release threshold" label, U_GAIN_AMP, compressor_metadata::RELEASE_LVL), \
             LOG_CONTROL("rt" id, "Release time" label, U_MSEC, compressor_metadata::RELEASE_TIME), \
+            CONTROL("hold" id, "Hold time" label, U_MSEC, compressor_metadata::HOLD_TIME), \
             LOG_CONTROL("cr" id, "Ratio" label, U_NONE, compressor_metadata::RATIO), \
             LOG_CONTROL("kn" id, "Knee" label, U_GAIN_AMP, compressor_metadata::KNEE), \
             EXT_LOG_CONTROL("bth" id, "Boost threshold" label, U_GAIN_AMP, compressor_metadata::BTH), \
@@ -160,6 +161,7 @@ namespace lsp
             LOG_CONTROL("mk" id, "Makeup gain" label, U_GAIN_AMP, compressor_metadata::MAKEUP), \
             AMP_GAIN10("cdr" id, "Dry gain" label, GAIN_AMP_M_INF_DB),     \
             AMP_GAIN10("cwt" id, "Wet gain" label, GAIN_AMP_0_DB), \
+            PERCENTS("cdw" id, "Dry/Wet balance" label, 100.0f, 0.1f), \
             METER_OUT_GAIN("rl" id, "Release level" label, 20.0f), \
             MESH("ccg" id, "Compressor curve graph" label, 2, compressor_metadata::CURVE_MESH_SIZE)
 
@@ -171,8 +173,8 @@ namespace lsp
             SWITCH("olv" id, "Output level visibility" label, 1.0f), \
             MESH("scg" id, "Compressor sidechain graph" label, 2, compressor_metadata::TIME_MESH_SIZE), \
             MESH("evg" id, "Compressor envelope graph" label, 2, compressor_metadata::TIME_MESH_SIZE), \
-            MESH("grg" id, "Compressor gain reduciton" label, 2, compressor_metadata::TIME_MESH_SIZE), \
-            MESH("icg" id, "Compressor input" label, 2, compressor_metadata::TIME_MESH_SIZE), \
+            MESH("grg" id, "Compressor gain reduciton" label, 2, compressor_metadata::TIME_MESH_SIZE + 4), \
+            MESH("icg" id, "Compressor input" label, 2, compressor_metadata::TIME_MESH_SIZE + 2), \
             MESH("ocg" id, "Compressor output" label, 2, compressor_metadata::TIME_MESH_SIZE), \
             METER_OUT_GAIN("slm" id, "Sidechain level meter" label, GAIN_AMP_P_36_DB), \
             METER_OUT_GAIN("clm" id, "Curve level meter" label, GAIN_AMP_P_36_DB), \
@@ -310,6 +312,8 @@ namespace lsp
             LSP_LV2_URI("compressor_mono"),
             LSP_LV2UI_URI("compressor_mono"),
             "bgsy",
+            LSP_VST3_UID("k1m     bgsy"),
+            LSP_VST3UI_UID("k1m     bgsy"),
             LSP_LADSPA_COMPRESSOR_BASE + 0,
             LSP_LADSPA_URI("compressor_mono"),
             LSP_CLAP_URI("compressor_mono"),
@@ -319,7 +323,7 @@ namespace lsp
             E_INLINE_DISPLAY | E_DUMP_STATE,
             compressor_mono_ports,
             "dynamics/compressor/single/mono.xml",
-            NULL,
+            "dynamics/compressor/single/mono",
             mono_plugin_port_groups,
             &compressor_bundle
         };
@@ -335,6 +339,8 @@ namespace lsp
             LSP_LV2_URI("compressor_stereo"),
             LSP_LV2UI_URI("compressor_stereo"),
             "unsc",
+            LSP_VST3_UID("k1s     unsc"),
+            LSP_VST3UI_UID("k1s     unsc"),
             LSP_LADSPA_COMPRESSOR_BASE + 1,
             LSP_LADSPA_URI("compressor_stereo"),
             LSP_CLAP_URI("compressor_stereo"),
@@ -344,7 +350,7 @@ namespace lsp
             E_INLINE_DISPLAY | E_DUMP_STATE,
             compressor_stereo_ports,
             "dynamics/compressor/single/stereo.xml",
-            NULL,
+            "dynamics/compressor/single/stereo",
             stereo_plugin_port_groups,
             &compressor_bundle
         };
@@ -360,6 +366,8 @@ namespace lsp
             LSP_LV2_URI("compressor_lr"),
             LSP_LV2UI_URI("compressor_lr"),
             "3nam",
+            LSP_VST3_UID("k1lr    3nam"),
+            LSP_VST3UI_UID("k1lr    3nam"),
             LSP_LADSPA_COMPRESSOR_BASE + 2,
             LSP_LADSPA_URI("compressor_lr"),
             LSP_CLAP_URI("compressor_lr"),
@@ -369,7 +377,7 @@ namespace lsp
             E_INLINE_DISPLAY | E_DUMP_STATE,
             compressor_lr_ports,
             "dynamics/compressor/single/lr.xml",
-            NULL,
+            "dynamics/compressor/single/lr",
             stereo_plugin_port_groups,
             &compressor_bundle
         };
@@ -385,6 +393,8 @@ namespace lsp
             LSP_LV2_URI("compressor_ms"),
             LSP_LV2UI_URI("compressor_ms"),
             "jjef",
+            LSP_VST3_UID("k1ms    jjef"),
+            LSP_VST3UI_UID("k1ms    jjef"),
             LSP_LADSPA_COMPRESSOR_BASE + 3,
             LSP_LADSPA_URI("compressor_ms"),
             LSP_CLAP_URI("compressor_ms"),
@@ -394,7 +404,7 @@ namespace lsp
             E_INLINE_DISPLAY | E_DUMP_STATE,
             compressor_ms_ports,
             "dynamics/compressor/single/ms.xml",
-            NULL,
+            "dynamics/compressor/single/ms",
             stereo_plugin_port_groups,
             &compressor_bundle
         };
@@ -411,6 +421,8 @@ namespace lsp
             LSP_LV2_URI("sc_compressor_mono"),
             LSP_LV2UI_URI("sc_compressor_mono"),
             "lyjq",
+            LSP_VST3_UID("sck1m   lyjq"),
+            LSP_VST3UI_UID("sck1m   lyjq"),
             LSP_LADSPA_COMPRESSOR_BASE + 4,
             LSP_LADSPA_URI("sc_compressor_mono"),
             LSP_CLAP_URI("sc_compressor_mono"),
@@ -420,7 +432,7 @@ namespace lsp
             E_INLINE_DISPLAY | E_DUMP_STATE,
             sc_compressor_mono_ports,
             "dynamics/compressor/single/mono.xml",
-            NULL,
+            "dynamics/compressor/single/mono",
             mono_plugin_sidechain_port_groups,
             &compressor_bundle
         };
@@ -436,6 +448,8 @@ namespace lsp
             LSP_LV2_URI("sc_compressor_stereo"),
             LSP_LV2UI_URI("sc_compressor_stereo"),
             "5xzi",
+            LSP_VST3_UID("sck1s   5xzi"),
+            LSP_VST3UI_UID("sck1s   5xzi"),
             LSP_LADSPA_COMPRESSOR_BASE + 5,
             LSP_LADSPA_URI("sc_compressor_stereo"),
             LSP_CLAP_URI("sc_compressor_stereo"),
@@ -445,7 +459,7 @@ namespace lsp
             E_INLINE_DISPLAY | E_DUMP_STATE,
             sc_compressor_stereo_ports,
             "dynamics/compressor/single/stereo.xml",
-            NULL,
+            "dynamics/compressor/single/stereo",
             stereo_plugin_sidechain_port_groups,
             &compressor_bundle
         };
@@ -461,6 +475,8 @@ namespace lsp
             LSP_LV2_URI("sc_compressor_lr"),
             LSP_LV2UI_URI("sc_compressor_lr"),
             "fowg",
+            LSP_VST3_UID("sck1lr  fowg"),
+            LSP_VST3UI_UID("sck1lr  fowg"),
             LSP_LADSPA_COMPRESSOR_BASE + 6,
             LSP_LADSPA_URI("sc_compressor_lr"),
             LSP_CLAP_URI("sc_compressor_lr"),
@@ -470,7 +486,7 @@ namespace lsp
             E_INLINE_DISPLAY | E_DUMP_STATE,
             sc_compressor_lr_ports,
             "dynamics/compressor/single/lr.xml",
-            NULL,
+            "dynamics/compressor/single/lr",
             stereo_plugin_sidechain_port_groups,
             &compressor_bundle
         };
@@ -486,6 +502,8 @@ namespace lsp
             LSP_LV2_URI("sc_compressor_ms"),
             LSP_LV2UI_URI("sc_compressor_ms"),
             "ioqg",
+            LSP_VST3_UID("sck1ms  ioqg"),
+            LSP_VST3UI_UID("sck1ms  ioqg"),
             LSP_LADSPA_COMPRESSOR_BASE + 7,
             LSP_LADSPA_URI("sc_compressor_ms"),
             LSP_CLAP_URI("sc_compressor_ms"),
@@ -495,7 +513,7 @@ namespace lsp
             E_INLINE_DISPLAY | E_DUMP_STATE,
             sc_compressor_ms_ports,
             "dynamics/compressor/single/ms.xml",
-            NULL,
+            "dynamics/compressor/single/ms",
             stereo_plugin_sidechain_port_groups,
             &compressor_bundle
         };
