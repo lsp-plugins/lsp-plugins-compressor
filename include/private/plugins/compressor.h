@@ -1,6 +1,6 @@
 /*
- * Copyright (C) 2023 Linux Studio Plugins Project <https://lsp-plug.in/>
- *           (C) 2023 Vladimir Sadovnikov <sadko4u@gmail.com>
+ * Copyright (C) 2024 Linux Studio Plugins Project <https://lsp-plug.in/>
+ *           (C) 2024 Vladimir Sadovnikov <sadko4u@gmail.com>
  *
  * This file is part of lsp-plugins-compressor
  * Created on: 3 авг. 2021 г.
@@ -140,6 +140,7 @@ namespace lsp
                     plug::IPort          *pReleaseLvl;        // Release level
                     plug::IPort          *pAttackTime;        // Attack time
                     plug::IPort          *pReleaseTime;       // Release time
+                    plug::IPort          *pHoldTime;          // Hold time
                     plug::IPort          *pRatio;             // Ratio
                     plug::IPort          *pKnee;              // Knee
                     plug::IPort          *pBThresh;           // Boost threshold
@@ -149,6 +150,7 @@ namespace lsp
 
                     plug::IPort          *pDryGain;           // Dry gain
                     plug::IPort          *pWetGain;           // Wet gain
+                    plug::IPort          *pDryWet;            // Dry/Wet balance
                     plug::IPort          *pCurve;             // Curve graph
                     plug::IPort          *pReleaseOut;        // Output release level
                 } channel_t;

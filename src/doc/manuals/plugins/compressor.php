@@ -126,8 +126,10 @@ keeping the same settings for the left and right channels.</p>
 		If the current compressor's envelope value is below the configured <b>Release Threshold</b>, the release time is
 		being considered to be the same to the <b>attack time</b>.</li>
 	<li><b>Release Time</b> - release time of the compressor.</li>
+	<li><b>Hold</b> - the time period the envelope holds it's maximum value before starting the release.</li>
 	<li><b>Mix Dry</b> - the amount of dry (unprocessed) signal, useful for parallel compression.</li>
 	<li><b>Mix Wet</b> - the amount of wet (processed) signal, useful for parallel compression.</li>
+	<li><b>Mix Dry/Wet</b> - the knob that controls this balance between mixed dry and wet signal (see <b>Mix Dry</b> and <b>Mix Wet</b>) and the dry (unprocessed) signal.</li>
 </ul>
 
 <p><b>'Signal' section:</b></p>

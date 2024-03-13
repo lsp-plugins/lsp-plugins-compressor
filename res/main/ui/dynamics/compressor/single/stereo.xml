@@ -58,6 +58,19 @@
 						<!-- Compression detector curve -->
 						<mesh id="evg_l" width="3" color="cyan" visibility=":elv_l"/>
 						<mesh id="evg_r" width="3" color="cyan" visibility=":elv_r"/>
+						<!-- TODO: Check this upstream changes -->
+<!--
+						<mesh id="icg_l" width="0" color="left_in" fcolor="left_in" fcolor.a="0.8" fill="true" visibility=":ilv_l"/>
+						<mesh id="icg_r" width="0" color="right_in" fcolor="right_in" fcolor.a="0.8" fill="true" visibility=":ilv_r"/>
+						<mesh id="ocg_l" width="2" color="left" visibility=":olv_l"/>
+						<mesh id="ocg_r" width="2" color="right" visibility=":olv_r"/>
+						<mesh id="scg_l" width="2" color="sidechain_1" visibility=":slv_l"/>
+						<mesh id="scg_r" width="2" color="sidechain_2" visibility=":slv_r"/>
+						<mesh id="evg_l" width="2" color="envelope_1" visibility=":elv_l"/>
+						<mesh id="evg_r" width="2" color="envelope_2" visibility=":elv_r"/>
+						<mesh id="grg_l" width="2" color="bright_blue" fcolor="bright_blue" fcolor.a="0.8" fill="true" visibility=":grv_l"/>
+						<mesh id="grg_r" width="2" color="bright_blue" fcolor="bright_blue" fcolor.a="0.8" fill="true" visibility=":grv_r"/> -->
+						<!-- TODO: /Check this upstream changes -->
 
 						<!-- Boundaries -->
 						<marker v="24 db" ox="1" oy="0" color="graph_prim" visibility="false"/>
@@ -65,8 +78,8 @@
 
 						<!-- Markers -->
 						<ui:attributes ox="1" oy="0">
-							<marker id="al" editable="true" width="2" pointer="vsize" color="attack_1" hcolor="attack_1"/>
-							<marker id="rl" color="release_1"/>
+							<marker id="rl" width="2" pointer="vsize" color="release" lcolor="release" ox="1" oy="0" lborder="25" color.a="0.1" lcolor.a="0.8"/>
+							<marker id="al" editable="true" width="3" pointer="vsize" color="threshold" hcolor="threshold" lcolor="threshold" hlcolor="threshold" ox="1" oy="0" lborder="50" hlborder="50" color.a="0.1" hcolor.a="0.0" lcolor.a="0.8" hlcolor.a="0.6"/>
 						</ui:attributes>
 
 						<!-- Text -->
@@ -91,8 +104,8 @@
 				<hbox spacing="4" vexpand="false" bg.color="bg_schema" pad.h="6">
 					<button id="pause" height="22" width="48" text="labels.pause" pad.v="4" ui:inject="Button_green"/>
 					<button id="clear" height="22" width="48" text="labels.clear" pad.v="4" ui:inject="Button_red"/>
-					<void hexpand="true" />
-					<vsep pad.h="2" bg.color="bg" reduce="true" />
+					<void hexpand="true"/>
+					<vsep pad.h="2" bg.color="bg" reduce="true"/>
 					<button id="ssplit" text="labels.stereo_split" size="22" pad.v="4" ui:inject="Button_blue"/>
 				</hbox>
 			</vbox>
@@ -120,20 +133,20 @@
 
 				<!-- Sidechain signal meter -->
 				<ledmeter vexpand="true" height.min="256" angle="1">
-					<ledchannel id="slm_l" min="${min_signal}" max="${max_signal}" log="true" type="peak" activity=":slv_l" value.color="gray"/>
-					<ledchannel id="slm_r" min="${min_signal}" max="${max_signal}" log="true" type="peak" activity=":slv_r" value.color="gray"/>
+					<ledchannel id="slm_l" min="${min_signal}" max="${max_signal}" log="true" type="peak" value.color="gray"/> <!-- activity=":slv_l" -->
+					<ledchannel id="slm_r" min="${min_signal}" max="${max_signal}" log="true" type="peak" value.color="gray"/> <!-- activity=":slv_r" -->
 				</ledmeter>
 
 				<!-- Envelope signal meter -->
 				<ledmeter vexpand="true" height.min="256" angle="1">
-					<ledchannel id="elm_l" min="${min_signal}" max="${max_signal}" log="true" type="peak" activity=":elv_l" value.color="cyan"/>
-					<ledchannel id="elm_r" min="${min_signal}" max="${max_signal}" log="true" type="peak" activity=":elv_r" value.color="cyan"/>
+					<ledchannel id="elm_l" min="${min_signal}" max="${max_signal}" log="true" type="peak" value.color="cyan"/> <!-- activity=":elv_l" -->
+					<ledchannel id="elm_r" min="${min_signal}" max="${max_signal}" log="true" type="peak" value.color="cyan"/> <!-- activity=":elv_r" -->
 				</ledmeter>
 
 				<!-- Gain signal meter -->
 				<ledmeter vexpand="true" height.min="256" angle="1">
-					<ledchannel id="rlm_l" min="-48 db" max="48 db" log="true" balance="0 db" balance.visibility="true" type="peak" activity=":grv_l" value.color="red"/>
-					<ledchannel id="rlm_r" min="-48 db" max="48 db" log="true" balance="0 db" balance.visibility="true" type="peak" activity=":grv_r" value.color="red"/>
+					<ledchannel id="rlm_l" min="-48 db" max="48 db" log="true" balance="0 db" balance.visibility="true" type="peak" value.color="red"/> <!-- activity=":grv_l" -->
+					<ledchannel id="rlm_r" min="-48 db" max="48 db" log="true" balance="0 db" balance.visibility="true" type="peak" value.color="red"/> <!-- activity=":grv_r" -->
 				</ledmeter>
 			</grid>
 
@@ -310,6 +323,24 @@
 						<knob id="shpf" size="40" scolor="(:shpm igt 0) ? 'kscale' : 'kscale_inactive'" bg.bright="(:shpm igt 0) ? 1 : :const_bg_darken"/>
 						<value id="shpf" sline="true" bright="(:shpm igt 0) ? 1 : 0.75" bg.bright="(:shpm igt 0) ? 1 : :const_bg_darken"/>
 					</vbox>
+					<!-- TODO: Check this upstream changes -->
+					<!-- <cell rows="2"><knob id="scp" scolor="kscale"/></cell>
+					<cell rows="2"><knob id="scr" scolor="kscale"/></cell>
+					<cell rows="2"><knob id="sla" scolor="kscale"/></cell>
+					<cell rows="3">
+						<vbox fill="false" spacing="1">
+							<ui:with pad.h="6" pad.b="4" hfill="true">
+								<combo id="sct" pad.t="4"/>
+								<combo id="scm"/>
+								<combo id="scs" visibility="!:ssplit"/>
+								<combo id="sscs" visibility=":ssplit"/>
+								<button id="scl" height="22" text="labels.listen" ui:inject="Button_cyan"/>
+							</ui:with>
+						</vbox>
+					</cell>
+					<combo id="shpm" pad.h="6" bright="(:shpm igt 0) ? 1 : 0.75" bg.bright="(:shpm igt 0) ? 1 : :const_bg_darken"/>
+					<combo id="slpm" pad.h="6" bright="(:slpm igt 0) ? 1 : 0.75" bg.bright="(:slpm igt 0) ? 1 : :const_bg_darken"/> -->
+					<!-- TODO: /Check this upstream changes -->
 
 					<!-- LPF -->
 					<vbox>
@@ -371,6 +402,12 @@
 								<label text="labels.attack" />
 								<knob id="at" size="30" ssize="3" scolor="pink" pad.t="4" />
 								<value id="at" sline="true" pad.h="6" pad.v="4" width.min="48" />
+							</vbox>
+
+							<vbox>
+								<label text="labels.hold" pad.h="6" pad.v="4" vreduce="true" />
+								<knob id="hold" size="20" pad.h="6" />
+								<value id="hold"/>
 							</vbox>
 
 							<vbox>
