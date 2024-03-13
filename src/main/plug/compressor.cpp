@@ -595,7 +595,6 @@ namespace lsp
                 }
 
                 // Update gains
-                float makeup            = c->pMakeup->value();
                 const float dry_gain    = c->pDryGain->value();
                 const float wet_gain    = c->pWetGain->value() * makeup;
                 const float drywet      = c->pDryWet->value() * 0.01f;
