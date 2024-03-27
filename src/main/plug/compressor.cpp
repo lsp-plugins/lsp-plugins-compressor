@@ -842,13 +842,13 @@ namespace lsp
                     channel_t *cm       = &vChannels[0];
                     channel_t *cs       = &vChannels[1];
 
-                    dsp::mix2(cm->vOut, cm->vIn, cm->fWetGain, cm->fDryGain, to_process);
-                    dsp::mix2(cs->vOut, cs->vIn, cs->fWetGain, cs->fDryGain, to_process);
-
                     cm->sGraph[G_OUT].process(cm->vOut, to_process);
                     cm->pMeter[M_OUT]->set_value(dsp::abs_max(cm->vOut, to_process));
                     cs->sGraph[G_OUT].process(cs->vOut, to_process);
                     cs->pMeter[M_OUT]->set_value(dsp::abs_max(cs->vOut, to_process));
+
+                    dsp::mix2(cm->vOut, cm->vIn, cm->fWetGain, cm->fDryGain, to_process);
+                    dsp::mix2(cs->vOut, cs->vIn, cs->fWetGain, cs->fDryGain, to_process);
 
                     if (!bMSListen)
                         dsp::ms_to_lr(cm->vOut, cs->vOut, cm->vOut, cs->vOut, to_process);
@@ -863,13 +863,15 @@ namespace lsp
                     {
                         // Mix dry/wet signal or copy sidechain signal
                         channel_t *c        = &vChannels[i];
+
                         if (c->bScListen)
                             dsp::copy(c->vOut, c->vSc, to_process);
-                        else
-                            dsp::mix2(c->vOut, c->vIn, c->fWetGain, c->fDryGain, to_process);
 
                         c->sGraph[G_OUT].process(c->vOut, to_process);                      // Output signal
                         c->pMeter[M_OUT]->set_value(dsp::abs_max(c->vOut, to_process));
+
+                        if (!c->bScListen)
+                            dsp::mix2(c->vOut, c->vIn, c->fWetGain, c->fDryGain, to_process);
                     }
                 }
 
