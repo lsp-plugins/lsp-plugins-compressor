@@ -168,7 +168,7 @@ namespace lsp
 
         #define COMP_AUDIO_METER(id, label) \
             SWITCH("slv" id, "Sidechain level visibility" label, 1.0f), \
-            SWITCH("elv" id, "Envelope level visibility" label, 1.0f), \
+            SWITCH("elv" id, "Envelope level visibility" label, 0.0f), \
             SWITCH("grv" id, "Gain reduction visibility" label, 1.0f), \
             SWITCH("ilv" id, "Input level visibility" label, 1.0f), \
             SWITCH("olv" id, "Output level visibility" label, 1.0f), \

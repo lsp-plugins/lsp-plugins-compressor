@@ -89,7 +89,7 @@ namespace lsp
 
             static constexpr float  REACTIVITY_MIN          = 0.000;    // Minimum reactivity [ms]
             static constexpr float  REACTIVITY_MAX          = 250;      // Maximum reactivity [ms]
-            static constexpr float  REACTIVITY_DFL          = 10;       // Default reactivity [ms]
+            static constexpr float  REACTIVITY_DFL          = 0;       // Default reactivity [ms]
             static constexpr float  REACTIVITY_STEP         = 0.025;    // Reactivity step
 
             static constexpr size_t SC_MODE_DFL             = 1;

@@ -3,7 +3,7 @@
 		<!-- Top part -->
 		<grid rows="1" cols="5" hspacing="4" expand="true">
 			<vbox expand="true">
-				<group ui:inject="GraphGroup" ipadding="0" expand="true" fill="true" text="labels.graphs.time">
+				<!-- <group ui:inject="GraphGroup" ipadding="0" expand="true" fill="true" text="labels.graphs.time"> -->
 					<graph width.min="496" height.min="222" expand="true" fill="true">
 						<origin hpos="1" vpos="-1" visible="false"/>
 
@@ -11,7 +11,7 @@
 						<ui:eval id="max_signal" value="6 db"/>
 
 						<!-- Axis -->
-						<axis min="3" max="5" angle="1.0" log="false" color="graph_prim" visibility="false"/>
+						<axis min="0" max="5" angle="1.0" log="false" color="graph_prim" visibility="false"/>
 						<!-- oy 0 -->
 						<axis min="${min_signal}" max="${max_signal}" angle="0.5" log="true" color="graph_prim" visibility="false"/>
 
@@ -48,16 +48,26 @@
 						<mesh id="ocg_r" width="2" color="right" visibility=":olv_r"/> -->
 
 						<!-- Input signal -->
-						<mesh id="scg_l" width="0" fcolor="#666" fcolor.a="0.7" fill="true" visibility=":slv_l"/>
-						<mesh id="scg_r" width="0" fcolor="#666" fcolor.a="0.7" fill="true" visibility=":slv_r"/>
+						<mesh id="icg_l" ui:inject="GraphMesh_in" fill="true" visibility=":ilv_l" />
+
+						<!-- Output signal -->
+						<mesh id="ocg_l" ui:inject="GraphMesh_out" fill="true" visibility=":olv_l" />
+
+						<!-- Input (Sidechain) signal -->
+						<mesh id="scg_l" width="2" color="orange" fcolor="#444" color.a="0.5" fcolor.a="0.9" fill="true" visibility=":slv_r and :sct ieq 2"/>
+						<mesh id="scg_r" width="2" color="orange" fcolor="#444" color.a="0.5" fcolor.a="0.7" fill="true" visibility=":slv_r and :sct ieq 2"/>
+
+						<!-- Output signal -->
+						<!-- <mesh id="ocg_l" width="2" color="#777" fcolor="#777" color.a="0.3" fcolor.a="0.9" fill="false" visibility=":olv_l" /> -->
+						<!-- <mesh id="scg_r" width="0" fcolor="#666" fcolor.a="0.7" fill="true" visibility=":slv_r"/> -->
 
 						<!-- Gain reduction/expansion -->
-						<mesh id="grg_l" width="0" fill="true" fcolor="#bf993333" visibility=":grv_l"/>
-						<mesh id="grg_r" width="0" fill="true" fcolor="#bf993333" visibility=":grv_r"/>
+						<mesh id="grg_l" width="0" fill="true" fcolor="#993333" fcolor.a="0.5" visibility=":grv_l"/>
+						<!-- <mesh id="grg_r" width="0" fill="true" fcolor="#bf993333" visibility=":grv_r"/> -->
 
 						<!-- Compression detector curve -->
 						<mesh id="evg_l" width="3" color="cyan" visibility=":elv_l"/>
-						<mesh id="evg_r" width="3" color="cyan" visibility=":elv_r"/>
+						<!-- <mesh id="evg_r" width="3" color="cyan" visibility=":elv_r"/> -->
 						<!-- TODO: Check this upstream changes -->
 <!--
 						<mesh id="icg_l" width="0" color="left_in" fcolor="left_in" fcolor.a="0.8" fill="true" visibility=":ilv_l"/>
@@ -99,7 +109,7 @@
 							<text x="5" y="24 db" text="graph.units.db" valign="-1"/>
 						</ui:attributes>
 					</graph>
-				</group>
+				<!-- </group> -->
 				<void bg.color="bg" vexpand="false" fill="false" pad.v="2"/>
 				<hbox spacing="4" vexpand="false" bg.color="bg_schema" pad.h="6">
 					<button id="pause" height="22" width="48" text="labels.pause" pad.v="4" ui:inject="Button_green"/>
@@ -117,36 +127,37 @@
 					<label text="labels.gain_" padding="4"/>
 					<!-- <grid rows="2" cols="2" fill="false" hspacing="2">
 						<button id="slv_l" size="10" ui:inject="Button_orange" led="true"/>
-						<button id="slv_r" size="10" ui:inject="Button_orange" led="true"/>
-					</grid>
+					</grid> -->
+					<button id="slv_l" size="20" ui:inject="Button_orange" led="true"/>
 
-					<grid rows="2" cols="2" fill="false" hspacing="2">
+					<!-- <grid rows="2" cols="2" fill="false" hspacing="2">
 						<button id="elv_l" size="10" ui:inject="Button_violet" led="true"/>
 						<button id="elv_r" size="10" ui:inject="Button_violet" led="true"/>
-					</grid>
-
-					<grid rows="2" cols="2" fill="false" hspacing="2">
-						<button id="grv_l" size="10" ui:inject="Button_blue" led="true"/>
-						<button id="grv_r" size="10" ui:inject="Button_blue" led="true"/>
 					</grid> -->
+					<button id="elv_l" size="20" ui:inject="Button_cyan" led="true"/>
+
+					<!-- <grid rows="2" cols="2" fill="false" hspacing="2">
+						<button id="grv_l" size="10" ui:inject="Button_blue" led="true"/>
+					</grid> -->
+					<button id="grv_l" size="20" ui:inject="Button_red" led="true"/>
 				</ui:with>
 
 				<!-- Sidechain signal meter -->
 				<ledmeter vexpand="true" height.min="256" angle="1">
-					<ledchannel id="slm_l" min="${min_signal}" max="${max_signal}" log="true" type="peak" value.color="gray"/> <!-- activity=":slv_l" -->
-					<ledchannel id="slm_r" min="${min_signal}" max="${max_signal}" log="true" type="peak" value.color="gray"/> <!-- activity=":slv_r" -->
+					<ledchannel id="slm_l" min="${min_signal}" max="${max_signal}" log="true" type="peak" value.color="orange" /> <!-- activity=":slv_l" -->
+					<!-- <ledchannel id="slm_r" min="${min_signal}" max="${max_signal}" log="true" type="peak" value.color="gray" /> -->
 				</ledmeter>
 
 				<!-- Envelope signal meter -->
 				<ledmeter vexpand="true" height.min="256" angle="1">
 					<ledchannel id="elm_l" min="${min_signal}" max="${max_signal}" log="true" type="peak" value.color="cyan"/> <!-- activity=":elv_l" -->
-					<ledchannel id="elm_r" min="${min_signal}" max="${max_signal}" log="true" type="peak" value.color="cyan"/> <!-- activity=":elv_r" -->
+					<!-- <ledchannel id="elm_r" min="${min_signal}" max="${max_signal}" log="true" type="peak" value.color="cyan"/> -->
 				</ledmeter>
 
 				<!-- Gain signal meter -->
 				<ledmeter vexpand="true" height.min="256" angle="1">
 					<ledchannel id="rlm_l" min="-48 db" max="48 db" log="true" balance="0 db" balance.visibility="true" type="peak" value.color="red"/> <!-- activity=":grv_l" -->
-					<ledchannel id="rlm_r" min="-48 db" max="48 db" log="true" balance="0 db" balance.visibility="true" type="peak" value.color="red"/> <!-- activity=":grv_r" -->
+					<!-- <ledchannel id="rlm_r" min="-48 db" max="48 db" log="true" balance="0 db" balance.visibility="true" type="peak" value.color="red"/> -->
 				</ledmeter>
 			</grid>
 
@@ -160,7 +171,7 @@
 
 						<label text="labels.knee" vreduce="true"/>
 						<knob id="kn" size="10" ssize="3" scolor="kscale"/>
-						<value id="kn" sline="true" width="64" />
+						<value id="kn" step="-1" sline="true" width="64" />
 					</hbox>
 
 					<hbox>
@@ -258,10 +269,14 @@
 					<hbox>
 						<fader id="g_in" vexpand="true" angle="1" ui:inject="Fader_prophessor" />
 
-						<ledmeter vexpand="true" height.min="256" angle="1">
-							<ledchannel id="ilm_l" min="${min_signal}" max="${max_signal}" log="true" type="rms_peak" peak.visibility="true" activity=":ilv_l" value.color="left_in"/>
-							<ledchannel id="ilm_r" min="${min_signal}" max="${max_signal}" log="true" type="rms_peak" peak.visibility="true" activity=":ilv_r" value.color="right_in"/>
-						</ledmeter>
+						<vbox>
+							<button id="ilv_l" size="20" ui:inject="Button_gray" led="true"/>
+
+							<ledmeter vexpand="true" height.min="256" angle="1">
+								<ledchannel id="ilm_l" min="${min_signal}" max="${max_signal}" log="true" type="rms_peak" peak.visibility="true" activity=":ilv_l" value.color="left_in"/>
+								<ledchannel id="ilm_r" min="${min_signal}" max="${max_signal}" log="true" type="rms_peak" peak.visibility="true" activity=":ilv_r" value.color="right_in"/>
+							</ledmeter>
+						</vbox>
 					</hbox>
 				</vbox>
 
@@ -274,10 +289,15 @@
 					<hbox>
 						<fader id="g_out" vexpand="true" angle="1" ui:inject="Fader_prophessor" />
 
-						<ledmeter vexpand="true" height.min="256" angle="1">
-							<ledchannel id="olm_l" min="${min_signal}" max="${max_signal}" log="true" type="rms_peak" peak.visibility="true" activity=":olv_l" value.color="left"/>
-							<ledchannel id="olm_r" min="${min_signal}" max="${max_signal}" log="true" type="rms_peak" peak.visibility="true" activity=":olv_r" value.color="right"/>
-						</ledmeter>
+						<vbox>
+							<button id="olv_l" size="20" ui:inject="Button_gray" led="true"/>
+
+							<ledmeter vexpand="true" height.min="256" angle="1">
+								<ledchannel id="olm_l" min="${min_signal}" max="${max_signal}" log="true" type="rms_peak" peak.visibility="true" activity=":olv_l" value.color="left"/>
+								<ledchannel id="olm_r" min="${min_signal}" max="${max_signal}" log="true" type="rms_peak" peak.visibility="true" activity=":olv_r" value.color="right"/>
+							</ledmeter>
+						</vbox>
+
 					</hbox>
 				</vbox>
 
