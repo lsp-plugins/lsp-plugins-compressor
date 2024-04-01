@@ -68,19 +68,6 @@
 						<!-- Compression detector curve -->
 						<mesh id="evg_l" width="3" color="cyan" visibility=":elv_l"/>
 						<!-- <mesh id="evg_r" width="3" color="cyan" visibility=":elv_r"/> -->
-						<!-- TODO: Check this upstream changes -->
-<!--
-						<mesh id="icg_l" width="0" color="left_in" fcolor="left_in" fcolor.a="0.8" fill="true" visibility=":ilv_l"/>
-						<mesh id="icg_r" width="0" color="right_in" fcolor="right_in" fcolor.a="0.8" fill="true" visibility=":ilv_r"/>
-						<mesh id="ocg_l" width="2" color="left" visibility=":olv_l"/>
-						<mesh id="ocg_r" width="2" color="right" visibility=":olv_r"/>
-						<mesh id="scg_l" width="2" color="sidechain_1" visibility=":slv_l"/>
-						<mesh id="scg_r" width="2" color="sidechain_2" visibility=":slv_r"/>
-						<mesh id="evg_l" width="2" color="envelope_1" visibility=":elv_l"/>
-						<mesh id="evg_r" width="2" color="envelope_2" visibility=":elv_r"/>
-						<mesh id="grg_l" width="2" color="bright_blue" fcolor="bright_blue" fcolor.a="0.8" fill="true" visibility=":grv_l"/>
-						<mesh id="grg_r" width="2" color="bright_blue" fcolor="bright_blue" fcolor.a="0.8" fill="true" visibility=":grv_r"/> -->
-						<!-- TODO: /Check this upstream changes -->
 
 						<!-- Boundaries -->
 						<marker v="24 db" ox="1" oy="0" color="graph_prim" visibility="false"/>
@@ -114,6 +101,10 @@
 				<hbox spacing="4" vexpand="false" bg.color="bg_schema" pad.h="6">
 					<button id="pause" height="22" width="48" text="labels.pause" pad.v="4" ui:inject="Button_green"/>
 					<button id="clear" height="22" width="48" text="labels.clear" pad.v="4" ui:inject="Button_red"/>
+					<void hexpand="true"/>
+					<label text="labels.sc.reactivity" vreduce="true"/>
+					<knob id="scr" scolor="kscale" size="10"/>
+					<value id="scr" sline="true"/>
 					<void hexpand="true"/>
 					<vsep pad.h="2" bg.color="bg" reduce="true"/>
 					<button id="ssplit" text="labels.stereo_split" size="22" pad.v="4" ui:inject="Button_blue"/>
@@ -309,7 +300,7 @@
 
 		<!-- Bottom part -->
 		<hbox>
-			<group text="groups.sidechain" vexpand="false" ipadding="0">
+			<group text="groups.sidechain" text.show="false" vexpand="false" ipadding="0">
 				<hbox bg.color="bg_schema">
 					<!-- Setup -->
 					<vbox>
@@ -319,19 +310,11 @@
 							<combo id="scm" />
 							<combo id="scs" visibility="!:ssplit" />
 							<combo id="sscs" visibility=":ssplit" />
+
+							<combo id="cm" pad.h="6" pad.v="4"/>
+
 							<button id="scl" height="22" text="labels.listen" ui:inject="Button_cyan"/>
 						</ui:with>
-					</vbox>
-
-					<!-- Lookahead/Reactivity -->
-					<vbox width="90">
-						<label text="labels.sc.reactivity" vreduce="true"/>
-						<knob id="scr" scolor="kscale" size="20"/>
-						<value id="scr" sline="true"/>
-
-						<label text="labels.sc.lookahead" vreduce="true"/>
-						<knob id="sla" scolor="kscale" size="20"/>
-						<value id="sla" sline="true"/>
 					</vbox>
 
 					<!-- Filters -->
@@ -343,24 +326,6 @@
 						<knob id="shpf" size="40" scolor="(:shpm igt 0) ? 'kscale' : 'kscale_inactive'" bg.bright="(:shpm igt 0) ? 1 : :const_bg_darken"/>
 						<value id="shpf" sline="true" bright="(:shpm igt 0) ? 1 : 0.75" bg.bright="(:shpm igt 0) ? 1 : :const_bg_darken"/>
 					</vbox>
-					<!-- TODO: Check this upstream changes -->
-					<!-- <cell rows="2"><knob id="scp" scolor="kscale"/></cell>
-					<cell rows="2"><knob id="scr" scolor="kscale"/></cell>
-					<cell rows="2"><knob id="sla" scolor="kscale"/></cell>
-					<cell rows="3">
-						<vbox fill="false" spacing="1">
-							<ui:with pad.h="6" pad.b="4" hfill="true">
-								<combo id="sct" pad.t="4"/>
-								<combo id="scm"/>
-								<combo id="scs" visibility="!:ssplit"/>
-								<combo id="sscs" visibility=":ssplit"/>
-								<button id="scl" height="22" text="labels.listen" ui:inject="Button_cyan"/>
-							</ui:with>
-						</vbox>
-					</cell>
-					<combo id="shpm" pad.h="6" bright="(:shpm igt 0) ? 1 : 0.75" bg.bright="(:shpm igt 0) ? 1 : :const_bg_darken"/>
-					<combo id="slpm" pad.h="6" bright="(:slpm igt 0) ? 1 : 0.75" bg.bright="(:slpm igt 0) ? 1 : :const_bg_darken"/> -->
-					<!-- TODO: /Check this upstream changes -->
 
 					<!-- LPF -->
 					<vbox>
@@ -369,152 +334,86 @@
 						<knob id="slpf" size="40" scolor="(:slpm igt 0) ? 'kscale' : 'kscale_inactive'" bg.bright="(:slpm igt 0) ? 1 : :const_bg_darken"/>
 						<value id="slpf" sline="true" bright="(:slpm igt 0) ? 1 : 0.75" bg.bright="(:slpm igt 0) ? 1 : :const_bg_darken"/>
 					</vbox>
-				</hbox>
-			</group>
-			<hsep pad.h="2" bg.color="bg"/>
 
-			<group text="groups.plug.compressor" vexpand="false" hexpand="true" ipadding="0">
+					<vbox rows="5" cols="14" spacing="0" bg.color="bg_schema">
 
-				<vbox rows="5" cols="14" spacing="0" bg.color="bg_schema">
-
-					<hbox>
-						<!-- Mode -->
-						<vbox>
-							<label text="labels.mode" pad.h="6" pad.v="4" vreduce="true"/>
+						<hbox>
+							<vbox>
+								<label text="labels.threshold" vreduce="false"/>
+								<knob id="al" size="50" scolor="attack_1"/>
+								<align valign="-1" pad.t="2">
+									<value id="al" detailed="true" sline="true" />
+								</align>
+							</vbox>
 
 							<vbox>
-								<combo id="cm" pad.h="6" pad.v="4"/>
-								<vbox visibility=":cm ine 0">
-									<label text="labels.boost" />
-									<knob id="bth" scolor="kscale" visibility=":cm ine 2"/>
-									<value id="bth" detailed="false" visibility=":cm ine 2"/>
-									<knob id="bsa" scolor="kscale" visibility=":cm ieq 2"/>
-									<value id="bsa" detailed="false" visibility=":cm ieq 2"/>
+								<label text="labels.ratio" vreduce="false"/>
+								<knob id="cr" size="50" scolor="kscale"/>
+								<!-- <knob id="rrl" size="20" scolor="kscale"/> -->
+								<align valign="-1" pad.t="2">
+									<hbox fill="false">
+										<value id="cr" detailed="false"/>
+										<label text=":"/>
+										<label text="1"/>
+									</hbox>
+								</align>
+							</vbox>
+
+							<!-- Boost -->
+							<vbox visibility=":cm ine 0">
+								<label text="labels.boost" />
+								<knob id="bth" scolor="kscale" visibility=":cm ine 2"/>
+								<value id="bth" size="40" detailed="false" visibility=":cm ine 2"/>
+								<knob id="bsa" scolor="kscale" visibility=":cm ieq 2"/>
+								<value id="bsa" size="40" detailed="false" visibility=":cm ieq 2"/>
+							</vbox>
+
+							<hbox >
+								<vbox width="75">
+									<vbox>
+										<label text="labels.attack" />
+										<knob id="at" size="30" ssize="3" scolor="pink" pad.t="4" />
+										<value id="at" sline="true" pad.h="6" pad.v="4" width.min="48" />
+									</vbox>
+									<vbox>
+										<label text="labels.sc.lookahead" vreduce="true"/>
+										<fader id="sla" hexpand="true" ui:inject="Fader_prophessor_water" />
+										<value id="sla" sline="true"/>
+									</vbox>
 								</vbox>
-							</vbox>
 
-							<void vexpand="true" />
-						</vbox>
+								<vbox width="75">
+									<vbox>
+										<label text="labels.release"/>
+										<knob id="rt" size="30" ssize="3" scolor="release_1" pad.t="4" />
+										<!-- TODO: It will be convenient if the value also displays fraction time in ms -->
+										<value id="rt" sline="true" pad.h="6" pad.v="4" width.min="48" />
+										<!-- <frac visibility=":rm_${i} ieq 1" id="rdf_${i}" den.id="rdd_${i}" color="green"/> -->
+										<!-- <button text="BPM" id="rm_${i}" ui:inject="Button_cyan" /> -->
+									</vbox>
 
-						<vbox>
-							<label text="labels.threshold" vreduce="false"/>
-							<knob id="al" size="50" scolor="attack_1"/>
-							<align valign="-1" pad.t="2">
-								<value id="al" detailed="true" sline="true" />
-							</align>
-						</vbox>
-
-						<vbox>
-							<label text="labels.ratio" vreduce="false"/>
-							<knob id="cr" size="50" scolor="kscale"/>
-							<!-- <knob id="rrl" size="20" scolor="kscale"/> -->
-							<align valign="-1" pad.t="2">
-								<hbox fill="false">
-									<value id="cr" detailed="false"/>
-									<label text=":"/>
-									<label text="1"/>
-								</hbox>
-							</align>
-						</vbox>
-
-						<vbox width.min="75" >
-							<vbox>
-								<label text="labels.attack" />
-								<knob id="at" size="30" ssize="3" scolor="pink" pad.t="4" />
-								<value id="at" sline="true" pad.h="6" pad.v="4" width.min="48" />
-							</vbox>
+									<vbox>
+										<label text="labels.hold" pad.h="6" pad.v="4" vreduce="true" />
+										<fader id="hold" hexpand="true" ui:inject="Fader_prophessor_water" />
+										<value id="hold" sline="true" />
+									</vbox>
+								</vbox>
+							</hbox>
 
 							<vbox>
-								<label text="labels.hold" pad.h="6" pad.v="4" vreduce="true" />
-								<knob id="hold" size="20" pad.h="6" />
-								<value id="hold"/>
+								<label text="labels.signal.wet"/>
+								<knob id="cwt" scolor="wet" size="30" />
+								<value id="cwt" sline="true" />
+
+								<button id="amk" pad.h="6" height="18" width="70" text="Auto gain" ui:inject="Button_orange_8"/>
+
+								<label text="labels.signal.dry"/>
+								<knob id="cdr" scolor="dry" size="30" />
+								<value id="cdr" sline="true" />
 							</vbox>
-
-							<vbox>
-								<label text="labels.release"/>
-								<knob id="rt" size="30" ssize="3" scolor="release_1" pad.t="4" />
-								<!-- TODO: It will be convenient if the value also displays fraction time in ms -->
-								<value id="rt" sline="true" pad.h="6" pad.v="4" width.min="48" />
-								<!-- <frac visibility=":rm_${i} ieq 1" id="rdf_${i}" den.id="rdd_${i}" color="green"/> -->
-								<!-- <button text="BPM" id="rm_${i}" ui:inject="Button_cyan" /> -->
-							</vbox>
-						</vbox>
-
-						<vbox>
-							<label text="labels.signal.wet"/>
-							<knob id="cwt" scolor="wet" size="30" />
-							<value id="cwt" sline="true" />
-
-							<button id="amk" pad.h="6" height="18" width="70" text="Auto gain" ui:inject="Button_orange_8"/>
-
-							<label text="labels.signal.dry"/>
-							<knob id="cdr" scolor="dry" size="30" />
-							<value id="cdr" sline="true" />
-						</vbox>
-					</hbox>
-
-					<!-- <hbox>
-						<ui:with pad.h="6" pad.v="4">
-
-							<label visibility="false" text="labels.knee" vreduce="true"/>
-							<label visibility="false" text="labels.makeup" vreduce="true"/>
-						</ui:with>
-						<cell rows="9" bg.color="bg" pad.h="2" hreduce="true"><vsep/></cell>
-						<cell cols="2"><label text="labels.attack" pad.h="6" pad.v="4" vreduce="true"/></cell>
-						<cell rows="9" bg.color="bg" pad.h="2" hreduce="true"><vsep/></cell>
-						<cell cols="2"><label text="labels.release" pad.h="6" pad.v="4" vreduce="true"/></cell>
-						<cell rows="9" bg.color="bg" pad.h="2" hreduce="true"><vsep/></cell>
-						<cell cols="2"><label visibility="false" text="labels.mix" pad.h="6" pad.v="4" vreduce="true"/></cell>
-					</hbox> -->
-
-					<!-- row 2 -->
-					<!-- <hbox>
-						<ui:with bg.color="bg" pad.v="2" vreduce="true">
-							<hsep/>
-							<cell cols="3"><hsep/></cell>
-							<cell cols="2"><hsep/></cell>
-							<cell cols="2"><hsep/></cell>
-							<cell cols="2"><hsep/></cell>
-						</ui:with>
-					</hbox> -->
-
-					<!-- row 3 -->
-					<!-- <hbox>
-
-						<cell rows="2"><knob visibility="false" id="kn" scolor="kscale"/></cell>
-						<cell rows="2"><knob visibility="false" id="mk" scolor="kscale"/></cell>
-						<label visibility="false" text="labels.time"/>
-						<label text="labels.attack"/>
-						<label text="labels.thresh_old"/>
-						<label text="labels.time"/>
-						<label visibility="false" text="labels.signal.dry"/>
-						<label visibility="false" text="labels.signal.wet"/>
-					</hbox> -->
-
-					<!-- row 4 -->
-					<!-- <hbox>
-						<knob id="al" scolor="attack_1" size="20" pad.h="6" pad.v="4"/>
-						<knob id="at" scolor="kscale" size="20" pad.h="6" pad.v="4"/>
-						<knob id="rrl" scolor="release_1" size="20" pad.h="6" pad.v="4"/>
-						<knob id="rt" scolor="kscale" size="20" pad.h="6" pad.v="4"/>
-						<knob visibility="false" id="cdr" scolor="dry" size="20" pad.h="6" pad.v="4"/>
-						<knob visibility="false" id="cwt" scolor="wet" size="20" pad.h="6" pad.v="4"/>
-					</hbox> -->
-
-					<!-- row 5 -->
-					<!-- <hbox>
-						<ui:with width.min="32">
-							<value visibility="false" id="kn"/>
-							<value visibility="false" id="mk"/>
-							<value id="al"/>
-							<value id="at"/>
-							<value id="rrl"/>
-							<value id="rt"/>
-							<value visibility="false" id="cdr"/>
-							<value visibility="false" id="cwt"/>
-						</ui:with>
-					</hbox> -->
-				</vbox>
+						</hbox>
+					</vbox>
+				</hbox>
 			</group>
 		</hbox>
 	</vbox>
