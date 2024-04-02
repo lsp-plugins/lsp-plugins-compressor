@@ -155,9 +155,9 @@
 			<group ui:inject="GraphGroup" ipadding="0" expand="true" fill="true" text.show="false">
 				<vbox>
 					<!-- Top panel -->
-					<hbox bg.color="bg_schema" fill="true">
+					<hbox bg.color="bg_schema_name" fill="true" padding.left="10">
 						<align halign="-1">
-							<label text="labels.graphs.compression"  />
+							<label text="labels.graphs.compression" />
 						</align>
 
 						<label text="labels.knee" vreduce="true"/>
