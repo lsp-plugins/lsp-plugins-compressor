@@ -299,122 +299,110 @@
 		<void bg.color="bg" fill="true" pad.v="2" reduce="true"/>
 
 		<!-- Bottom part -->
-		<hbox>
-			<group text="groups.sidechain" text.show="false" vexpand="false" ipadding="0">
-				<hbox bg.color="bg_schema">
-					<!-- Setup -->
+		<hbox bg.color="bg" spacing="5">
+			<!-- Setup -->
+			<hbox bg.color="bg_schema">
+				<vbox>
+					<label text="labels.setup" pad.h="6" pad.v="4" fill="false" vreduce="true"/>
+					<ui:with pad.h="6" pad.b="4" hfill="true">
+						<combo id="sct" pad.t="4"/>
+						<combo id="scm" />
+						<combo id="scs" visibility="!:ssplit" />
+						<combo id="sscs" visibility=":ssplit" />
+						<combo id="cm" pad.h="6" pad.v="4"/>
+						<button id="scl" height="22" text="labels.listen" ui:inject="Button_cyan"/>
+					</ui:with>
+				</vbox>
+				<!-- Filters -->
+				<!-- HPF -->
+				<vbox width="64">
+					<label text="labels.flt.HPF" pad.h="6" pad.v="4" fill="false" vreduce="true"/>
+					<combo id="shpm" pad.h="6" bright="(:shpm igt 0) ? 1 : 0.75" bg.bright="(:shpm igt 0) ? 1 : :const_bg_darken"/>
+					<knob id="shpf" size="30" scolor="(:shpm igt 0) ? 'kscale' : 'kscale_inactive'" bg.bright="(:shpm igt 0) ? 1 : :const_bg_darken"/>
+					<value id="shpf" sline="true" bright="(:shpm igt 0) ? 1 : 0.75" bg.bright="(:shpm igt 0) ? 1 : :const_bg_darken"/>
+				</vbox>
+				<!-- LPF -->
+				<vbox width="64">
+					<label text="labels.flt.LPF" pad.h="6" pad.v="4" fill="false" vreduce="true"/>
+					<combo id="slpm" pad.h="6" bright="(:slpm igt 0) ? 1 : 0.75" bg.bright="(:slpm igt 0) ? 1 : :const_bg_darken"/>
+					<knob id="slpf" size="30" scolor="(:slpm igt 0) ? 'kscale' : 'kscale_inactive'" bg.bright="(:slpm igt 0) ? 1 : :const_bg_darken"/>
+					<value id="slpf" sline="true" bright="(:slpm igt 0) ? 1 : 0.75" bg.bright="(:slpm igt 0) ? 1 : :const_bg_darken"/>
+				</vbox>
+			</hbox>
+
+			<hbox hexpand="true" spacing="5">
+				<!-- Threshold/Ratio -->
+				<hbox padding.left="10" hexpand="true" padding.right="10" bg.color="bg_schema">
 					<vbox>
-						<label text="labels.setup" pad.h="6" pad.v="4" fill="false" vreduce="true"/>
-						<ui:with pad.h="6" pad.b="4" hfill="true">
-							<combo id="sct" pad.t="4"/>
-							<combo id="scm" />
-							<combo id="scs" visibility="!:ssplit" />
-							<combo id="sscs" visibility=":ssplit" />
-
-							<combo id="cm" pad.h="6" pad.v="4"/>
-
-							<button id="scl" height="22" text="labels.listen" ui:inject="Button_cyan"/>
-						</ui:with>
+						<label text="labels.threshold" vreduce="false"/>
+						<knob id="al" size="50" scolor="attack_1"/>
+						<align valign="-1" pad.t="2">
+							<value id="al" detailed="true" sline="true" />
+						</align>
 					</vbox>
-
-					<!-- Filters -->
-
-					<!-- HPF -->
 					<vbox>
-						<label text="labels.flt.HPF" pad.h="6" pad.v="4" fill="false" vreduce="true"/>
-						<combo id="shpm" pad.h="6" bright="(:shpm igt 0) ? 1 : 0.75" bg.bright="(:shpm igt 0) ? 1 : :const_bg_darken"/>
-						<knob id="shpf" size="40" scolor="(:shpm igt 0) ? 'kscale' : 'kscale_inactive'" bg.bright="(:shpm igt 0) ? 1 : :const_bg_darken"/>
-						<value id="shpf" sline="true" bright="(:shpm igt 0) ? 1 : 0.75" bg.bright="(:shpm igt 0) ? 1 : :const_bg_darken"/>
-					</vbox>
-
-					<!-- LPF -->
-					<vbox>
-						<label text="labels.flt.LPF" pad.h="6" pad.v="4" fill="false" vreduce="true"/>
-						<combo id="slpm" pad.h="6" bright="(:slpm igt 0) ? 1 : 0.75" bg.bright="(:slpm igt 0) ? 1 : :const_bg_darken"/>
-						<knob id="slpf" size="40" scolor="(:slpm igt 0) ? 'kscale' : 'kscale_inactive'" bg.bright="(:slpm igt 0) ? 1 : :const_bg_darken"/>
-						<value id="slpf" sline="true" bright="(:slpm igt 0) ? 1 : 0.75" bg.bright="(:slpm igt 0) ? 1 : :const_bg_darken"/>
-					</vbox>
-
-					<vbox rows="5" cols="14" spacing="0" bg.color="bg_schema">
-
-						<hbox>
-							<vbox>
-								<label text="labels.threshold" vreduce="false"/>
-								<knob id="al" size="50" scolor="attack_1"/>
-								<align valign="-1" pad.t="2">
-									<value id="al" detailed="true" sline="true" />
-								</align>
-							</vbox>
-
-							<vbox>
-								<label text="labels.ratio" vreduce="false"/>
-								<knob id="cr" size="50" scolor="kscale"/>
-								<!-- <knob id="rrl" size="20" scolor="kscale"/> -->
-								<align valign="-1" pad.t="2">
-									<hbox fill="false">
-										<value id="cr" detailed="false"/>
-										<label text=":"/>
-										<label text="1"/>
-									</hbox>
-								</align>
-							</vbox>
-
-							<!-- Boost -->
-							<vbox visibility=":cm ine 0">
-								<label text="labels.boost" />
-								<knob id="bth" scolor="kscale" visibility=":cm ine 2"/>
-								<value id="bth" size="40" detailed="false" visibility=":cm ine 2"/>
-								<knob id="bsa" scolor="kscale" visibility=":cm ieq 2"/>
-								<value id="bsa" size="40" detailed="false" visibility=":cm ieq 2"/>
-							</vbox>
-
-							<hbox >
-								<vbox width="75">
-									<vbox>
-										<label text="labels.attack" />
-										<knob id="at" size="30" ssize="3" scolor="pink" pad.t="4" />
-										<value id="at" sline="true" pad.h="6" pad.v="4" width.min="48" />
-									</vbox>
-									<vbox>
-										<label text="labels.sc.lookahead" vreduce="true"/>
-										<fader id="sla" hexpand="true" ui:inject="Fader_prophessor_water" />
-										<value id="sla" sline="true"/>
-									</vbox>
-								</vbox>
-
-								<vbox width="75">
-									<vbox>
-										<label text="labels.release"/>
-										<knob id="rt" size="30" ssize="3" scolor="release_1" pad.t="4" />
-										<!-- TODO: It will be convenient if the value also displays fraction time in ms -->
-										<value id="rt" sline="true" pad.h="6" pad.v="4" width.min="48" />
-										<!-- <frac visibility=":rm_${i} ieq 1" id="rdf_${i}" den.id="rdd_${i}" color="green"/> -->
-										<!-- <button text="BPM" id="rm_${i}" ui:inject="Button_cyan" /> -->
-									</vbox>
-
-									<vbox>
-										<label text="labels.hold" pad.h="6" pad.v="4" vreduce="true" />
-										<fader id="hold" hexpand="true" ui:inject="Fader_prophessor_water" />
-										<value id="hold" sline="true" />
-									</vbox>
-								</vbox>
+						<label text="labels.ratio" vreduce="false"/>
+						<knob id="cr" size="50" scolor="kscale"/>
+						<!-- <knob id="rrl" size="20" scolor="kscale"/> -->
+						<align valign="-1" pad.t="2">
+							<hbox fill="false">
+								<value id="cr" detailed="false"/>
+								<label text=":"/>
+								<label text="1"/>
 							</hbox>
-
-							<vbox>
-								<label text="labels.signal.wet"/>
-								<knob id="cwt" scolor="wet" size="30" />
-								<value id="cwt" sline="true" />
-
-								<button id="amk" pad.h="6" height="18" width="70" text="Auto gain" ui:inject="Button_orange_8"/>
-
-								<label text="labels.signal.dry"/>
-								<knob id="cdr" scolor="dry" size="30" />
-								<value id="cdr" sline="true" />
-							</vbox>
-						</hbox>
+						</align>
+					</vbox>
+					<!-- Boost -->
+					<vbox visibility=":cm ine 0">
+						<label text="labels.boost" />
+						<knob id="bth" scolor="kscale" visibility=":cm ine 2"/>
+						<value id="bth" size="40" detailed="false" visibility=":cm ine 2"/>
+						<knob id="bsa" scolor="kscale" visibility=":cm ieq 2"/>
+						<value id="bsa" size="40" detailed="false" visibility=":cm ieq 2"/>
 					</vbox>
 				</hbox>
-			</group>
+
+				<!-- Attack/Release -->
+				<hbox spacing="25" bg.color="bg_schema" padding.left="25" padding.right="25">
+					<vbox width="75">
+						<vbox>
+							<label text="labels.attack" />
+							<knob id="at" size="30" ssize="3" scolor="pink" pad.t="4" />
+							<value id="at" sline="true" pad.h="6" pad.v="4" width.min="48" />
+						</vbox>
+						<vbox>
+							<label text="labels.sc.lookahead" vreduce="true"/>
+							<fader id="sla" hexpand="true" ui:inject="Fader_prophessor_water" />
+							<value id="sla" sline="true"/>
+						</vbox>
+					</vbox>
+					<vbox width="75">
+						<vbox>
+							<label text="labels.release"/>
+							<knob id="rt" size="30" ssize="3" scolor="release_1" pad.t="4" />
+							<!-- TODO: It will be convenient if the value also displays fraction time in ms -->
+							<value id="rt" sline="true" pad.h="6" pad.v="4" width.min="48" />
+							<!-- <frac visibility=":rm_${i} ieq 1" id="rdf_${i}" den.id="rdd_${i}" color="green"/> -->
+							<!-- <button text="BPM" id="rm_${i}" ui:inject="Button_cyan" /> -->
+						</vbox>
+						<vbox>
+							<label text="labels.hold" pad.h="6" pad.v="4" vreduce="true" />
+							<fader id="hold" hexpand="true" ui:inject="Fader_prophessor_water" />
+							<value id="hold" sline="true" />
+						</vbox>
+					</vbox>
+				</hbox>
+
+				<vbox bg.color="bg_schema">
+					<label text="labels.signal.wet"/>
+					<knob id="cwt" scolor="wet" size="30" />
+					<value id="cwt" sline="true" />
+					<button id="amk" pad.h="6" height="18" width="70" text="Auto gain" ui:inject="Button_orange_8"/>
+					<label text="labels.signal.dry"/>
+					<knob id="cdr" scolor="dry" size="30" />
+					<value id="cdr" sline="true" />
+				</vbox>
+			</hbox>
 		</hbox>
 	</vbox>
 </plugin>
