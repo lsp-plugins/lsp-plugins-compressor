@@ -79,6 +79,7 @@ namespace lsp
         {
             { "Feed-forward",   "sidechain.feed_forward" },
             { "Feed-back",      "sidechain.feed_back" },
+            { "Link",           "sidechain.link" },
             { NULL, NULL }
         };
 
@@ -87,6 +88,7 @@ namespace lsp
             { "Feed-forward",   "sidechain.feed_forward" },
             { "Feed-back",      "sidechain.feed_back" },
             { "External",       "sidechain.external" },
+            { "Link",           "sidechain.link" },
             { NULL, NULL }
         };
 
@@ -121,6 +123,12 @@ namespace lsp
         #define COMP_SPLIT_COMMON \
             SWITCH("ssplit", "Stereo split", 0.0f), \
             COMBO("sscs", "Split sidechain source", compressor_metadata::SC_SPLIT_SOURCE_DFL, comp_sc_split_sources)
+
+        #define COMP_SHM_LINK_MONO \
+            OPT_RETURN_MONO("link", "scl", "Side-chain shared memory link")
+
+        #define COMP_SHM_LINK_STEREO \
+            OPT_RETURN_STEREO("link", "scl_", "Side-chain shared memory link")
 
         #define COMP_SC_MONO_CHANNEL(sct) \
             COMBO("sct", "Sidechain type", compressor_metadata::SC_TYPE_DFL, sct), \
@@ -186,6 +194,7 @@ namespace lsp
         static const port_t compressor_mono_ports[] =
         {
             PORTS_MONO_PLUGIN,
+            COMP_SHM_LINK_MONO,
             COMP_COMMON,
             COMP_SC_MONO_CHANNEL(comp_sc_type),
             COMP_CHANNEL("", "", comp_modes),
@@ -197,6 +206,7 @@ namespace lsp
         static const port_t compressor_stereo_ports[] =
         {
             PORTS_STEREO_PLUGIN,
+            COMP_SHM_LINK_STEREO,
             COMP_COMMON,
             COMP_SPLIT_COMMON,
             COMP_SC_STEREO_CHANNEL("", "", comp_sc_type),
@@ -210,6 +220,7 @@ namespace lsp
         static const port_t compressor_lr_ports[] =
         {
             PORTS_STEREO_PLUGIN,
+            COMP_SHM_LINK_STEREO,
             COMP_COMMON,
             COMP_SC_STEREO_CHANNEL("_l", " Left", comp_sc_type),
             COMP_SC_STEREO_CHANNEL("_r", " Right", comp_sc_type),
@@ -224,6 +235,7 @@ namespace lsp
         static const port_t compressor_ms_ports[] =
         {
             PORTS_STEREO_PLUGIN,
+            COMP_SHM_LINK_STEREO,
             COMP_MS_COMMON,
             COMP_SC_STEREO_CHANNEL("_m", " Mid", comp_sc_type),
             COMP_SC_STEREO_CHANNEL("_s", " Side", comp_sc_type),
@@ -239,6 +251,7 @@ namespace lsp
         {
             PORTS_MONO_PLUGIN,
             PORTS_MONO_SIDECHAIN,
+            COMP_SHM_LINK_MONO,
             COMP_COMMON,
             COMP_SC_MONO_CHANNEL(comp_sc2_type),
             COMP_CHANNEL("", "", comp_modes),
@@ -251,6 +264,7 @@ namespace lsp
         {
             PORTS_STEREO_PLUGIN,
             PORTS_STEREO_SIDECHAIN,
+            COMP_SHM_LINK_STEREO,
             COMP_COMMON,
             COMP_SPLIT_COMMON,
             COMP_SC_STEREO_CHANNEL("", "", comp_sc2_type),
@@ -265,6 +279,7 @@ namespace lsp
         {
             PORTS_STEREO_PLUGIN,
             PORTS_STEREO_SIDECHAIN,
+            COMP_SHM_LINK_STEREO,
             COMP_COMMON,
             COMP_SC_STEREO_CHANNEL("_l", " Left", comp_sc2_type),
             COMP_SC_STEREO_CHANNEL("_r", " Right", comp_sc2_type),
@@ -280,6 +295,7 @@ namespace lsp
         {
             PORTS_STEREO_PLUGIN,
             PORTS_STEREO_SIDECHAIN,
+            COMP_SHM_LINK_STEREO,
             COMP_MS_COMMON,
             COMP_SC_STEREO_CHANNEL("_m", " Mid", comp_sc2_type),
             COMP_SC_STEREO_CHANNEL("_s", " Side", comp_sc2_type),
