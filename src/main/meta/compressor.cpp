@@ -125,10 +125,10 @@ namespace lsp
             COMBO("sscs", "Split sidechain source", compressor_metadata::SC_SPLIT_SOURCE_DFL, comp_sc_split_sources)
 
         #define COMP_SHM_LINK_MONO \
-            OPT_RETURN_MONO("link", "scl", "Side-chain shared memory link")
+            OPT_RETURN_MONO("link", "shml", "Side-chain shared memory link")
 
         #define COMP_SHM_LINK_STEREO \
-            OPT_RETURN_STEREO("link", "scl_", "Side-chain shared memory link")
+            OPT_RETURN_STEREO("link", "shml_", "Side-chain shared memory link")
 
         #define COMP_SC_MONO_CHANNEL(sct) \
             COMBO("sct", "Sidechain type", compressor_metadata::SC_TYPE_DFL, sct), \
