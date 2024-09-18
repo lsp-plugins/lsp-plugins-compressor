@@ -187,12 +187,12 @@ namespace lsp
                 void            process_non_feedback(channel_t *c, float **in, size_t samples);
                 void            do_destroy();
                 uint32_t        decode_sidechain_type(uint32_t sc) const;
+                inline float   *select_buffer(const channel_t & c, float *in, float *sc, float *shm);
 
             protected:
                 static dspu::compressor_mode_t      decode_mode(int mode);
                 static dspu::sidechain_source_t     decode_sidechain_source(int source, bool split, size_t channel);
                 static inline bool                  use_sidechain(const channel_t & c);
-                static inline float                *select_buffer(const channel_t & c, float *in, float *sc, float *shm);
 
             public:
                 explicit compressor(const meta::plugin_t *metadata, bool sc, size_t mode);
