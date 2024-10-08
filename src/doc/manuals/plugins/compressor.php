@@ -52,6 +52,7 @@ keeping the same settings for the left and right channels.</p>
 	<li><b>Env<?= $sm ?></b> - enables drawing of compressor's envelope graph and corresponding level meter.</li>
 	<li><b>In<?= $sm ?></b> - enables drawing of compressor's input signal graph and corresponding level meter.</li>
 	<li><b>Out<?= $sm ?></b> - enables drawing of compressor's output signal graph and corresponding level meter.</li>
+	<li><b>Link</b> - the name of the shared memory link to pass sidechain signal.</li>
 </ul>
 <p><b>'Sidechain' section:</b></p>
 <ul>
@@ -63,6 +64,7 @@ keeping the same settings for the left and right channels.</p>
 		<?php if ($sc) { ?>
 		<li><b>External</b> - sidechain signal is taken from additional (external) sidechain inputs of plugin.</li>
 		<?php }?>
+		<li><b>Link</b> - sidechain input is passed by shared memory link.</li>
 	</ul>
 	<?php } ?>
 	<li><b>Listen</b> - allows to listen the <b>processed</b> sidechain signal.</li>

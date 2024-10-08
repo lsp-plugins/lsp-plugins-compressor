@@ -83,6 +83,8 @@
 					<button id="pause" height="22" width="48" text="labels.pause" pad.v="4" ui:inject="Button_green"/>
 					<button id="clear" height="22" width="48" text="labels.clear" pad.v="4" ui:inject="Button_red"/>
 					<void hexpand="true"/>
+					<vsep pad.h="2" bg.color="bg" reduce="true"/>
+					<shmlink id="link" pad.l="2"/>
 				</hbox>
 			</vbox>
 

@@ -82,7 +82,9 @@
 					<button id="clear" height="22" width="48" text="labels.clear" pad.v="4" ui:inject="Button_red"/>
 					<void hexpand="true"/>
 					<vsep pad.h="2" bg.color="bg" reduce="true"/>
-					<button id="ssplit" text="labels.stereo_split" size="22" pad.v="4" ui:inject="Button_blue"/>
+					<button id="ssplit" text="labels.stereo_split" size="22" pad.v="4" ui:inject="Button_blue" pad.h="2"/>
+					<vsep pad.h="2" bg.color="bg" reduce="true"/>
+					<shmlink id="link" pad.l="2"/>
 				</hbox>
 			</vbox>
 
