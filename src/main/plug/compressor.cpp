@@ -612,7 +612,7 @@ namespace lsp
                 c->sComp.set_mode(mode);
                 if (c->pReleaseOut != NULL)
                     c->pReleaseOut->set_value(release);
-                c->sGraph[G_GAIN].set_method((mode == dspu::CM_DOWNWARD) ? dspu::MM_MINIMUM : dspu::MM_MAXIMUM);
+                c->sGraph[G_GAIN].set_method((mode == dspu::CM_DOWNWARD) ? dspu::MM_ABS_MINIMUM : dspu::MM_ABS_MAXIMUM);
 
                 // Check modification flag
                 if (c->sComp.modified())
