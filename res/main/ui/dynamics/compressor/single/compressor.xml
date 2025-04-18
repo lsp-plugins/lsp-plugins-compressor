@@ -363,9 +363,9 @@
 				</group>
 				<void bg.color="bg" vexpand="false" fill="false" pad.v="2"/>
 				<hbox spacing="4" vexpand="false" bg.color="bg_schema" pad.h="6">
-					<button id="showsc" text="labels.sidechain" size="22" pad.v="4"/>
+					<button ui:id="sidechain_trigger" id="showsc" text="labels.sidechain" size="22" pad.v="4"/>
 					<void hexpand="true"/>
-					<button id="showmx" text="labels.mix" size="22" pad.v="4"/>
+					<button ui:id="mix_trigger" id="showmx" text="labels.mix" size="22" pad.v="4"/>
 				</hbox>
 			</vbox>
 
@@ -461,7 +461,7 @@
 
 			<!-- For Stereo and Mono version-->
 			<ui:if test="ex :cm">
-				<group ui:id="compressor_setup" text="groups.plug.compressor" vexpand="false" hexpand="true" ipadding="0">
+				<group text="groups.plug.compressor" vexpand="false" hexpand="true" ipadding="0">
 
 					<grid rows="5" cols="13" spacing="0" bg.color="bg_schema">
 						<!-- row 1 -->
@@ -537,7 +537,7 @@
 
 			<!-- For Left Right version -->
 			<ui:if test="ex :cm_l">
-				<group ui:id="compressor_setup" text="groups.plug.compressor" vexpand="false" hexpand="true" ipadding="0">
+				<group text="groups.plug.compressor" vexpand="false" hexpand="true" ipadding="0">
 
 					<grid rows="9" cols="18" spacing="0" bg.color="bg_schema">
 						<!-- row 1 -->
@@ -690,7 +690,7 @@
 
 			<!-- For Mid Side version -->
 			<ui:if test="ex :cm_m">
-				<group ui:id="compressor_setup" text="groups.plug.compressor" vexpand="false" hexpand="true" ipadding="0">
+				<group text="groups.plug.compressor" vexpand="false" hexpand="true" ipadding="0">
 
 					<grid rows="9" cols="18" spacing="0" bg.color="bg_schema">
 						<!-- row 1 -->
@@ -861,7 +861,7 @@
 	</vbox>
 
 	<!-- Sidechain overlay -->
-	<overlay id="showsc" trigger="compressor_setup" hpos="0" vpos="1" halign="1" valign="-1">
+	<overlay id="showsc" trigger="sidechain_trigger" hpos="1" vpos="1" halign="-1" valign="1">
 		<!-- For Stereo and Mono version-->
 		<ui:if test="ex :cm">
 			<group text="groups.sidechain" vexpand="false" ipadding="0">
@@ -1112,80 +1112,80 @@
 	</overlay>
 
 	<!-- Mix overlay -->
-	<overlay id="showmx" trigger="compressor_setup" hpos="1" vpos="1" halign="-1" valign="-1">
+	<overlay id="showmx" trigger="mix_trigger" hpos="1" vpos="1" halign="-1" valign="1">
 		<!-- For Stereo and Mono version-->
-			<ui:if test="ex :cm">
-		<group text="groups.mix" vexpand="false" ipadding="0">
-			<grid rows="3" cols="4" spacing="0" bg.color="bg_schema" height="139">
-
-				<!-- Row 1 -->
-				<label text="labels.signal.dry" pad.h="6" width="44" pad.v="4"/>
-				<label text="labels.signal.wet" pad.h="6" width="44" pad.v="4"/>
-				<cell rows="3" bg.color="bg" pad.h="2" hreduce="true"><vsep/></cell>
-				<label text="labels.signal.drywet" pad.h="6" width="44" pad.v="4"/>
-
-				<!-- Row 2 -->
-				<knob id="cdr" size="20" scolor="dry"/>
-				<knob id="cwt" size="20" scolor="wet"/>
-				<knob id="cdw" size="20" scolor="drywet"/>
-
-				<!-- Row 3 -->
-				<value id="cdr" pad.v="4"/>
-				<value id="cwt" pad.v="4"/>
-				<value id="cdw" pad.v="4"/>
-
-			</grid>
-		</group>
-	</ui:if>
-
-	<!-- For Left Right version -->
-	<ui:if test="ex :cm_l">
-		<group text="groups.mix" vexpand="false" ipadding="0">
-			<grid rows="3" cols="4" spacing="0" bg.color="bg_schema" height="139">
-
-				<!-- Row 1 -->
-				<label text="labels.signal.dry" pad.h="6" width="44" pad.v="4"/>
-				<label text="labels.signal.wet" pad.h="6" width="44" pad.v="4"/>
-				<cell rows="3" bg.color="bg" pad.h="2" hreduce="true"><vsep/></cell>
-				<label text="labels.signal.drywet" pad.h="6" width="44" pad.v="4"/>
-
-				<!-- Row 2 -->
-				<knob id="cdr" size="20" scolor="dry"/>
-				<knob id="cwt" size="20" scolor="wet"/>
-				<knob id="cdw" size="20" scolor="drywet"/>
-
-				<!-- Row 3 -->
-				<value id="cdr" pad.v="4"/>
-				<value id="cwt" pad.v="4"/>
-				<value id="cdw" pad.v="4"/>
-
-			</grid>
-		</group>
-	</ui:if>
-	<!-- For Mid Side version -->
-	<ui:if test="ex :cm_m">
-		<group text="groups.mix" vexpand="false" ipadding="0">
-			<grid rows="3" cols="4" spacing="0" bg.color="bg_schema" height="139">
-
-				<!-- Row 1 -->
-				<label text="labels.signal.dry" pad.h="6" width="44" pad.v="4"/>
-				<label text="labels.signal.wet" pad.h="6" width="44" pad.v="4"/>
-				<cell rows="3" bg.color="bg" pad.h="2" hreduce="true"><vsep/></cell>
-				<label text="labels.signal.drywet" pad.h="6" width="44" pad.v="4"/>
-
-				<!-- Row 2 -->
-				<knob id="cdr" size="20" scolor="dry"/>
-				<knob id="cwt" size="20" scolor="wet"/>
-				<knob id="cdw" size="20" scolor="drywet"/>
-
-				<!-- Row 3 -->
-				<value id="cdr" pad.v="4"/>
-				<value id="cwt" pad.v="4"/>
-				<value id="cdw" pad.v="4"/>
-
-			</grid>
-		</group>
-	</ui:if>
-
-</overlay>
+		<ui:if test="ex :cm">
+			<group text="groups.mix" vexpand="false" ipadding="0">
+				<grid rows="3" cols="4" spacing="0" bg.color="bg_schema" height="139">
+	
+					<!-- Row 1 -->
+					<label text="labels.signal.dry" pad.h="6" width="44" pad.v="4"/>
+					<label text="labels.signal.wet" pad.h="6" width="44" pad.v="4"/>
+					<cell rows="3" bg.color="bg" pad.h="2" hreduce="true"><vsep/></cell>
+					<label text="labels.signal.drywet" pad.h="6" width="44" pad.v="4"/>
+	
+					<!-- Row 2 -->
+					<knob id="cdr" size="20" scolor="dry"/>
+					<knob id="cwt" size="20" scolor="wet"/>
+					<knob id="cdw" size="20" scolor="drywet"/>
+	
+					<!-- Row 3 -->
+					<value id="cdr" pad.v="4"/>
+					<value id="cwt" pad.v="4"/>
+					<value id="cdw" pad.v="4"/>
+	
+				</grid>
+			</group>
+		</ui:if>
+	
+		<!-- For Left Right version -->
+		<ui:if test="ex :cm_l">
+			<group text="groups.mix" vexpand="false" ipadding="0">
+				<grid rows="3" cols="4" spacing="0" bg.color="bg_schema" height="139">
+	
+					<!-- Row 1 -->
+					<label text="labels.signal.dry" pad.h="6" width="44" pad.v="4"/>
+					<label text="labels.signal.wet" pad.h="6" width="44" pad.v="4"/>
+					<cell rows="3" bg.color="bg" pad.h="2" hreduce="true"><vsep/></cell>
+					<label text="labels.signal.drywet" pad.h="6" width="44" pad.v="4"/>
+	
+					<!-- Row 2 -->
+					<knob id="cdr" size="20" scolor="dry"/>
+					<knob id="cwt" size="20" scolor="wet"/>
+					<knob id="cdw" size="20" scolor="drywet"/>
+	
+					<!-- Row 3 -->
+					<value id="cdr" pad.v="4"/>
+					<value id="cwt" pad.v="4"/>
+					<value id="cdw" pad.v="4"/>
+	
+				</grid>
+			</group>
+		</ui:if>
+		
+		<!-- For Mid Side version -->
+		<ui:if test="ex :cm_m">
+			<group text="groups.mix" vexpand="false" ipadding="0">
+				<grid rows="3" cols="4" spacing="0" bg.color="bg_schema" height="139">
+	
+					<!-- Row 1 -->
+					<label text="labels.signal.dry" pad.h="6" width="44" pad.v="4"/>
+					<label text="labels.signal.wet" pad.h="6" width="44" pad.v="4"/>
+					<cell rows="3" bg.color="bg" pad.h="2" hreduce="true"><vsep/></cell>
+					<label text="labels.signal.drywet" pad.h="6" width="44" pad.v="4"/>
+	
+					<!-- Row 2 -->
+					<knob id="cdr" size="20" scolor="dry"/>
+					<knob id="cwt" size="20" scolor="wet"/>
+					<knob id="cdw" size="20" scolor="drywet"/>
+	
+					<!-- Row 3 -->
+					<value id="cdr" pad.v="4"/>
+					<value id="cwt" pad.v="4"/>
+					<value id="cdw" pad.v="4"/>
+	
+				</grid>
+			</group>
+		</ui:if>
+	</overlay>
 </plugin>
