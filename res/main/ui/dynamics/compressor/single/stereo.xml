@@ -1,7 +1,7 @@
 <plugin resizable="true">
 	<vbox>
 		<!-- Top part -->
-		<grid rows="1" cols="5" hspacing="4" expand="true">
+		<grid rows="1" cols="4" hspacing="4" expand="true">
 			<vbox expand="true">
 				<group ui:inject="GraphGroup" ipadding="0" expand="true" fill="true" text="labels.graphs.time">
 					<graph width.min="496" height.min="222" expand="true" fill="true">
@@ -128,68 +128,76 @@
 				</ledmeter>
 			</grid>
 
-			<group ui:inject="GraphGroup" ipadding="0" expand="true" fill="true" text="labels.graphs.compression">
-				<!-- Curve graph -->
-				<graph width.min="256" height.min="256" expand="true" fill="true">
-					<origin hpos="-1" vpos="-1" visible="false"/>
+			<vbox expand="true">
+				<group ui:inject="GraphGroup" ipadding="0" expand="true" fill="true" text="labels.graphs.compression">
+					<!-- Curve graph -->
+					<graph width.min="256" height.min="256" expand="true" fill="true">
+						<origin hpos="-1" vpos="-1" visible="false"/>
 
-					<!-- Gray grid -->
-					<ui:for id="g" first="-60" last="12" step="24">
-						<marker v="${g} db" color="graph_alt_1"/>
-						<marker v="${g} db" ox="1" oy="0" color="graph_alt_1"/>
-					</ui:for>
+						<!-- Gray grid -->
+						<ui:for id="g" first="-60" last="12" step="24">
+							<marker v="${g} db" color="graph_alt_1"/>
+							<marker v="${g} db" ox="1" oy="0" color="graph_alt_1"/>
+						</ui:for>
 
-					<!-- Yellow grid -->
-					<ui:for id="g" first="-48" last="-24" step="24">
-						<marker v="${g} db" color="graph_sec"/>
-						<marker v="${g} db" ox="1" oy="0" color="graph_sec"/>
-					</ui:for>
+						<!-- Yellow grid -->
+						<ui:for id="g" first="-48" last="-24" step="24">
+							<marker v="${g} db" color="graph_sec"/>
+							<marker v="${g} db" ox="1" oy="0" color="graph_sec"/>
+						</ui:for>
 
-					<!-- Axes and boundaries -->
-					<marker v="1" ox="1" oy="0" dv="1" dx=":_a_width" dy=":_a_height" color="graph_alt_1" width="2" smooth="true"/>
-					<marker v="24 db" color="graph_alt_1" visibility="false"/>
-					<marker v="24 db" ox="1" oy="0" color="graph_alt_1" visibility="false"/>
-					<axis min="-72 db" max="24 db" color="graph_prim" angle="0.0" log="true" visibility="false"/>
-					<axis min="-72 db" max="24 db" color="graph_prim" angle="0.5" log="true" visibility="false"/>
+						<!-- Axes and boundaries -->
+						<marker v="1" ox="1" oy="0" dv="1" dx=":_a_width" dy=":_a_height" color="graph_alt_1" width="2" smooth="true"/>
+						<marker v="24 db" color="graph_alt_1" visibility="false"/>
+						<marker v="24 db" ox="1" oy="0" color="graph_alt_1" visibility="false"/>
+						<axis min="-72 db" max="24 db" color="graph_prim" angle="0.0" log="true" visibility="false"/>
+						<axis min="-72 db" max="24 db" color="graph_prim" angle="0.5" log="true" visibility="false"/>
 
-					<!-- 0 dB markers -->
-					<marker v="0 db" ox="0" oy="1" width="2" color="graph_prim"/>
-					<marker v="0 db" ox="1" oy="0" width="2" color="graph_prim"/>
+						<!-- 0 dB markers -->
+						<marker v="0 db" ox="0" oy="1" width="2" color="graph_prim"/>
+						<marker v="0 db" ox="1" oy="0" width="2" color="graph_prim"/>
 
-					<!-- Meshes -->
-					<mesh id="ccg" width="3" color="graph_mesh" smooth="true"/>
-					<dot x.id="elm_l" y.id="clm_l" color="graph_mesh" bcolor="graph_mesh" visibility="!:ssplit"/>
-					<dot x.id="elm_l" y.id="clm_l" color="left" bcolor="left" visibility=":ssplit"/>
-					<dot x.id="elm_r" y.id="clm_r" color="right" bcolor="right" visibility=":ssplit"/>
+						<!-- Meshes -->
+						<mesh id="ccg" width="3" color="graph_mesh" smooth="true"/>
+						<dot x.id="elm_l" y.id="clm_l" color="graph_mesh" bcolor="graph_mesh" visibility="!:ssplit"/>
+						<dot x.id="elm_l" y.id="clm_l" color="left" bcolor="left" visibility=":ssplit"/>
+						<dot x.id="elm_r" y.id="clm_r" color="right" bcolor="right" visibility=":ssplit"/>
 
-					<!-- Markers -->
-					<marker id="al" editable="true" width="2" pointer="hsize" color="threshold" hcolor="threshold"/>
-					<marker id="rl" color="release_1"/>
+						<!-- Markers -->
+						<marker id="al" editable="true" width="2" pointer="hsize" color="threshold" hcolor="threshold"/>
+						<marker id="rl" color="release_1"/>
 
-					<!-- Text -->
-					<text x="0 db" y="0 db" text="0" halign="1" valign="1"/>
-					<ui:attributes x="0 db" halign="1" valign="-1">
-						<text y="24 db" text="graph.units.db"/>
-						<text y="12 db" text="+12"/>
-						<text y="-12 db" text="-12"/>
-						<text y="-24 db" text="-24"/>
-						<text y="-36 db" text="-36"/>
-						<text y="-48 db" text="-48"/>
-						<text y="-60 db" text="-60"/>
-						<text y="-72 db" text="graph.axis.out" valign="1"/>
-					</ui:attributes>
-					<ui:attributes y="0 db" halign="-1" valign="1">
-						<text x="24 db" text="graph.units.db"/>
-						<text x="12 db" text="+12"/>
-						<text x="-12 db" text="-12"/>
-						<text x="-24 db" text="-24"/>
-						<text x="-36 db" text="-36"/>
-						<text x="-48 db" text="-48"/>
-						<text x="-60 db" text="-60"/>
-						<text x="-72 db" text="graph.axis.in" halign="1"/>
-					</ui:attributes>
-				</graph>
-			</group>
+						<!-- Text -->
+						<text x="0 db" y="0 db" text="0" halign="1" valign="1"/>
+						<ui:attributes x="0 db" halign="1" valign="-1">
+							<text y="24 db" text="graph.units.db"/>
+							<text y="12 db" text="+12"/>
+							<text y="-12 db" text="-12"/>
+							<text y="-24 db" text="-24"/>
+							<text y="-36 db" text="-36"/>
+							<text y="-48 db" text="-48"/>
+							<text y="-60 db" text="-60"/>
+							<text y="-72 db" text="graph.axis.out" valign="1"/>
+						</ui:attributes>
+						<ui:attributes y="0 db" halign="-1" valign="1">
+							<text x="24 db" text="graph.units.db"/>
+							<text x="12 db" text="+12"/>
+							<text x="-12 db" text="-12"/>
+							<text x="-24 db" text="-24"/>
+							<text x="-36 db" text="-36"/>
+							<text x="-48 db" text="-48"/>
+							<text x="-60 db" text="-60"/>
+							<text x="-72 db" text="graph.axis.in" halign="1"/>
+						</ui:attributes>
+					</graph>
+				</group>
+				<void bg.color="bg" vexpand="false" fill="false" pad.v="2"/>
+				<hbox spacing="4" vexpand="false" bg.color="bg_schema" pad.h="6">
+					<button id="showsc" text="labels.sidechain" size="22" pad.v="4"/>
+					<void hexpand="true"/>
+					<button id="showmx" text="labels.mix" size="22" pad.v="4"/>
+				</hbox>
+			</vbox>
 
 			<grid rows="3" cols="2" hfill="false" hexpand="false" hspacing="4">
 				<ui:with bg.color="bg_schema">
@@ -219,40 +227,16 @@
 					<ledchannel id="olm_r" min="-72 db" max="24 db" log="true" type="rms_peak" peak.visibility="true" value.color="right"/>
 				</ledmeter>
 			</grid>
-
-			<!-- Signal control -->
-			<group text="groups.signal" vexpand="true" hexpand="false" ipadding="0">
-				<vbox vexpand="true">
-					<ui:with pad="6">
-						<label text="labels.input"/>
-						<knob id="g_in"/>
-						<value id="g_in"/>
-						<hsep bg.color="bg" fill="true" pad.h="0" pad.v="2"/>
-						<label text="labels.output"/>
-						<knob id="g_out"/>
-						<value id="g_out"/>
-					</ui:with>
-					<hsep bg.color="bg" fill="true" pad.v="2"/>
-					<label vexpand="true"/>
-				</vbox>
-			</group>
 		</grid>
 
 		<!-- Separator -->
 		<void bg.color="bg" fill="true" pad.v="2" reduce="true"/>
 
 		<!-- Bottom part -->
-		<hbox>
-			<vbox>
-				<button id="showsc" text="labels.sidechain" />
-				<void expand="true " />
-			</vbox>
-		
-			<vsep pad.h="2" bg.color="bg"/>
-		
+<hbox>
 			<group ui:id="compressor_setup" text="groups.plug.compressor" vexpand="false" hexpand="true" ipadding="0">
-	
-				<grid rows="5" cols="18" spacing="0" bg.color="bg_schema">
+
+				<grid rows="5" cols="13" spacing="0" bg.color="bg_schema">
 					<!-- row 1 -->
 					<label text="labels.mode" pad.h="6" pad.v="4" vreduce="true"/>
 					<cell rows="9" bg.color="bg" pad.h="2" hreduce="true"><vsep/></cell>
@@ -267,9 +251,7 @@
 					<cell cols="2"><label text="labels.release" pad.h="6" pad.v="4" vreduce="true"/></cell>
 					<cell rows="9" bg.color="bg" pad.h="2" hreduce="true"><vsep/></cell>
 					<label text="labels.hold" pad.h="6" pad.v="4" vreduce="true"/>
-					<cell rows="9" bg.color="bg" pad.h="2" hreduce="true"><vsep/></cell>
-					<cell cols="4"><label text="labels.mix" pad.h="6" pad.v="4" vreduce="true"/></cell>
-	
+
 					<!-- row 2 -->
 					<ui:with bg.color="bg" pad.v="2" vreduce="true">
 						<hsep/>
@@ -277,9 +259,8 @@
 						<cell cols="2"><hsep/></cell>
 						<cell cols="2"><hsep/></cell>
 						<hsep/>
-						<cell cols="4"><hsep/></cell>
 					</ui:with>
-	
+
 					<!-- row 3 -->
 					<cell rows="3" height.min="111">
 						<vbox>
@@ -299,20 +280,13 @@
 					<label text="labels.thresh_old"/>
 					<label text="labels.time"/>
 					<cell rows="2"><knob id="hold" size="20" pad.h="6"/></cell>
-					<label text="labels.signal.dry"/>
-					<label text="labels.signal.wet"/>
-					<cell rows="3" bg.color="bg" pad.h="2" hreduce="true"><vsep/></cell>
-					<label text="labels.signal.drywet" pad.h="6"/>
-	
+
 					<!-- row 4 -->
 					<knob id="al" scolor="attack_1" size="20" pad.h="6" pad.v="4"/>
 					<knob id="at" scolor="kscale" size="20" pad.h="6" pad.v="4"/>
 					<knob id="rrl" scolor="release_1" size="20" pad.h="6" pad.v="4"/>
 					<knob id="rt" scolor="kscale" size="20" pad.h="6" pad.v="4"/>
-					<knob id="cdr" size="20" pad.h="6" pad.v="4" scolor="dry"/>
-					<knob id="cwt" size="20" pad.h="6" pad.v="4" scolor="wet"/>
-					<knob id="cdw" size="20" pad.h="6" pad.v="4" scolor="drywet"/>
-	
+
 					<!-- row 5 -->
 					<align valign="-1" pad.t="2">
 						<hbox fill="false">
@@ -329,16 +303,31 @@
 						<value id="rrl"/>
 						<value id="rt"/>
 						<value id="hold"/>
-						<value id="cdr"/>
-						<value id="cwt"/>
-						<value id="cdw"/>
 					</ui:with>
 				</grid>
 			</group>
+
+			<!-- Separator -->
+			<vsep bg.color="bg" pad.h="2" hreduce="true"/>
+
+			<!-- Signal control -->
+			<group text="groups.signal" vexpand="false" hexpand="true" ipadding="0">
+				<grid rows="3" cols="2" spacing="0" bg.color="bg_schema" transpose="true">
+						<label text="labels.input" width="40" pad.h="6" pad.v="4"/>
+						<knob id="g_in"/>
+						<value id="g_in" pad.v="4"/>
+
+						<label text="labels.output" width="40" pad.h="6" pad.v="4"/>
+						<knob id="g_out"/>
+						<value id="g_out" pad.v="4"/>
+				</grid>
+			</group>
 		</hbox>
+
 	</vbox>
-	
+
 	<!-- Sidechain overlay -->
+	<!-- <vbox> -->
 	<overlay id="showsc" trigger="compressor_setup" hpos="0" vpos="1" halign="1" valign="-1">
 		<group text="groups.sidechain" vexpand="false" ipadding="0">
 			<grid rows="5" cols="9" spacing="0" bg.color="bg_schema">
@@ -394,4 +383,30 @@
 			</grid>
 		</group>
 	</overlay>
+
+	<!-- Mix overlay -->
+	<overlay id="showmx" trigger="compressor_setup" hpos="1" vpos="1" halign="-1" valign="-1">
+		<group text="groups.mix" vexpand="false" ipadding="0">
+			<grid rows="3" cols="4" spacing="0" bg.color="bg_schema" height="139">
+
+				<!-- Row 1 -->
+				<label text="labels.signal.dry" pad.h="6" width="44" pad.v="4"/>
+				<label text="labels.signal.wet" pad.h="6" width="44" pad.v="4"/>
+				<cell rows="3" bg.color="bg" pad.h="2" hreduce="true"><vsep/></cell>
+				<label text="labels.signal.drywet" pad.h="6" width="44" pad.v="4"/>
+
+				<!-- Row 2 -->
+				<knob id="cdr" size="20" scolor="dry"/>
+				<knob id="cwt" size="20" scolor="wet"/>
+				<knob id="cdw" size="20" scolor="drywet"/>
+
+				<!-- Row 3 -->
+				<value id="cdr" pad.v="4"/>
+				<value id="cwt" pad.v="4"/>
+				<value id="cdw" pad.v="4"/>
+
+			</grid>
+		</group>
+	</overlay>
+<!-- </vbox> -->
 </plugin>

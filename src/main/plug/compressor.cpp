@@ -255,6 +255,7 @@ namespace lsp
             BIND_PORT(pBypass);
             BIND_PORT(pInGain);
             BIND_PORT(pOutGain);
+            SKIP_PORT("Show mix overlay");
             SKIP_PORT("Show sidechain overlay");
             BIND_PORT(pPause);
             BIND_PORT(pClear);

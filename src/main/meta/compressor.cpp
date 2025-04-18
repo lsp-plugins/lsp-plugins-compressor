@@ -85,9 +85,9 @@ namespace lsp
 
         static const port_item_t comp_sc2_type[] =
         {
+            { "External",       "sidechain.external" },
             { "Feed-forward",   "sidechain.feed_forward" },
             { "Feed-back",      "sidechain.feed_back" },
-            { "External",       "sidechain.external" },
             { "Link",           "sidechain.link" },
             { NULL, NULL }
         };
@@ -113,6 +113,7 @@ namespace lsp
             BYPASS,             \
             IN_GAIN,            \
             OUT_GAIN,           \
+            SWITCH("showmx", "Show mix overlay", 0.0f), \
             SWITCH("showsc", "Show sidechain overlay", 0.0f), \
             SWITCH("pause", "Pause graph analysis", 0.0f), \
             TRIGGER("clear", "Clear graph analysis")
