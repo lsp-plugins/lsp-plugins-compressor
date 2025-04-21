@@ -644,8 +644,10 @@
 							<ui:with pad.h="6" pad.b="4" hfill="true">
 								<combo id="sct" pad.t="4"/>
 								<combo id="scm"/>
-								<combo id="scs" visibility="!:ssplit"/>
-								<combo id="sscs" visibility=":ssplit"/>
+								<ui:if test=":stereo">
+									<combo id="scs" visibility="!:ssplit"/>
+									<combo id="sscs" visibility=":ssplit"/>
+								</ui:if>
 								<button id="scl" height="22" text="labels.listen" ui:inject="Button_cyan"/>
 							</ui:with>
 						</vbox>
