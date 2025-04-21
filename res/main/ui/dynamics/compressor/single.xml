@@ -598,7 +598,7 @@
 	</vbox>
 
 	<!-- Sidechain overlay -->
-	<overlay id="showsc" trigger="sidechain_trigger" hpos="1" vpos="1" halign="-1" valign="1">
+	<overlay id="showsc" trigger="sidechain_trigger" hpos="1" vpos="1" halign="-1" valign="1" ipadding.t="4">
 		<group text="groups.sidechain" vexpand="false" ipadding="0">
 			<!-- For Stereo and Mono version-->
 			<ui:if test=":mono or :stereo">
@@ -752,7 +752,7 @@
 	</overlay>
 
 	<!-- Mix overlay -->
-	<overlay id="showmx" trigger="mix_trigger" hpos="1" vpos="1" halign="-1" valign="1">
+	<overlay id="showmx" trigger="mix_trigger" hpos="1" vpos="1" halign="-1" valign="1" ipadding.t="4">
 		<group text="groups.mix" vexpand="false" ipadding="0">
 			<!-- For Stereo and Mono version-->
 			<ui:if test=":mono or :stereo">
@@ -792,7 +792,7 @@
 					<!-- row 2 -->
 					<knob id="cdr_${xa}" size="20" pad.h="6" pad.v="4" scolor="dry"/>
 					<knob id="cwt_${xa}" size="20" pad.h="6" pad.v="4" scolor="wet"/>
-					<knob id="cdw_${xa}" size="20" pad.h="6" pad.v="4" scolor="drywet"/>
+					<knob id="cdw_${xa}" size="20" pad.h="6" pad.v="4" scooverlaylor="drywet"/>
 
 					<!-- row 3 -->
 					<ui:with width.min="32">
