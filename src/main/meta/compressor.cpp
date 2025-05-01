@@ -137,38 +137,38 @@ namespace lsp
             COMBO("scm", "Sidechain mode", compressor_metadata::SC_MODE_DFL, comp_sc_modes), \
             CONTROL("sla", "Sidechain lookahead", U_MSEC, compressor_metadata::LOOKAHEAD), \
             SWITCH("scl", "Sidechain listen", 0.0f), \
-            LOG_CONTROL("scr", "Sidechain reactivity", U_MSEC, compressor_metadata::REACTIVITY), \
+            LOG_CONTROL("scr", "Sidechain reactivity", "SC react", U_MSEC, compressor_metadata::REACTIVITY), \
             AMP_GAIN100("scp", "Sidechain preamp", GAIN_AMP_0_DB), \
             COMBO("shpm", "High-pass filter mode", 0, comp_filter_slope),      \
-            LOG_CONTROL("shpf", "High-pass filter frequency", U_HZ, compressor_metadata::HPF),   \
+            LOG_CONTROL("shpf", "High-pass filter frequency", "HPF freq", U_HZ, compressor_metadata::HPF),   \
             COMBO("slpm", "Low-pass filter mode", 0, comp_filter_slope),      \
-            LOG_CONTROL("slpf", "Low-pass filter frequency", U_HZ, compressor_metadata::LPF)
+            LOG_CONTROL("slpf", "Low-pass filter frequency", "LPF freq", U_HZ, compressor_metadata::LPF)
 
-        #define COMP_SC_STEREO_CHANNEL(id, label, sct) \
+        #define COMP_SC_STEREO_CHANNEL(id, label, alias, sct) \
             COMBO("sct" id, "Sidechain type" label, compressor_metadata::SC_TYPE_DFL, sct), \
             COMBO("scm" id, "Sidechain mode" label, compressor_metadata::SC_MODE_DFL, comp_sc_modes), \
             CONTROL("sla" id, "Sidechain lookahead" label, U_MSEC, compressor_metadata::LOOKAHEAD), \
             SWITCH("scl" id, "Sidechain listen" label, 0.0f), \
             COMBO("scs" id, "Sidechain source" label, compressor_metadata::SC_SOURCE_DFL, comp_sc_sources), \
-            LOG_CONTROL("scr" id, "Sidechain reactivity" label, U_MSEC, compressor_metadata::REACTIVITY), \
+            LOG_CONTROL("scr" id, "Sidechain reactivity" label, "SC react" alias, U_MSEC, compressor_metadata::REACTIVITY), \
             AMP_GAIN100("scp" id, "Sidechain preamp" label, GAIN_AMP_0_DB), \
             COMBO("shpm" id, "High-pass filter mode" label, 0, comp_filter_slope),      \
-            LOG_CONTROL("shpf" id, "High-pass filter frequency" label, U_HZ, compressor_metadata::HPF),   \
+            LOG_CONTROL("shpf" id, "High-pass filter frequency" label, "HPF freq" alias, U_HZ, compressor_metadata::HPF),   \
             COMBO("slpm" id, "Low-pass filter mode" label, 0, comp_filter_slope),      \
-            LOG_CONTROL("slpf" id, "Low-pass filter frequency" label, U_HZ, compressor_metadata::LPF)
+            LOG_CONTROL("slpf" id, "Low-pass filter frequency" label, "LPF freq" alias, U_HZ, compressor_metadata::LPF)
 
-        #define COMP_CHANNEL(id, label, modes) \
+        #define COMP_CHANNEL(id, label, alias, modes) \
             COMBO("cm" id, "Compression mode" label, compressor_metadata::CM_DEFAULT, modes), \
-            LOG_CONTROL("al" id, "Attack threshold" label, U_GAIN_AMP, compressor_metadata::ATTACK_LVL), \
-            LOG_CONTROL("at" id, "Attack time" label, U_MSEC, compressor_metadata::ATTACK_TIME), \
-            LOG_CONTROL("rrl" id, "Release threshold" label, U_GAIN_AMP, compressor_metadata::RELEASE_LVL), \
-            LOG_CONTROL("rt" id, "Release time" label, U_MSEC, compressor_metadata::RELEASE_TIME), \
+            LOG_CONTROL("al" id, "Attack threshold" label, "Att lvl" alias, U_GAIN_AMP, compressor_metadata::ATTACK_LVL), \
+            LOG_CONTROL("at" id, "Attack time" label, "Att time" alias, U_MSEC, compressor_metadata::ATTACK_TIME), \
+            LOG_CONTROL("rrl" id, "Release threshold" label, "Rel lvl" alias, U_GAIN_AMP, compressor_metadata::RELEASE_LVL), \
+            LOG_CONTROL("rt" id, "Release time" label, "Rel time" alias, U_MSEC, compressor_metadata::RELEASE_TIME), \
             CONTROL("hold" id, "Hold time" label, U_MSEC, compressor_metadata::HOLD_TIME), \
-            LOG_CONTROL("cr" id, "Ratio" label, U_NONE, compressor_metadata::RATIO), \
-            LOG_CONTROL("kn" id, "Knee" label, U_GAIN_AMP, compressor_metadata::KNEE), \
+            LOG_CONTROL("cr" id, "Ratio" label, "Ratio" alias, U_NONE, compressor_metadata::RATIO), \
+            LOG_CONTROL("kn" id, "Knee" label, "Knee" alias, U_GAIN_AMP, compressor_metadata::KNEE), \
             EXT_LOG_CONTROL("bth" id, "Boost threshold" label, U_GAIN_AMP, compressor_metadata::BTH), \
             EXT_LOG_CONTROL("bsa" id, "Boost signal amount" label, U_GAIN_AMP, compressor_metadata::BSA), \
-            LOG_CONTROL("mk" id, "Makeup gain" label, U_GAIN_AMP, compressor_metadata::MAKEUP), \
+            LOG_CONTROL("mk" id, "Makeup gain" label, "Makeup" alias, U_GAIN_AMP, compressor_metadata::MAKEUP), \
             AMP_GAIN10("cdr" id, "Dry gain" label, GAIN_AMP_M_INF_DB),     \
             AMP_GAIN10("cwt" id, "Wet gain" label, GAIN_AMP_0_DB), \
             PERCENTS("cdw" id, "Dry/Wet balance" label, 100.0f, 0.1f), \
@@ -199,7 +199,7 @@ namespace lsp
             COMP_SHM_LINK_MONO,
             COMP_COMMON,
             COMP_SC_MONO_CHANNEL(comp_sc_type),
-            COMP_CHANNEL("", "", comp_modes),
+            COMP_CHANNEL("", "", "", comp_modes),
             COMP_AUDIO_METER("", ""),
 
             PORTS_END
@@ -211,8 +211,8 @@ namespace lsp
             COMP_SHM_LINK_STEREO,
             COMP_COMMON,
             COMP_SPLIT_COMMON,
-            COMP_SC_STEREO_CHANNEL("", "", comp_sc_type),
-            COMP_CHANNEL("", "", comp_modes),
+            COMP_SC_STEREO_CHANNEL("", "", "", comp_sc_type),
+            COMP_CHANNEL("", "", "", comp_modes),
             COMP_AUDIO_METER("_l", " Left"),
             COMP_AUDIO_METER("_r", " Right"),
 
@@ -224,10 +224,10 @@ namespace lsp
             PORTS_STEREO_PLUGIN,
             COMP_SHM_LINK_STEREO,
             COMP_COMMON,
-            COMP_SC_STEREO_CHANNEL("_l", " Left", comp_sc_type),
-            COMP_SC_STEREO_CHANNEL("_r", " Right", comp_sc_type),
-            COMP_CHANNEL("_l", " Left", comp_modes),
-            COMP_CHANNEL("_r", " Right", comp_modes),
+            COMP_SC_STEREO_CHANNEL("_l", " Left", " L", comp_sc_type),
+            COMP_SC_STEREO_CHANNEL("_r", " Right", " R", comp_sc_type),
+            COMP_CHANNEL("_l", " Left", " L", comp_modes),
+            COMP_CHANNEL("_r", " Right", " R", comp_modes),
             COMP_AUDIO_METER("_l", " Left"),
             COMP_AUDIO_METER("_r", " Right"),
 
@@ -239,10 +239,10 @@ namespace lsp
             PORTS_STEREO_PLUGIN,
             COMP_SHM_LINK_STEREO,
             COMP_MS_COMMON,
-            COMP_SC_STEREO_CHANNEL("_m", " Mid", comp_sc_type),
-            COMP_SC_STEREO_CHANNEL("_s", " Side", comp_sc_type),
-            COMP_CHANNEL("_m", " Mid", comp_modes),
-            COMP_CHANNEL("_s", " Side", comp_modes),
+            COMP_SC_STEREO_CHANNEL("_m", " Mid", " M", comp_sc_type),
+            COMP_SC_STEREO_CHANNEL("_s", " Side", " S", comp_sc_type),
+            COMP_CHANNEL("_m", " Mid", " M", comp_modes),
+            COMP_CHANNEL("_s", " Side", " S", comp_modes),
             COMP_AUDIO_METER("_m", " Mid"),
             COMP_AUDIO_METER("_s", " Side"),
 
@@ -256,7 +256,7 @@ namespace lsp
             COMP_SHM_LINK_MONO,
             COMP_COMMON,
             COMP_SC_MONO_CHANNEL(comp_sc2_type),
-            COMP_CHANNEL("", "", comp_modes),
+            COMP_CHANNEL("", "", "", comp_modes),
             COMP_AUDIO_METER("", ""),
 
             PORTS_END
@@ -269,8 +269,8 @@ namespace lsp
             COMP_SHM_LINK_STEREO,
             COMP_COMMON,
             COMP_SPLIT_COMMON,
-            COMP_SC_STEREO_CHANNEL("", "", comp_sc2_type),
-            COMP_CHANNEL("", "", comp_modes),
+            COMP_SC_STEREO_CHANNEL("", "", "", comp_sc2_type),
+            COMP_CHANNEL("", "", "", comp_modes),
             COMP_AUDIO_METER("_l", " Left"),
             COMP_AUDIO_METER("_r", " Right"),
 
@@ -283,10 +283,10 @@ namespace lsp
             PORTS_STEREO_SIDECHAIN,
             COMP_SHM_LINK_STEREO,
             COMP_COMMON,
-            COMP_SC_STEREO_CHANNEL("_l", " Left", comp_sc2_type),
-            COMP_SC_STEREO_CHANNEL("_r", " Right", comp_sc2_type),
-            COMP_CHANNEL("_l", " Left", comp_modes),
-            COMP_CHANNEL("_r", " Right", comp_modes),
+            COMP_SC_STEREO_CHANNEL("_l", " Left", " L", comp_sc2_type),
+            COMP_SC_STEREO_CHANNEL("_r", " Right", " R", comp_sc2_type),
+            COMP_CHANNEL("_l", " Left", " L", comp_modes),
+            COMP_CHANNEL("_r", " Right", " R", comp_modes),
             COMP_AUDIO_METER("_l", " Left"),
             COMP_AUDIO_METER("_r", " Right"),
 
@@ -299,10 +299,10 @@ namespace lsp
             PORTS_STEREO_SIDECHAIN,
             COMP_SHM_LINK_STEREO,
             COMP_MS_COMMON,
-            COMP_SC_STEREO_CHANNEL("_m", " Mid", comp_sc2_type),
-            COMP_SC_STEREO_CHANNEL("_s", " Side", comp_sc2_type),
-            COMP_CHANNEL("_m", " Mid", comp_modes),
-            COMP_CHANNEL("_s", " Side", comp_modes),
+            COMP_SC_STEREO_CHANNEL("_m", " Mid", " M", comp_sc2_type),
+            COMP_SC_STEREO_CHANNEL("_s", " Side", " S", comp_sc2_type),
+            COMP_CHANNEL("_m", " Mid", " M", comp_modes),
+            COMP_CHANNEL("_s", " Side", " S", comp_modes),
             COMP_AUDIO_METER("_m", " Mid"),
             COMP_AUDIO_METER("_s", " Side"),
 
