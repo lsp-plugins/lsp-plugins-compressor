@@ -166,8 +166,8 @@ namespace lsp
             CONTROL("hold" id, "Hold time" label, U_MSEC, compressor_metadata::HOLD_TIME), \
             LOG_CONTROL("cr" id, "Ratio" label, "Ratio" alias, U_NONE, compressor_metadata::RATIO), \
             LOG_CONTROL("kn" id, "Knee" label, "Knee" alias, U_GAIN_AMP, compressor_metadata::KNEE), \
-            EXT_LOG_CONTROL("bth" id, "Boost threshold" label, U_GAIN_AMP, compressor_metadata::BTH), \
-            EXT_LOG_CONTROL("bsa" id, "Boost signal amount" label, U_GAIN_AMP, compressor_metadata::BSA), \
+            EXT_LOG_CONTROL("bth" id, "Boost threshold" label, "Boost" alias, U_GAIN_AMP, compressor_metadata::BTH), \
+            EXT_LOG_CONTROL("bsa" id, "Boost signal amount" label, "Boost lvl" alias, U_GAIN_AMP, compressor_metadata::BSA), \
             LOG_CONTROL("mk" id, "Makeup gain" label, "Makeup" alias, U_GAIN_AMP, compressor_metadata::MAKEUP), \
             AMP_GAIN10("cdr" id, "Dry gain" label, GAIN_AMP_M_INF_DB),     \
             AMP_GAIN10("cwt" id, "Wet gain" label, GAIN_AMP_0_DB), \
