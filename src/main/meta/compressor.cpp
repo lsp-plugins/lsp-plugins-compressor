@@ -135,7 +135,7 @@ namespace lsp
         #define COMP_SC_MONO_CHANNEL(sct) \
             COMBO("sct", "Sidechain type", "SC type", compressor_metadata::SC_TYPE_DFL, sct), \
             COMBO("scm", "Sidechain mode", "SC mode", compressor_metadata::SC_MODE_DFL, comp_sc_modes), \
-            CONTROL("sla", "Sidechain lookahead", U_MSEC, compressor_metadata::LOOKAHEAD), \
+            CONTROL("sla", "Sidechain lookahead", "SC look", U_MSEC, compressor_metadata::LOOKAHEAD), \
             SWITCH("scl", "Sidechain listen", "SC listen", 0.0f), \
             LOG_CONTROL("scr", "Sidechain reactivity", "SC react", U_MSEC, compressor_metadata::REACTIVITY), \
             AMP_GAIN100("scp", "Sidechain preamp", GAIN_AMP_0_DB), \
@@ -147,7 +147,7 @@ namespace lsp
         #define COMP_SC_STEREO_CHANNEL(id, label, alias, sct) \
             COMBO("sct" id, "Sidechain type" label, "SC type" alias, compressor_metadata::SC_TYPE_DFL, sct), \
             COMBO("scm" id, "Sidechain mode" label, "SC mode" alias, compressor_metadata::SC_MODE_DFL, comp_sc_modes), \
-            CONTROL("sla" id, "Sidechain lookahead" label, U_MSEC, compressor_metadata::LOOKAHEAD), \
+            CONTROL("sla" id, "Sidechain lookahead" label, "SC look" alias, U_MSEC, compressor_metadata::LOOKAHEAD), \
             SWITCH("scl" id, "Sidechain listen" label, "SC listen" alias, 0.0f), \
             COMBO("scs" id, "Sidechain source" label, "SC source" alias, compressor_metadata::SC_SOURCE_DFL, comp_sc_sources), \
             LOG_CONTROL("scr" id, "Sidechain reactivity" label, "SC react" alias, U_MSEC, compressor_metadata::REACTIVITY), \
@@ -163,7 +163,7 @@ namespace lsp
             LOG_CONTROL("at" id, "Attack time" label, "Att time" alias, U_MSEC, compressor_metadata::ATTACK_TIME), \
             LOG_CONTROL("rrl" id, "Release threshold" label, "Rel lvl" alias, U_GAIN_AMP, compressor_metadata::RELEASE_LVL), \
             LOG_CONTROL("rt" id, "Release time" label, "Rel time" alias, U_MSEC, compressor_metadata::RELEASE_TIME), \
-            CONTROL("hold" id, "Hold time" label, U_MSEC, compressor_metadata::HOLD_TIME), \
+            CONTROL("hold" id, "Hold time" label, "Hold time" alias, U_MSEC, compressor_metadata::HOLD_TIME), \
             LOG_CONTROL("cr" id, "Ratio" label, "Ratio" alias, U_NONE, compressor_metadata::RATIO), \
             LOG_CONTROL("kn" id, "Knee" label, "Knee" alias, U_GAIN_AMP, compressor_metadata::KNEE), \
             EXT_LOG_CONTROL("bth" id, "Boost threshold" label, "Boost" alias, U_GAIN_AMP, compressor_metadata::BTH), \
