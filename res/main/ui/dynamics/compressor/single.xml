@@ -10,6 +10,18 @@
 
 	<ui:eval id="clr_a" value="(:mid_side) ? 'mid' : 'left'"/>
 	<ui:eval id="clr_b" value="(:mid_side) ? 'side' : 'right'"/>
+	
+	<!-- Control linking -->
+	<ui:if test=":left_right or :mid_side">
+		<ui:for id="port"
+			list="'sct'; 'scm'; 'sla'; 'scl'; 'scs'; 'scr'; 'scp'; 'shpm'; 'shpf'; 'slpm'; 'slpf';
+				'cm'; 'al'; 'at'; 'rrl'; 'rt'; 'hold'; 'cr'; 'kn'; 'bth'; 'bsa'; 'mk'; 'cdr'; 'cwt'; 'cdw'">
+			<ctl:link
+				id.1="${port}_${xa}" value.1=":${port}_${xb}"
+				id.2="${port}_${xb}" value.2=":${port}_${xa}"
+				activity=":clink" />
+		</ui:for>
+	</ui:if>
 
 	<vbox>
 		<!-- Top part -->
@@ -114,6 +126,12 @@
 				<hbox spacing="4" vexpand="false" bg.color="bg_schema" pad.h="6">
 					<button id="pause" height="22" width="48" text="labels.pause" pad.v="4" ui:inject="Button_green"/>
 					<button id="clear" height="22" width="48" text="labels.clear" pad.v="4" ui:inject="Button_red"/>
+					<ui:if test=":left_right">
+						<button id="clink" ui:inject="Button_green" text="labels.chan.lr_link" />
+					</ui:if>
+					<ui:if test=":mid_side">
+						<button id="clink" ui:inject="Button_green" text="labels.chan.ms_link" />
+					</ui:if>
 					<void hexpand="true"/>
 
 					<ui:if test=":mid_side">

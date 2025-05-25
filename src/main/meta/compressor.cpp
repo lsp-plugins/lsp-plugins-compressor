@@ -193,6 +193,9 @@ namespace lsp
             METER_GAIN("ilm" id, "Input level meter" label, GAIN_AMP_P_36_DB), \
             METER_GAIN("olm" id, "Output level meter" label, GAIN_AMP_P_36_DB)
 
+        #define COMP_LINK(id, label, alias) \
+            SWITCH(id, label, alias, 0.0f)
+
         static const port_t compressor_mono_ports[] =
         {
             PORTS_MONO_PLUGIN,
@@ -224,6 +227,7 @@ namespace lsp
             PORTS_STEREO_PLUGIN,
             COMP_SHM_LINK_STEREO,
             COMP_COMMON,
+            COMP_LINK("clink", "Left/Right controls link", "L/R link"),
             COMP_SC_STEREO_CHANNEL("_l", " Left", " L", comp_sc_type),
             COMP_SC_STEREO_CHANNEL("_r", " Right", " R", comp_sc_type),
             COMP_CHANNEL("_l", " Left", " L", comp_modes),
@@ -239,6 +243,7 @@ namespace lsp
             PORTS_STEREO_PLUGIN,
             COMP_SHM_LINK_STEREO,
             COMP_MS_COMMON,
+            COMP_LINK("clink", "Mid/Side controls link", "M/S link"),
             COMP_SC_STEREO_CHANNEL("_m", " Mid", " M", comp_sc_type),
             COMP_SC_STEREO_CHANNEL("_s", " Side", " S", comp_sc_type),
             COMP_CHANNEL("_m", " Mid", " M", comp_modes),
@@ -283,6 +288,7 @@ namespace lsp
             PORTS_STEREO_SIDECHAIN,
             COMP_SHM_LINK_STEREO,
             COMP_COMMON,
+            COMP_LINK("clink", "Left/Right controls link", "L/R link"),
             COMP_SC_STEREO_CHANNEL("_l", " Left", " L", comp_sc2_type),
             COMP_SC_STEREO_CHANNEL("_r", " Right", " R", comp_sc2_type),
             COMP_CHANNEL("_l", " Left", " L", comp_modes),
@@ -299,6 +305,7 @@ namespace lsp
             PORTS_STEREO_SIDECHAIN,
             COMP_SHM_LINK_STEREO,
             COMP_MS_COMMON,
+            COMP_LINK("clink", "Mid/Side controls link", "M/S link"),
             COMP_SC_STEREO_CHANNEL("_m", " Mid", " M", comp_sc2_type),
             COMP_SC_STEREO_CHANNEL("_s", " Side", " S", comp_sc2_type),
             COMP_CHANNEL("_m", " Mid", " M", comp_modes),
