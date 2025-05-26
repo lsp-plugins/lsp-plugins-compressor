@@ -44,8 +44,11 @@ keeping the same settings for the left and right channels.</p>
 	<li><b>Clear</b> - clears all graphs.</li>
 	<?php if ($m == 's') { ?>
 		<li><b>Stereo Split</b> - enables independent compression of left and right channels.</li>
+	<?php } else if ($m == 'lr') { ?>
+		<li><b>L/R Link</b> - enables linking between Left and Right channel controls so change of one forces the sibling to become the same value.</li>
 	<?php } elseif ($m == 'ms') { ?>
 		<li><b>MS Listen</b> - passes mid-side signal to the output of compressor instead of stereo signal.</li>
+		<li><b>M/S Link</b> - enables linking between Mid and Side channel controls so change of one forces the sibling to become the same value.</li>
 	<?php } ?>
 	<li><b>Gain<?= $sm ?></b> - enables drawing of gain amplification line and corresponding amplification meter.</li>
 	<li><b>SC<?= $sm ?></b> - enables drawing of sidechain input graph and corresponding level meter.</li>
