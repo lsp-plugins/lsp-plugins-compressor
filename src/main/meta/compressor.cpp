@@ -118,6 +118,18 @@ namespace lsp
             SWITCH("pause", "Pause graph analysis", "Pause", 0.0f), \
             TRIGGER("clear", "Clear graph analysis", "Clear")
 
+        #define COMP_PREMIX \
+            SWITCH("showpmx", "Show pre-mix overlay", "Show premix bar", 0.0f), \
+            AMP_GAIN10("in2lk", "Input to Link mix", "In to Link mix", GAIN_AMP_M_INF_DB), \
+            AMP_GAIN10("lk2in", "Link to Input mix", "Link to In mix", GAIN_AMP_M_INF_DB), \
+            AMP_GAIN10("lk2sc", "Link to Sidechain mix", "Link to SC mix", GAIN_AMP_M_INF_DB) \
+
+        #define COMP_SC_PREMIX \
+            COMP_PREMIX, \
+            AMP_GAIN10("in2sc", "Input to Sidechain mix", "In to SC mix", GAIN_AMP_M_INF_DB), \
+            AMP_GAIN10("sc2in", "Sidechain to Input mix", "SC to In mix", GAIN_AMP_M_INF_DB), \
+            AMP_GAIN10("sc2lk", "Sidechain to Link mix", "SC to Link mix", GAIN_AMP_M_INF_DB) \
+
         #define COMP_MS_COMMON  \
             COMP_COMMON,        \
             SWITCH("msl", "Mid/Side listen", "M/S listen", 0.0f)
@@ -200,6 +212,7 @@ namespace lsp
         {
             PORTS_MONO_PLUGIN,
             COMP_SHM_LINK_MONO,
+            COMP_PREMIX,
             COMP_COMMON,
             COMP_SC_MONO_CHANNEL(comp_sc_type),
             COMP_CHANNEL("", "", "", comp_modes),
@@ -212,6 +225,7 @@ namespace lsp
         {
             PORTS_STEREO_PLUGIN,
             COMP_SHM_LINK_STEREO,
+            COMP_PREMIX,
             COMP_COMMON,
             COMP_SPLIT_COMMON,
             COMP_SC_STEREO_CHANNEL("", "", "", comp_sc_type),
@@ -226,6 +240,7 @@ namespace lsp
         {
             PORTS_STEREO_PLUGIN,
             COMP_SHM_LINK_STEREO,
+            COMP_PREMIX,
             COMP_COMMON,
             COMP_LINK("clink", "Left/Right controls link", "L/R link"),
             COMP_SC_STEREO_CHANNEL("_l", " Left", " L", comp_sc_type),
@@ -242,6 +257,7 @@ namespace lsp
         {
             PORTS_STEREO_PLUGIN,
             COMP_SHM_LINK_STEREO,
+            COMP_PREMIX,
             COMP_MS_COMMON,
             COMP_LINK("clink", "Mid/Side controls link", "M/S link"),
             COMP_SC_STEREO_CHANNEL("_m", " Mid", " M", comp_sc_type),
@@ -259,6 +275,7 @@ namespace lsp
             PORTS_MONO_PLUGIN,
             PORTS_MONO_SIDECHAIN,
             COMP_SHM_LINK_MONO,
+            COMP_SC_PREMIX,
             COMP_COMMON,
             COMP_SC_MONO_CHANNEL(comp_sc2_type),
             COMP_CHANNEL("", "", "", comp_modes),
@@ -272,6 +289,7 @@ namespace lsp
             PORTS_STEREO_PLUGIN,
             PORTS_STEREO_SIDECHAIN,
             COMP_SHM_LINK_STEREO,
+            COMP_SC_PREMIX,
             COMP_COMMON,
             COMP_SPLIT_COMMON,
             COMP_SC_STEREO_CHANNEL("", "", "", comp_sc2_type),
@@ -287,6 +305,7 @@ namespace lsp
             PORTS_STEREO_PLUGIN,
             PORTS_STEREO_SIDECHAIN,
             COMP_SHM_LINK_STEREO,
+            COMP_SC_PREMIX,
             COMP_COMMON,
             COMP_LINK("clink", "Left/Right controls link", "L/R link"),
             COMP_SC_STEREO_CHANNEL("_l", " Left", " L", comp_sc2_type),
@@ -304,6 +323,7 @@ namespace lsp
             PORTS_STEREO_PLUGIN,
             PORTS_STEREO_SIDECHAIN,
             COMP_SHM_LINK_STEREO,
+            COMP_SC_PREMIX,
             COMP_MS_COMMON,
             COMP_LINK("clink", "Mid/Side controls link", "M/S link"),
             COMP_SC_STEREO_CHANNEL("_m", " Mid", " M", comp_sc2_type),
