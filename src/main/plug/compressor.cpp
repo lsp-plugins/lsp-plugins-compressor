@@ -912,7 +912,7 @@ namespace lsp
                 // Initialize pointers
                 sPremix.vIn[i]      = c->pIn->buffer<float>();
                 sPremix.vOut[i]     = c->pOut->buffer<float>();
-                sPremix.vSc[i]      = (c->pSC != NULL) ? c->pSC->buffer<float>() : in_buf[i];
+                sPremix.vSc[i]      = (c->pSC != NULL) ? c->pSC->buffer<float>() : sPremix.vIn[i];
                 sPremix.vLink[i]    = NULL;
 
                 core::AudioBuffer *buf = (c->pShmIn != NULL) ? c->pShmIn->buffer<core::AudioBuffer>() : NULL;

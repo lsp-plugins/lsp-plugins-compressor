@@ -85,9 +85,9 @@ namespace lsp
 
         static const port_item_t comp_sc2_type[] =
         {
-            { "External",       "sidechain.external" },
             { "Feed-forward",   "sidechain.feed_forward" },
             { "Feed-back",      "sidechain.feed_back" },
+            { "External",       "sidechain.external" },
             { "Link",           "sidechain.link" },
             { NULL, NULL }
         };
@@ -144,8 +144,8 @@ namespace lsp
         #define COMP_SHM_LINK_STEREO \
             OPT_RETURN_STEREO("link", "shml_", "Side-chain shared memory link")
 
-        #define COMP_SC_MONO_CHANNEL(sct) \
-            COMBO("sct", "Sidechain type", "SC type", compressor_metadata::SC_TYPE_DFL, sct), \
+        #define COMP_SC_MONO_CHANNEL(sct, sct_dfl) \
+            COMBO("sct", "Sidechain type", "SC type", sct_dfl, sct), \
             COMBO("scm", "Sidechain mode", "SC mode", compressor_metadata::SC_MODE_DFL, comp_sc_modes), \
             CONTROL("sla", "Sidechain lookahead", "SC look", U_MSEC, compressor_metadata::LOOKAHEAD), \
             SWITCH("scl", "Sidechain listen", "SC listen", 0.0f), \
@@ -156,8 +156,8 @@ namespace lsp
             COMBO("slpm", "Low-pass filter mode", "LPF mode", 0, comp_filter_slope),      \
             LOG_CONTROL("slpf", "Low-pass filter frequency", "LPF freq", U_HZ, compressor_metadata::LPF)
 
-        #define COMP_SC_STEREO_CHANNEL(id, label, alias, sct) \
-            COMBO("sct" id, "Sidechain type" label, "SC type" alias, compressor_metadata::SC_TYPE_DFL, sct), \
+        #define COMP_SC_STEREO_CHANNEL(id, label, alias, sct, sct_dfl) \
+            COMBO("sct" id, "Sidechain type" label, "SC type" alias, sct_dfl, sct), \
             COMBO("scm" id, "Sidechain mode" label, "SC mode" alias, compressor_metadata::SC_MODE_DFL, comp_sc_modes), \
             CONTROL("sla" id, "Sidechain lookahead" label, "SC look" alias, U_MSEC, compressor_metadata::LOOKAHEAD), \
             SWITCH("scl" id, "Sidechain listen" label, "SC listen" alias, 0.0f), \
@@ -214,7 +214,7 @@ namespace lsp
             COMP_SHM_LINK_MONO,
             COMP_PREMIX,
             COMP_COMMON,
-            COMP_SC_MONO_CHANNEL(comp_sc_type),
+            COMP_SC_MONO_CHANNEL(comp_sc_type, 0),
             COMP_CHANNEL("", "", "", comp_modes),
             COMP_AUDIO_METER("", "", ""),
 
@@ -228,7 +228,7 @@ namespace lsp
             COMP_PREMIX,
             COMP_COMMON,
             COMP_SPLIT_COMMON,
-            COMP_SC_STEREO_CHANNEL("", "", "", comp_sc_type),
+            COMP_SC_STEREO_CHANNEL("", "", "", comp_sc_type, 0),
             COMP_CHANNEL("", "", "", comp_modes),
             COMP_AUDIO_METER("_l", " Left", " L"),
             COMP_AUDIO_METER("_r", " Right", " R"),
@@ -243,8 +243,8 @@ namespace lsp
             COMP_PREMIX,
             COMP_COMMON,
             COMP_LINK("clink", "Left/Right controls link", "L/R link"),
-            COMP_SC_STEREO_CHANNEL("_l", " Left", " L", comp_sc_type),
-            COMP_SC_STEREO_CHANNEL("_r", " Right", " R", comp_sc_type),
+            COMP_SC_STEREO_CHANNEL("_l", " Left", " L", comp_sc_type, 0),
+            COMP_SC_STEREO_CHANNEL("_r", " Right", " R", comp_sc_type, 0),
             COMP_CHANNEL("_l", " Left", " L", comp_modes),
             COMP_CHANNEL("_r", " Right", " R", comp_modes),
             COMP_AUDIO_METER("_l", " Left", " L"),
@@ -260,8 +260,8 @@ namespace lsp
             COMP_PREMIX,
             COMP_MS_COMMON,
             COMP_LINK("clink", "Mid/Side controls link", "M/S link"),
-            COMP_SC_STEREO_CHANNEL("_m", " Mid", " M", comp_sc_type),
-            COMP_SC_STEREO_CHANNEL("_s", " Side", " S", comp_sc_type),
+            COMP_SC_STEREO_CHANNEL("_m", " Mid", " M", comp_sc_type, 0),
+            COMP_SC_STEREO_CHANNEL("_s", " Side", " S", comp_sc_type, 0),
             COMP_CHANNEL("_m", " Mid", " M", comp_modes),
             COMP_CHANNEL("_s", " Side", " S", comp_modes),
             COMP_AUDIO_METER("_m", " Mid", " M"),
@@ -277,7 +277,7 @@ namespace lsp
             COMP_SHM_LINK_MONO,
             COMP_SC_PREMIX,
             COMP_COMMON,
-            COMP_SC_MONO_CHANNEL(comp_sc2_type),
+            COMP_SC_MONO_CHANNEL(comp_sc2_type, 2),
             COMP_CHANNEL("", "", "", comp_modes),
             COMP_AUDIO_METER("", "", ""),
 
@@ -292,7 +292,7 @@ namespace lsp
             COMP_SC_PREMIX,
             COMP_COMMON,
             COMP_SPLIT_COMMON,
-            COMP_SC_STEREO_CHANNEL("", "", "", comp_sc2_type),
+            COMP_SC_STEREO_CHANNEL("", "", "", comp_sc2_type, 2),
             COMP_CHANNEL("", "", "", comp_modes),
             COMP_AUDIO_METER("_l", " Left", " L"),
             COMP_AUDIO_METER("_r", " Right", " R"),
@@ -308,8 +308,8 @@ namespace lsp
             COMP_SC_PREMIX,
             COMP_COMMON,
             COMP_LINK("clink", "Left/Right controls link", "L/R link"),
-            COMP_SC_STEREO_CHANNEL("_l", " Left", " L", comp_sc2_type),
-            COMP_SC_STEREO_CHANNEL("_r", " Right", " R", comp_sc2_type),
+            COMP_SC_STEREO_CHANNEL("_l", " Left", " L", comp_sc2_type, 2),
+            COMP_SC_STEREO_CHANNEL("_r", " Right", " R", comp_sc2_type, 2),
             COMP_CHANNEL("_l", " Left", " L", comp_modes),
             COMP_CHANNEL("_r", " Right", " R", comp_modes),
             COMP_AUDIO_METER("_l", " Left", " L"),
@@ -326,8 +326,8 @@ namespace lsp
             COMP_SC_PREMIX,
             COMP_MS_COMMON,
             COMP_LINK("clink", "Mid/Side controls link", "M/S link"),
-            COMP_SC_STEREO_CHANNEL("_m", " Mid", " M", comp_sc2_type),
-            COMP_SC_STEREO_CHANNEL("_s", " Side", " S", comp_sc2_type),
+            COMP_SC_STEREO_CHANNEL("_m", " Mid", " M", comp_sc2_type, 2),
+            COMP_SC_STEREO_CHANNEL("_s", " Side", " S", comp_sc2_type, 2),
             COMP_CHANNEL("_m", " Mid", " M", comp_modes),
             COMP_CHANNEL("_s", " Side", " S", comp_modes),
             COMP_AUDIO_METER("_m", " Mid", " M"),
