@@ -620,7 +620,7 @@
 	<!-- Premix overlay -->
 	<overlay id="showpmx" trigger="premix_trigger" hpos="1" vpos="1" halign="-1" valign="1" ipadding.t="4">
 		<group text="groups.premix" vexpand="false" ipadding="0">
-			<grid rows="3" cols="${(:is_sidechain) ? 8 : 5}" spacing="0" bg.color="bg_schema" transpose="true">
+			<grid rows="3" cols="${(:is_sidechain) ? 8 : 5}" spacing="0" bg.color="bg_schema" transpose="true" height="139">
 				<ui:if test=":is_sidechain">
 					<label text="labels.premix.in_to_sc" pad.h="6" pad.v="4" />
 					<knob id="in2sc" />

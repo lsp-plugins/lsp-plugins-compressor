@@ -1469,6 +1469,32 @@ namespace lsp
             v->write("fInGain", fInGain);
             v->write("bUISync", bUISync);
             v->write("pIDisplay", pIDisplay);
+
+            v->begin_object("premix", &sPremix, sizeof(premix_t));
+            {
+                v->write("fInToSc", sPremix.fInToSc);
+                v->write("fInToLink", sPremix.fInToLink);
+                v->write("fLinkToIn", sPremix.fLinkToIn);
+                v->write("fLinkToSc", sPremix.fLinkToSc);
+                v->write("fScToIn", sPremix.fScToIn);
+                v->write("fScToLink", sPremix.fScToLink);
+
+                v->writev("vIn", sPremix.vIn, 2);
+                v->writev("vOut", sPremix.vOut, 2);
+                v->writev("vSc", sPremix.vSc, 2);
+                v->writev("vLink", sPremix.vLink, 2);
+                v->writev("vTmpIn", sPremix.vTmpIn, 2);
+                v->writev("vTmpLink", sPremix.vTmpLink, 2);
+                v->writev("vTmpSc", sPremix.vTmpSc, 2);
+
+                v->write("pInToSc", sPremix.pInToSc);
+                v->write("pInToLink", sPremix.pInToLink);
+                v->write("pLinkToIn", sPremix.pLinkToIn);
+                v->write("pLinkToSc", sPremix.pLinkToSc);
+                v->write("pScToIn", sPremix.pScToIn);
+                v->write("pScToLink", sPremix.pScToLink);
+            }
+
             v->write("pBypass", pBypass);
             v->write("pInGain", pInGain);
             v->write("pOutGain", pOutGain);
