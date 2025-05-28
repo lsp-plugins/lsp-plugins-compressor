@@ -109,15 +109,6 @@ namespace lsp
             { NULL, NULL }
         };
 
-        #define COMP_COMMON     \
-            BYPASS,             \
-            IN_GAIN,            \
-            OUT_GAIN,           \
-            SWITCH("showmx", "Show mix overlay", "Show mix bar", 0.0f), \
-            SWITCH("showsc", "Show sidechain overlay", "Show SC bar", 0.0f), \
-            SWITCH("pause", "Pause graph analysis", "Pause", 0.0f), \
-            TRIGGER("clear", "Clear graph analysis", "Clear")
-
         #define COMP_PREMIX \
             SWITCH("showpmx", "Show pre-mix overlay", "Show premix bar", 0.0f), \
             AMP_GAIN10("in2lk", "Input to Link mix", "In to Link mix", GAIN_AMP_M_INF_DB), \
@@ -129,6 +120,15 @@ namespace lsp
             AMP_GAIN10("in2sc", "Input to Sidechain mix", "In to SC mix", GAIN_AMP_M_INF_DB), \
             AMP_GAIN10("sc2in", "Sidechain to Input mix", "SC to In mix", GAIN_AMP_M_INF_DB), \
             AMP_GAIN10("sc2lk", "Sidechain to Link mix", "SC to Link mix", GAIN_AMP_M_INF_DB) \
+
+        #define COMP_COMMON     \
+            BYPASS,             \
+            IN_GAIN,            \
+            OUT_GAIN,           \
+            SWITCH("showmx", "Show mix overlay", "Show mix bar", 0.0f), \
+            SWITCH("showsc", "Show sidechain overlay", "Show SC bar", 0.0f), \
+            SWITCH("pause", "Pause graph analysis", "Pause", 0.0f), \
+            TRIGGER("clear", "Clear graph analysis", "Clear")
 
         #define COMP_MS_COMMON  \
             COMP_COMMON,        \
