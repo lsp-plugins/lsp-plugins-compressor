@@ -1470,7 +1470,7 @@ namespace lsp
             v->write("bUISync", bUISync);
             v->write("pIDisplay", pIDisplay);
 
-            v->begin_object("premix", &sPremix, sizeof(premix_t));
+            v->begin_object("sPremix", &sPremix, sizeof(premix_t));
             {
                 v->write("fInToSc", sPremix.fInToSc);
                 v->write("fInToLink", sPremix.fInToLink);
