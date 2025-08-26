@@ -90,70 +90,96 @@ namespace lsp
                     S_ALL       = S_CURVE
                 };
 
+                typedef struct premix_t
+                {
+                    float               fInToSc;                // Input -> Sidechain mix
+                    float               fInToLink;              // Input -> Link mix
+                    float               fLinkToIn;              // Link -> Input mix
+                    float               fLinkToSc;              // Link -> Sidechain mix
+                    float               fScToIn;                // Sidechain -> Input mix
+                    float               fScToLink;              // Sidechain -> Link mix
+
+                    float              *vIn[2];                 // Input buffer
+                    float              *vOut[2];                // Output buffer
+                    float              *vSc[2];                 // Sidechain buffer
+                    float              *vLink[2];               // Link buffer
+
+                    float              *vTmpIn[2];              // Replacement buffer for input
+                    float              *vTmpLink[2];            // Replacement buffer for link
+                    float              *vTmpSc[2];              // Replacement buffer for sidechain
+
+                    plug::IPort        *pInToSc;                // Input -> Sidechain mix
+                    plug::IPort        *pInToLink;              // Input -> Link mix
+                    plug::IPort        *pLinkToIn;              // Link -> Input mix
+                    plug::IPort        *pLinkToSc;              // Link -> Sidechain mix
+                    plug::IPort        *pScToIn;                // Sidechain -> Input mix
+                    plug::IPort        *pScToLink;              // Sidechain -> Link mix
+                } premix_t;
+
                 typedef struct channel_t
                 {
-                    dspu::Bypass          sBypass;            // Bypass
-                    dspu::Sidechain       sSC;                // Sidechain module
-                    dspu::Equalizer       sSCEq;              // Sidechain equalizer
-                    dspu::Compressor      sComp;              // Compression module
-                    dspu::Delay           sLaDelay;           // Lookahead delay
-                    dspu::Delay           sInDelay;           // Input compensation delay
-                    dspu::Delay           sOutDelay;          // Output compensation delay
-                    dspu::Delay           sDryDelay;          // Dry delay
-                    dspu::MeterGraph      sGraph[G_TOTAL];    // Input meter graph
+                    dspu::Bypass        sBypass;                // Bypass
+                    dspu::Sidechain     sSC;                    // Sidechain module
+                    dspu::Equalizer     sSCEq;                  // Sidechain equalizer
+                    dspu::Compressor    sComp;                  // Compression module
+                    dspu::Delay         sLaDelay;               // Lookahead delay
+                    dspu::Delay         sInDelay;               // Input compensation delay
+                    dspu::Delay         sOutDelay;              // Output compensation delay
+                    dspu::Delay         sDryDelay;              // Dry delay
+                    dspu::MeterGraph    sGraph[G_TOTAL];        // Input meter graph
 
-                    float                *vIn;                // Input data
-                    float                *vOut;               // Output data
-                    float                *vSc;                // Sidechain data
-                    float                *vEnv;               // Envelope data
-                    float                *vGain;              // Gain reduction data
-                    bool                  bScListen;          // Listen sidechain
-                    uint32_t              nSync;              // Synchronization flags
-                    uint32_t              nScType;            // Sidechain type
-                    float                 fMakeup;            // Makeup gain
-                    float                 fFeedback;          // Feedback
-                    float                 fDryGain;           // Dry gain
-                    float                 fWetGain;           // Wet gain
-                    float                 fDotIn;             // Dot input gain
-                    float                 fDotOut;            // Dot output gain
+                    float              *vIn;                    // Input data
+                    float              *vOut;                   // Output data
+                    float              *vSc;                    // Sidechain data
+                    float              *vEnv;                   // Envelope data
+                    float              *vGain;                  // Gain reduction data
+                    bool                bScListen;              // Listen sidechain
+                    uint32_t            nSync;                  // Synchronization flags
+                    uint32_t            nScType;                // Sidechain type
+                    float               fMakeup;                // Makeup gain
+                    float               fFeedback;              // Feedback
+                    float               fDryGain;               // Dry gain
+                    float               fWetGain;               // Wet gain
+                    float               fDotIn;                 // Dot input gain
+                    float               fDotOut;                // Dot output gain
 
-                    plug::IPort          *pIn;                // Input port
-                    plug::IPort          *pOut;               // Output port
-                    plug::IPort          *pSC;                // Sidechain port
-                    plug::IPort          *pShmIn;             // Shared memory link input port
+                    plug::IPort        *pIn;                    // Input port
+                    plug::IPort        *pOut;                   // Output port
+                    plug::IPort        *pSC;                    // Sidechain port
+                    plug::IPort        *pShmIn;                 // Shared memory link input port
 
-                    plug::IPort          *pGraph[G_TOTAL];    // History graphs
-                    plug::IPort          *pMeter[M_TOTAL];    // Meters
+                    plug::IPort        *pGraph[G_TOTAL];        // History graphs
+                    plug::IPort        *pMeter[M_TOTAL];        // Meters
 
-                    plug::IPort          *pScType;            // Sidechain location
-                    plug::IPort          *pScMode;            // Sidechain mode
-                    plug::IPort          *pScLookahead;       // Sidechain lookahead
-                    plug::IPort          *pScListen;          // Sidechain listen
-                    plug::IPort          *pScSource;          // Sidechain source
-                    plug::IPort          *pScReactivity;      // Sidechain reactivity
-                    plug::IPort          *pScPreamp;          // Sidechain pre-amplification
-                    plug::IPort          *pScHpfMode;         // Sidechain high-pass filter mode
-                    plug::IPort          *pScHpfFreq;         // Sidechain high-pass filter frequency
-                    plug::IPort          *pScLpfMode;         // Sidechain low-pass filter mode
-                    plug::IPort          *pScLpfFreq;         // Sidechain low-pass filter frequency
+                    plug::IPort        *pScType;                // Sidechain location
+                    plug::IPort        *pScMode;                // Sidechain mode
+                    plug::IPort        *pScLookahead;           // Sidechain lookahead
+                    plug::IPort        *pScListen;              // Sidechain listen
+                    plug::IPort        *pScSource;              // Sidechain source
+                    plug::IPort        *pScReactivity;          // Sidechain reactivity
+                    plug::IPort        *pScPreamp;              // Sidechain pre-amplification
+                    plug::IPort        *pScHpfMode;             // Sidechain high-pass filter mode
+                    plug::IPort        *pScHpfFreq;             // Sidechain high-pass filter frequency
+                    plug::IPort        *pScLpfMode;             // Sidechain low-pass filter mode
+                    plug::IPort        *pScLpfFreq;             // Sidechain low-pass filter frequency
 
-                    plug::IPort          *pMode;              // Mode
-                    plug::IPort          *pAttackLvl;         // Attack level
-                    plug::IPort          *pReleaseLvl;        // Release level
-                    plug::IPort          *pAttackTime;        // Attack time
-                    plug::IPort          *pReleaseTime;       // Release time
-                    plug::IPort          *pHoldTime;          // Hold time
-                    plug::IPort          *pRatio;             // Ratio
-                    plug::IPort          *pKnee;              // Knee
-                    plug::IPort          *pBThresh;           // Boost threshold
-                    plug::IPort          *pBoost;             // Boost signal amount
-                    plug::IPort          *pMakeup;            // Makeup
+                    plug::IPort        *pMode;                  // Mode
+                    plug::IPort        *pAttackLvl;             // Attack level
+                    plug::IPort        *pReleaseLvl;            // Release level
+                    plug::IPort        *pAttackTime;            // Attack time
+                    plug::IPort        *pReleaseTime;           // Release time
+                    plug::IPort        *pHoldTime;              // Hold time
+                    plug::IPort        *pRatio;                 // Ratio
+                    plug::IPort        *pKnee;                  // Knee
+                    plug::IPort        *pBThresh;               // Boost threshold
+                    plug::IPort        *pBoost;                 // Boost signal amount
+                    plug::IPort        *pMakeup;                // Makeup
 
-                    plug::IPort          *pDryGain;           // Dry gain
-                    plug::IPort          *pWetGain;           // Wet gain
-                    plug::IPort          *pDryWet;            // Dry/Wet balance
-                    plug::IPort          *pCurve;             // Curve graph
-                    plug::IPort          *pReleaseOut;        // Output release level
+                    plug::IPort        *pDryGain;               // Dry gain
+                    plug::IPort        *pWetGain;               // Wet gain
+                    plug::IPort        *pDryWet;                // Dry/Wet balance
+                    plug::IPort        *pCurve;                 // Curve graph
+                    plug::IPort        *pReleaseOut;            // Output release level
                 } channel_t;
 
             protected:
@@ -171,6 +197,8 @@ namespace lsp
                 bool            bUISync;
                 core::IDBuffer *pIDisplay;      // Inline display buffer
 
+                premix_t        sPremix;        // Pre-mix settings
+
                 plug::IPort    *pBypass;        // Bypass port
                 plug::IPort    *pInGain;        // Input gain
                 plug::IPort    *pOutGain;       // Output gain
@@ -186,6 +214,8 @@ namespace lsp
                 float           process_feedback(channel_t *c, size_t i, size_t channels);
                 void            process_non_feedback(channel_t *c, float **in, size_t samples);
                 void            do_destroy();
+                void            update_premix();
+                void            premix_channel(uint32_t channel, float * & in, float * & out, float * & sc, float * & link, size_t count);
                 uint32_t        decode_sidechain_type(uint32_t sc) const;
                 inline float   *select_buffer(const channel_t & c, float *in, float *sc, float *shm);
 
