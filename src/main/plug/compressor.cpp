@@ -28,12 +28,12 @@
 #include <lsp-plug.in/shared/debug.h>
 #include <lsp-plug.in/shared/id_colors.h>
 
-#define COMP_BUF_SIZE           0x200
-
 namespace lsp
 {
     namespace plugins
     {
+        static constexpr size_t COMP_BUF_SIZE       = 0x200;
+
         //-------------------------------------------------------------------------
         // Plugin factory
         inline namespace
@@ -501,8 +501,10 @@ namespace lsp
                 c->sDryDelay.init(max_delay);
 
                 for (size_t j=0; j<G_TOTAL; ++j)
-                    c->sGraph[j].init(meta::compressor_metadata::TIME_MESH_SIZE, samples_per_dot);
-                c->sGraph[G_GAIN].fill(1.0f);
+                {
+                    const float dfl = (j == G_GAIN) ? GAIN_AMP_0_DB : GAIN_AMP_M_INF_DB;
+                    c->sGraph[j].init(meta::compressor_metadata::TIME_MESH_SIZE, samples_per_dot, dfl);
+                }
             }
         }
 
@@ -1142,7 +1144,7 @@ namespace lsp
 
                         // Clear data if requested
                         if (bClear)
-                            dsp::fill_zero(c->sGraph[j].data(), meta::compressor_metadata::TIME_MESH_SIZE);
+                            c->sGraph[j].clear();
 
                         // Get mesh
                         plug::mesh_t *mesh    = c->pGraph[j]->buffer<plug::mesh_t>();
@@ -1155,7 +1157,7 @@ namespace lsp
                                 float *y = mesh->pvData[1];
 
                                 dsp::copy(&x[1], vTime, meta::compressor_metadata::TIME_MESH_SIZE);
-                                dsp::copy(&y[1], c->sGraph[j].data(), meta::compressor_metadata::TIME_MESH_SIZE);
+                                c->sGraph[j].read(&y[1], meta::compressor_metadata::TIME_MESH_SIZE);
 
                                 x[0] = x[1];
                                 y[0] = 0.0f;
@@ -1173,7 +1175,7 @@ namespace lsp
                                 float *y = mesh->pvData[1];
 
                                 dsp::copy(&x[2], vTime, meta::compressor_metadata::TIME_MESH_SIZE);
-                                dsp::copy(&y[2], c->sGraph[j].data(), meta::compressor_metadata::TIME_MESH_SIZE);
+                                c->sGraph[j].read(&y[2], meta::compressor_metadata::TIME_MESH_SIZE);
 
                                 x[0] = x[2] + 0.5f;
                                 x[1] = x[0];
@@ -1192,7 +1194,7 @@ namespace lsp
                             else
                             {
                                 dsp::copy(mesh->pvData[0], vTime, meta::compressor_metadata::TIME_MESH_SIZE);
-                                dsp::copy(mesh->pvData[1], c->sGraph[j].data(), meta::compressor_metadata::TIME_MESH_SIZE);
+                                c->sGraph[j].read(mesh->pvData[1], meta::compressor_metadata::TIME_MESH_SIZE);
                                 mesh->data(2, meta::compressor_metadata::TIME_MESH_SIZE);
                             }
                         }
