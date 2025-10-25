@@ -2,6 +2,9 @@
 * RECENT CHANGES
 *******************************************************************************
 
+=== 1.0.33 ===
+
+
 === 1.0.32 ===
 * Optimized code for updated implementation of dspu::MeterGraph.
 * Updated build scripts and dependencies.
