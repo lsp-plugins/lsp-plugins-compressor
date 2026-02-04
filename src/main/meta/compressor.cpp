@@ -1,6 +1,6 @@
 /*
- * Copyright (C) 2025 Linux Studio Plugins Project <https://lsp-plug.in/>
- *           (C) 2025 Vladimir Sadovnikov <sadko4u@gmail.com>
+ * Copyright (C) 2026 Linux Studio Plugins Project <https://lsp-plug.in/>
+ *           (C) 2026 Vladimir Sadovnikov <sadko4u@gmail.com>
  *
  * This file is part of lsp-plugins-compressor
  * Created on: 3 авг. 2024 г.
@@ -20,6 +20,7 @@
  */
 
 #include <lsp-plug.in/plug-fw/meta/ports.h>
+#include <lsp-plug.in/plug-fw/meta/registry.h>
 #include <lsp-plug.in/shared/meta/developers.h>
 #include <private/meta/compressor.h>
 
@@ -375,6 +376,7 @@ namespace lsp
             mono_plugin_port_groups,
             &compressor_bundle
         };
+        LSP_REGISTER_METADATA(compressor_mono);
 
         const meta::plugin_t  compressor_stereo =
         {
@@ -405,6 +407,7 @@ namespace lsp
             stereo_plugin_port_groups,
             &compressor_bundle
         };
+        LSP_REGISTER_METADATA(compressor_stereo);
 
         const meta::plugin_t  compressor_lr =
         {
@@ -435,6 +438,7 @@ namespace lsp
             stereo_plugin_port_groups,
             &compressor_bundle
         };
+        LSP_REGISTER_METADATA(compressor_lr);
 
         const meta::plugin_t  compressor_ms =
         {
@@ -465,6 +469,7 @@ namespace lsp
             stereo_plugin_port_groups,
             &compressor_bundle
         };
+        LSP_REGISTER_METADATA(compressor_ms);
 
         // Sidechain compressor
         const meta::plugin_t  sc_compressor_mono =
@@ -496,6 +501,7 @@ namespace lsp
             mono_plugin_sidechain_port_groups,
             &compressor_bundle
         };
+        LSP_REGISTER_METADATA(sc_compressor_mono);
 
         const meta::plugin_t  sc_compressor_stereo =
         {
@@ -526,6 +532,7 @@ namespace lsp
             stereo_plugin_sidechain_port_groups,
             &compressor_bundle
         };
+        LSP_REGISTER_METADATA(sc_compressor_stereo);
 
         const meta::plugin_t  sc_compressor_lr =
         {
@@ -556,6 +563,7 @@ namespace lsp
             stereo_plugin_sidechain_port_groups,
             &compressor_bundle
         };
+        LSP_REGISTER_METADATA(sc_compressor_lr);
 
         const meta::plugin_t  sc_compressor_ms =
         {
@@ -586,5 +594,7 @@ namespace lsp
             stereo_plugin_sidechain_port_groups,
             &compressor_bundle
         };
+        LSP_REGISTER_METADATA(sc_compressor_ms);
+
     } /* namespace meta */
 } /* namespace lsp */
