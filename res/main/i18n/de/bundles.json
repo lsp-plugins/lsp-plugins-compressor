@@ -1,7 +1,17 @@
 {
 	"compressor": {
-		"name": "Kompressor",
-		"description": "Dieses Plugin komprimiert das Inputsignall. Flexible Sidechain-\nkonfiguration ist verfügbar. Verschiedene Arten der Kompression sind möglich:\nabwärts, aufwärts und parallel. Der Kompressor kann auch als Limiter verwendet werden im\nPeakmodus mit einer hohen Ratio und niedriger Attackzeit."
+		"description": "Dieses Plugin komprimiert das Inputsignall. Flexible Sidechain-\nkonfiguration ist verfügbar. Verschiedene Arten der Kompression sind möglich:\nabwärts, aufwärts und parallel. Der Kompressor kann auch als Limiter verwendet werden im\nPeakmodus mit einer hohen Ratio und niedriger Attackzeit.",
+		"name": "Kompressor"
+	},
+	"launcher": {
+		"compressor_lr": "Split LR",
+		"compressor_mono": "Mono",
+		"compressor_ms": "Split MS",
+		"compressor_stereo": "Stereo",
+		"sc_compressor_lr": "SC Split LR",
+		"sc_compressor_mono": "SC Mono",
+		"sc_compressor_ms": "SC Split MS",
+		"sc_compressor_stereo": "SC Stereo"
 	}
 }
 
