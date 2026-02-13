@@ -371,7 +371,7 @@ namespace lsp
             clap_features_mono,
             E_INLINE_DISPLAY | E_DUMP_STATE,
             compressor_mono_ports,
-            "dynamics/compressor/single.xml",
+            "plugins/dynamics/compressor/single.xml",
             "dynamics/compressor/single/mono",
             mono_plugin_port_groups,
             &compressor_bundle
@@ -402,7 +402,7 @@ namespace lsp
             clap_features_stereo,
             E_INLINE_DISPLAY | E_DUMP_STATE,
             compressor_stereo_ports,
-            "dynamics/compressor/single.xml",
+            "plugins/dynamics/compressor/single.xml",
             "dynamics/compressor/single/stereo",
             stereo_plugin_port_groups,
             &compressor_bundle
@@ -433,7 +433,7 @@ namespace lsp
             clap_features_stereo,
             E_INLINE_DISPLAY | E_DUMP_STATE,
             compressor_lr_ports,
-            "dynamics/compressor/single.xml",
+            "plugins/dynamics/compressor/single.xml",
             "dynamics/compressor/single/lr",
             stereo_plugin_port_groups,
             &compressor_bundle
@@ -464,7 +464,7 @@ namespace lsp
             clap_features_stereo,
             E_INLINE_DISPLAY | E_DUMP_STATE,
             compressor_ms_ports,
-            "dynamics/compressor/single.xml",
+            "plugins/dynamics/compressor/single.xml",
             "dynamics/compressor/single/ms",
             stereo_plugin_port_groups,
             &compressor_bundle
@@ -496,7 +496,7 @@ namespace lsp
             clap_features_mono,
             E_INLINE_DISPLAY | E_DUMP_STATE,
             sc_compressor_mono_ports,
-            "dynamics/compressor/single.xml",
+            "plugins/dynamics/compressor/single.xml",
             "dynamics/compressor/single/mono",
             mono_plugin_sidechain_port_groups,
             &compressor_bundle
@@ -527,7 +527,7 @@ namespace lsp
             clap_features_stereo,
             E_INLINE_DISPLAY | E_DUMP_STATE,
             sc_compressor_stereo_ports,
-            "dynamics/compressor/single.xml",
+            "plugins/dynamics/compressor/single.xml",
             "dynamics/compressor/single/stereo",
             stereo_plugin_sidechain_port_groups,
             &compressor_bundle
@@ -558,7 +558,7 @@ namespace lsp
             clap_features_stereo,
             E_INLINE_DISPLAY | E_DUMP_STATE,
             sc_compressor_lr_ports,
-            "dynamics/compressor/single.xml",
+            "plugins/dynamics/compressor/single.xml",
             "dynamics/compressor/single/lr",
             stereo_plugin_sidechain_port_groups,
             &compressor_bundle
@@ -589,7 +589,7 @@ namespace lsp
             clap_features_stereo,
             E_INLINE_DISPLAY | E_DUMP_STATE,
             sc_compressor_ms_ports,
-            "dynamics/compressor/single.xml",
+            "plugins/dynamics/compressor/single.xml",
             "dynamics/compressor/single/ms",
             stereo_plugin_sidechain_port_groups,
             &compressor_bundle
