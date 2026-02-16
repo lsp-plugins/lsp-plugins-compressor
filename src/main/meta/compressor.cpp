@@ -374,7 +374,8 @@ namespace lsp
             "plugins/dynamics/compressor/single.xml",
             "dynamics/compressor/single/mono",
             mono_plugin_port_groups,
-            &compressor_bundle
+            &compressor_bundle,
+            3
         };
         LSP_REGISTER_METADATA(compressor_mono);
 
@@ -405,7 +406,8 @@ namespace lsp
             "plugins/dynamics/compressor/single.xml",
             "dynamics/compressor/single/stereo",
             stereo_plugin_port_groups,
-            &compressor_bundle
+            &compressor_bundle,
+            1
         };
         LSP_REGISTER_METADATA(compressor_stereo);
 
@@ -436,7 +438,8 @@ namespace lsp
             "plugins/dynamics/compressor/single.xml",
             "dynamics/compressor/single/lr",
             stereo_plugin_port_groups,
-            &compressor_bundle
+            &compressor_bundle,
+            5
         };
         LSP_REGISTER_METADATA(compressor_lr);
 
@@ -467,7 +470,8 @@ namespace lsp
             "plugins/dynamics/compressor/single.xml",
             "dynamics/compressor/single/ms",
             stereo_plugin_port_groups,
-            &compressor_bundle
+            &compressor_bundle,
+            7
         };
         LSP_REGISTER_METADATA(compressor_ms);
 
@@ -499,7 +503,8 @@ namespace lsp
             "plugins/dynamics/compressor/single.xml",
             "dynamics/compressor/single/mono",
             mono_plugin_sidechain_port_groups,
-            &compressor_bundle
+            &compressor_bundle,
+            4
         };
         LSP_REGISTER_METADATA(sc_compressor_mono);
 
@@ -530,7 +535,8 @@ namespace lsp
             "plugins/dynamics/compressor/single.xml",
             "dynamics/compressor/single/stereo",
             stereo_plugin_sidechain_port_groups,
-            &compressor_bundle
+            &compressor_bundle,
+            2
         };
         LSP_REGISTER_METADATA(sc_compressor_stereo);
 
@@ -561,7 +567,8 @@ namespace lsp
             "plugins/dynamics/compressor/single.xml",
             "dynamics/compressor/single/lr",
             stereo_plugin_sidechain_port_groups,
-            &compressor_bundle
+            &compressor_bundle,
+            6
         };
         LSP_REGISTER_METADATA(sc_compressor_lr);
 
@@ -592,7 +599,8 @@ namespace lsp
             "plugins/dynamics/compressor/single.xml",
             "dynamics/compressor/single/ms",
             stereo_plugin_sidechain_port_groups,
-            &compressor_bundle
+            &compressor_bundle,
+            8
         };
         LSP_REGISTER_METADATA(sc_compressor_ms);
 
