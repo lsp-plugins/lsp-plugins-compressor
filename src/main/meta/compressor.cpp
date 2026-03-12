@@ -1,6 +1,6 @@
 /*
- * Copyright (C) 2025 Linux Studio Plugins Project <https://lsp-plug.in/>
- *           (C) 2025 Vladimir Sadovnikov <sadko4u@gmail.com>
+ * Copyright (C) 2026 Linux Studio Plugins Project <https://lsp-plug.in/>
+ *           (C) 2026 Vladimir Sadovnikov <sadko4u@gmail.com>
  *
  * This file is part of lsp-plugins-compressor
  * Created on: 3 авг. 2024 г.
@@ -20,12 +20,13 @@
  */
 
 #include <lsp-plug.in/plug-fw/meta/ports.h>
+#include <lsp-plug.in/plug-fw/meta/registry.h>
 #include <lsp-plug.in/shared/meta/developers.h>
 #include <private/meta/compressor.h>
 
 #define LSP_PLUGINS_COMPRESSOR_VERSION_MAJOR       1
 #define LSP_PLUGINS_COMPRESSOR_VERSION_MINOR       0
-#define LSP_PLUGINS_COMPRESSOR_VERSION_MICRO       34
+#define LSP_PLUGINS_COMPRESSOR_VERSION_MICRO       35
 
 #define LSP_PLUGINS_COMPRESSOR_VERSION  \
     LSP_MODULE_VERSION( \
@@ -370,11 +371,13 @@ namespace lsp
             clap_features_mono,
             E_INLINE_DISPLAY | E_DUMP_STATE,
             compressor_mono_ports,
-            "dynamics/compressor/single.xml",
+            "plugins/dynamics/compressor/single.xml",
             "dynamics/compressor/single/mono",
             mono_plugin_port_groups,
-            &compressor_bundle
+            &compressor_bundle,
+            3
         };
+        LSP_REGISTER_METADATA(compressor_mono);
 
         const meta::plugin_t  compressor_stereo =
         {
@@ -400,11 +403,13 @@ namespace lsp
             clap_features_stereo,
             E_INLINE_DISPLAY | E_DUMP_STATE,
             compressor_stereo_ports,
-            "dynamics/compressor/single.xml",
+            "plugins/dynamics/compressor/single.xml",
             "dynamics/compressor/single/stereo",
             stereo_plugin_port_groups,
-            &compressor_bundle
+            &compressor_bundle,
+            1
         };
+        LSP_REGISTER_METADATA(compressor_stereo);
 
         const meta::plugin_t  compressor_lr =
         {
@@ -430,11 +435,13 @@ namespace lsp
             clap_features_stereo,
             E_INLINE_DISPLAY | E_DUMP_STATE,
             compressor_lr_ports,
-            "dynamics/compressor/single.xml",
+            "plugins/dynamics/compressor/single.xml",
             "dynamics/compressor/single/lr",
             stereo_plugin_port_groups,
-            &compressor_bundle
+            &compressor_bundle,
+            5
         };
+        LSP_REGISTER_METADATA(compressor_lr);
 
         const meta::plugin_t  compressor_ms =
         {
@@ -460,11 +467,13 @@ namespace lsp
             clap_features_stereo,
             E_INLINE_DISPLAY | E_DUMP_STATE,
             compressor_ms_ports,
-            "dynamics/compressor/single.xml",
+            "plugins/dynamics/compressor/single.xml",
             "dynamics/compressor/single/ms",
             stereo_plugin_port_groups,
-            &compressor_bundle
+            &compressor_bundle,
+            7
         };
+        LSP_REGISTER_METADATA(compressor_ms);
 
         // Sidechain compressor
         const meta::plugin_t  sc_compressor_mono =
@@ -491,11 +500,13 @@ namespace lsp
             clap_features_mono,
             E_INLINE_DISPLAY | E_DUMP_STATE,
             sc_compressor_mono_ports,
-            "dynamics/compressor/single.xml",
+            "plugins/dynamics/compressor/single.xml",
             "dynamics/compressor/single/mono",
             mono_plugin_sidechain_port_groups,
-            &compressor_bundle
+            &compressor_bundle,
+            4
         };
+        LSP_REGISTER_METADATA(sc_compressor_mono);
 
         const meta::plugin_t  sc_compressor_stereo =
         {
@@ -521,11 +532,13 @@ namespace lsp
             clap_features_stereo,
             E_INLINE_DISPLAY | E_DUMP_STATE,
             sc_compressor_stereo_ports,
-            "dynamics/compressor/single.xml",
+            "plugins/dynamics/compressor/single.xml",
             "dynamics/compressor/single/stereo",
             stereo_plugin_sidechain_port_groups,
-            &compressor_bundle
+            &compressor_bundle,
+            2
         };
+        LSP_REGISTER_METADATA(sc_compressor_stereo);
 
         const meta::plugin_t  sc_compressor_lr =
         {
@@ -551,11 +564,13 @@ namespace lsp
             clap_features_stereo,
             E_INLINE_DISPLAY | E_DUMP_STATE,
             sc_compressor_lr_ports,
-            "dynamics/compressor/single.xml",
+            "plugins/dynamics/compressor/single.xml",
             "dynamics/compressor/single/lr",
             stereo_plugin_sidechain_port_groups,
-            &compressor_bundle
+            &compressor_bundle,
+            6
         };
+        LSP_REGISTER_METADATA(sc_compressor_lr);
 
         const meta::plugin_t  sc_compressor_ms =
         {
@@ -581,10 +596,13 @@ namespace lsp
             clap_features_stereo,
             E_INLINE_DISPLAY | E_DUMP_STATE,
             sc_compressor_ms_ports,
-            "dynamics/compressor/single.xml",
+            "plugins/dynamics/compressor/single.xml",
             "dynamics/compressor/single/ms",
             stereo_plugin_sidechain_port_groups,
-            &compressor_bundle
+            &compressor_bundle,
+            8
         };
+        LSP_REGISTER_METADATA(sc_compressor_ms);
+
     } /* namespace meta */
 } /* namespace lsp */
