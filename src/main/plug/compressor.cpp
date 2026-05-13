@@ -634,13 +634,13 @@ namespace lsp
                 c->bScListen    = c->pScListen->value() >= 0.5f;
 
                 c->sSC.set_gain(c->pScPreamp->value());
-                c->sSC.set_mode((c->pScMode != NULL) ? c->pScMode->value() : dspu::SCM_RMS);
+                c->sSC.set_mode((c->pScMode != NULL) ? size_t(c->pScMode->value()) : size_t(dspu::SCM_RMS));
                 c->sSC.set_source(decode_sidechain_source(sc_src, bStereoSplit, i));
                 c->sSC.set_reactivity(c->pScReactivity->value());
                 c->sSC.set_stereo_mode(((nMode == CM_MS) && (!use_sidechain(*c))) ? dspu::SCSM_MIDSIDE : dspu::SCSM_STEREO);
 
                 // Setup hi-pass filter for sidechain
-                size_t hp_slope = c->pScHpfMode->value() * 2;
+                size_t hp_slope = size_t(c->pScHpfMode->value()) * 2;
                 fp.nType        = (hp_slope > 0) ? dspu::FLT_BT_BWC_HIPASS : dspu::FLT_NONE;
                 fp.fFreq        = c->pScHpfFreq->value();
                 fp.fFreq2       = fp.fFreq;
@@ -650,7 +650,7 @@ namespace lsp
                 c->sSCEq.set_params(0, &fp);
 
                 // Setup low-pass filter for sidechain
-                size_t lp_slope = c->pScLpfMode->value() * 2;
+                size_t lp_slope = size_t(c->pScLpfMode->value()) * 2;
                 fp.nType        = (lp_slope > 0) ? dspu::FLT_BT_BWC_LOPASS : dspu::FLT_NONE;
                 fp.fFreq        = c->pScLpfFreq->value();
                 fp.fFreq2       = fp.fFreq;
