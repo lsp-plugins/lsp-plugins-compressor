@@ -1,6 +1,6 @@
 /*
- * Copyright (C) 2025 Linux Studio Plugins Project <https://lsp-plug.in/>
- *           (C) 2025 Vladimir Sadovnikov <sadko4u@gmail.com>
+ * Copyright (C) 2026 Linux Studio Plugins Project <https://lsp-plug.in/>
+ *           (C) 2026 Vladimir Sadovnikov <sadko4u@gmail.com>
  *
  * This file is part of lsp-plugins-compressor
  * Created on: 3 авг. 2021 г.
@@ -624,7 +624,7 @@ namespace lsp
             {
                 channel_t *c    = &vChannels[i];
                 plug::IPort *sc = (bStereoSplit) ? pScSpSource : c->pScSource;
-                size_t sc_src   = (sc != NULL) ? sc->value() : dspu::SCS_MIDDLE;
+                size_t sc_src   = (sc != NULL) ? size_t(sc->value()) : size_t(dspu::SCS_MIDDLE);
 
                 // Update bypass settings
                 c->sBypass.set_bypass(bypass);
