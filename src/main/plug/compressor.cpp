@@ -1,6 +1,6 @@
 /*
- * Copyright (C) 2025 Linux Studio Plugins Project <https://lsp-plug.in/>
- *           (C) 2025 Vladimir Sadovnikov <sadko4u@gmail.com>
+ * Copyright (C) 2026 Linux Studio Plugins Project <https://lsp-plug.in/>
+ *           (C) 2026 Vladimir Sadovnikov <sadko4u@gmail.com>
  *
  * This file is part of lsp-plugins-compressor
  * Created on: 3 авг. 2021 г.
@@ -624,7 +624,7 @@ namespace lsp
             {
                 channel_t *c    = &vChannels[i];
                 plug::IPort *sc = (bStereoSplit) ? pScSpSource : c->pScSource;
-                size_t sc_src   = (sc != NULL) ? sc->value() : dspu::SCS_MIDDLE;
+                size_t sc_src   = (sc != NULL) ? size_t(sc->value()) : size_t(dspu::SCS_MIDDLE);
 
                 // Update bypass settings
                 c->sBypass.set_bypass(bypass);
@@ -634,13 +634,13 @@ namespace lsp
                 c->bScListen    = c->pScListen->value() >= 0.5f;
 
                 c->sSC.set_gain(c->pScPreamp->value());
-                c->sSC.set_mode((c->pScMode != NULL) ? c->pScMode->value() : dspu::SCM_RMS);
+                c->sSC.set_mode((c->pScMode != NULL) ? size_t(c->pScMode->value()) : size_t(dspu::SCM_RMS));
                 c->sSC.set_source(decode_sidechain_source(sc_src, bStereoSplit, i));
                 c->sSC.set_reactivity(c->pScReactivity->value());
                 c->sSC.set_stereo_mode(((nMode == CM_MS) && (!use_sidechain(*c))) ? dspu::SCSM_MIDSIDE : dspu::SCSM_STEREO);
 
                 // Setup hi-pass filter for sidechain
-                size_t hp_slope = c->pScHpfMode->value() * 2;
+                size_t hp_slope = size_t(c->pScHpfMode->value()) * 2;
                 fp.nType        = (hp_slope > 0) ? dspu::FLT_BT_BWC_HIPASS : dspu::FLT_NONE;
                 fp.fFreq        = c->pScHpfFreq->value();
                 fp.fFreq2       = fp.fFreq;
@@ -650,7 +650,7 @@ namespace lsp
                 c->sSCEq.set_params(0, &fp);
 
                 // Setup low-pass filter for sidechain
-                size_t lp_slope = c->pScLpfMode->value() * 2;
+                size_t lp_slope = size_t(c->pScLpfMode->value()) * 2;
                 fp.nType        = (lp_slope > 0) ? dspu::FLT_BT_BWC_LOPASS : dspu::FLT_NONE;
                 fp.fFreq        = c->pScLpfFreq->value();
                 fp.fFreq2       = fp.fFreq;
